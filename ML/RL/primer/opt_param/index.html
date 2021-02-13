@@ -1,0 +1,293 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>参数优化 | 云玩家</title><meta name="keywords" content="强化学习,机器学习"><meta name="author" content="云玩家"><meta name="copyright" content="云玩家"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="推导最简单的策略梯度我们考虑一个随机的, 参数化的策略 $\pi_{\theta}$ . 我们的目标是最大化期望回报 (还可以称为性能函数, 与损失函数意义相反) $J(\pi_{\theta})&#x3D;\mathop{\mathrm{E}}\limits_{\tau\sim \pi_{\theta}}[R(\tau)]$ . 这里使用有限无折损回报 ($\textrm{finite-horizon u">
+<meta property="og:type" content="article">
+<meta property="og:title" content="参数优化">
+<meta property="og:url" content="http://example.com/ML/RL/primer/opt_param/index.html">
+<meta property="og:site_name" content="云玩家">
+<meta property="og:description" content="推导最简单的策略梯度我们考虑一个随机的, 参数化的策略 $\pi_{\theta}$ . 我们的目标是最大化期望回报 (还可以称为性能函数, 与损失函数意义相反) $J(\pi_{\theta})&#x3D;\mathop{\mathrm{E}}\limits_{\tau\sim \pi_{\theta}}[R(\tau)]$ . 这里使用有限无折损回报 ($\textrm{finite-horizon u">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/ML/RL/primer/opt_param/opt_param.jpg">
+<meta property="article:published_time" content="2020-06-07T07:31:17.000Z">
+<meta property="article:modified_time" content="2021-02-07T11:07:11.356Z">
+<meta property="article:author" content="云玩家">
+<meta property="article:tag" content="强化学习">
+<meta property="article:tag" content="机器学习">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/ML/RL/primer/opt_param/opt_param.jpg"><link rel="shortcut icon" href="/img/favicon.ico"><link rel="canonical" href="http://example.com/ML/RL/primer/opt_param/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//s4.cnzz.com"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script async="async" data-pjax="data-pjax" src="https://s4.cnzz.com/z_stat.php?id=1278869595&amp;web_id=1278869595"></script><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+}</script><script src="/js/yuntools.js"></script><script id="config-diff">var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2021-02-07 19:07:11'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    })(window)</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/cnyist/blog/css/font.css"><meta name="generator" content="Hexo 5.3.0"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" src="https://cdn.jsdelivr.net/gh/cnyist/blog/img/avatar.svg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">61</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">35</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">24</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/speak/"><i class="fa-fw fas fa-comment"></i><span> 说说</span></a></div><div class="menus_item"><a class="site-page" href="/chat/"><i class="fa-fw fas fa-comments"></i><span> 闲聊室</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> about</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw iconfont icon-Web"></i><span> 镜像站点</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page" target="_blank" rel="noopener" href="https://yunist.gitee.io"><i class="fa-fw iconfont icon-gitee-fill-round"></i><span> Gitee Pages</span></a></li></ul></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/ML/RL/primer/opt_param/opt_param.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">云玩家</a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/speak/"><i class="fa-fw fas fa-comment"></i><span> 说说</span></a></div><div class="menus_item"><a class="site-page" href="/chat/"><i class="fa-fw fas fa-comments"></i><span> 闲聊室</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> about</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw iconfont icon-Web"></i><span> 镜像站点</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page" target="_blank" rel="noopener" href="https://yunist.gitee.io"><i class="fa-fw iconfont icon-gitee-fill-round"></i><span> Gitee Pages</span></a></li></ul></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">参数优化</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2020-06-07T07:31:17.000Z" title="发表于 2020-06-07 15:31:17">2020-06-07</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2021-02-07T11:07:11.356Z" title="更新于 2021-02-07 19:07:11">2021-02-07</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/">强化学习</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/%E5%85%A5%E9%97%A8/">入门</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span><span class="post-meta-separator">|</span><span class="post-meta-commentcount"><i class="far fa-comments fa-fw post-meta-icon"></i><span class="post-meta-label">评论数:</span><a href="/ML/RL/primer/opt_param/#post-comment"><span id="twikoo-count"></span></a></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="推导最简单的策略梯度"><a href="#推导最简单的策略梯度" class="headerlink" title="推导最简单的策略梯度"></a>推导最简单的策略梯度</h1><p>我们考虑一个随机的, 参数化的策略 $\pi_{\theta}$ . 我们的目标是最大化期望回报 (还可以称为性能函数, 与损失函数意义相反) $J(\pi_{\theta})=\mathop{\mathrm{E}}\limits_{\tau\sim \pi_{\theta}}[R(\tau)]$ . 这里使用<strong>有限无折损回报</strong> ($\textrm{finite-horizon undiscounted return}$) 来推导, 但是<strong>无限有折损回报</strong> ($\textrm{infinite-horizon discounted return}$) 的推导几乎是完全相同的.</p>
+<p>我们会用<strong>梯度下降</strong> ($\textrm{gradient ascent}$) 来优化策略的参数, 比如<br>$$<br>\theta_{k+1}=\theta_k+\alpha\nabla_{\theta}J(\pi_{\theta})|<em>{\theta_k}<br>$$<br>其中 $\nabla_{\theta}J(\pi</em>{\theta})|_{\theta_k}$ 代表 $\theta$ 取值为 $\theta_k$ .</p>
+<p>为了使用该算法, 我们需要一个能够用数值计算的策略梯度表达式. 这包括两个步骤:</p>
+<ol>
+<li>推导出策略性能的<strong>解析梯度</strong> ($\textrm{analytical gradient}$ , 什么是解析梯度? 详情看<a target="_blank" rel="noopener" href="https://yunist.cn/ML/optimizer/numerical_analytical_gradient/">这篇文章</a>) , 以期望值的形式表现 (便于用平均值估计).</li>
+<li>算出在样本上的估计的期望值, 可以使用有限步代理人-环境交互的数据.</li>
+</ol>
+<p>这里列出对推导解析梯度有帮助的一些事实.</p>
+<ol>
+<li>轨迹的概率. 采取策略 $\pi_{\theta}$ 所做出的轨迹 $\tau={s_0,a_0,\dots,s_{T+1}}$ 的概率是</li>
+</ol>
+<p>$$<br>P(\tau\mid \theta)=\rho_0(s_0)\prod_{t=0}^TP(s_{t+1}\mid s_t,a_t)\pi_{\theta}(a_t\mid s_t)<br>$$</p>
+<ol>
+<li>对数的把戏. 我们知道 $\log x$ 对 $x$ 的导数是 $1/x$ , 于是根据链式法则有</li>
+</ol>
+<p>$$<br>\nabla <em>{\theta}P(\tau\mid\theta)=P(\tau\mid \theta)\frac{1}{P(\tau\mid \theta)}\nabla</em>{\theta}P(\tau\mid \theta)=P(\tau\mid \theta)\nabla_{\theta}\log P(\tau\mid \theta)<br>$$</p>
+<ol>
+<li>轨迹的对数概率</li>
+</ol>
+<p>$$<br>\log P(\tau\mid \theta)=\log \rho_0(s_0)+\sum_{t=0}^T\bigg(\log P(s_{t+1}\mid s_t,a_t)+\log \pi_{\theta}(a_t\mid s_t)\bigg)<br>$$</p>
+<ol>
+<li>环境函数的梯度. 由于 $\rho_0(s_0),P(s_{t+1}\mid s_t,a_t),R(\tau)$ 与 $\theta$ 都无关, 因此它们的梯度为 $0$ .</li>
+<li>由第 4 条与第 3 条可知, 轨迹的对数概率的梯度是</li>
+</ol>
+<p>$$<br>\begin{aligned}<br>\nabla_{\theta}\log P(\tau \mid \theta)&amp;={\nabla_{\theta}\log \rho_0(s_0)}+\sum_{t=0}^T\bigg({\nabla_{\theta }\log P(s_{t+1}\mid s_t,a_t)}+\nabla_{\theta}\log \pi_\theta(a_t\mid s_t)\bigg)\\<br>&amp;=\sum_{t=0}^Y\nabla_{\theta}\log \pi_\theta(a_t\mid s_t)<br>\end{aligned}<br>$$</p>
+<p>由以上全部推导就有<br>$$<br>\begin{aligned}<br>\nabla_{\theta}J(\pi_\theta)&amp;=\nabla_\theta\mathop{\mathrm{E}}<em>{\tau\sim\pi_0}[R(\tau)]\\<br>&amp;=\nabla_{\theta}\int_\tau P(\tau\mid \theta)R(\tau)\\<br>&amp;=\int_\tau \nabla</em>{\theta}P(\tau\mid \theta)R(\tau)\\<br>&amp;=\int_\tau P(\tau\mid \theta)\nabla_{\theta}\log P(\tau\mid \theta)R(\tau)\\<br>&amp;=\mathop{\mathrm{E}}<em>{\tau\sim\pi_\theta}[\nabla_{\theta}\log P(\tau\mid \theta)R(\tau)]\\<br>&amp;=\mathop{\mathrm{E}}</em>{\tau\sim\pi_\theta}\left[\sum_{t=0}^T\nabla_{\theta}\log \pi_\theta(a_t\mid s_t)R(\tau)\right]<br>\end{aligned}<br>$$<br>这样我们就可以用样本的平均值来估计策略梯度了. 假如我们有轨迹的集合 $\mathcal{D}={\tau_i}<em>{i=1,\dots,N}$ , 并且这些轨迹都是代理人根据策略 $\pi</em>{\theta}$ 在环境中行动获得, 那么策略梯度可以估计为<br>$$<br>\hat{g}=\frac{1}{|\mathcal{D}|}\sum_{\tau\in \mathcal{D}}\sum_{t=0}^T\nabla_\theta \log \pi_\theta(a_t\mid s_t)R(\tau)<br>$$<br>其中 $|\mathcal{D}|$ 是集合 $\mathcal{D}$ 的元素个数.</p>
+<h1 id="损失函数"><a href="#损失函数" class="headerlink" title="损失函数"></a>损失函数</h1><p>在强化学习中, 我们同样可以定义类似监督学习中的损失函数的概念, 但是在强化学习中的损失函数与监督学习中的损失函数有很大区别.  损失函数的梯度与策略梯度是相同的. 其接受的数据包含了 (状态, 动作, 权重) 三元组. </p>
+<h2 id="与参数关系"><a href="#与参数关系" class="headerlink" title="与参数关系"></a>与参数关系</h2><p>在监督学习中, 损失只与数据有关而与参数无关, 但是在强化学习中, 由于数据是遵循最近的策略采样得来的, 因此损失也与参数有关.</p>
+<h2 id="描述性能"><a href="#描述性能" class="headerlink" title="描述性能"></a>描述性能</h2><p>在强化学习中, 我们关心的是期望回报 $J(\pi_{\theta})$ , 而损失函数并不能很好的表达它. 最优化损失函数并不能保证能够提升期望回报. 你甚至可以将损失函数降低到 $-\infty$ 而同时策略性能 (期望回报) 并不怎样. 此时我们称其 “过拟合” . 但这与我们通常所称的过拟合有所不同, 这只是一种描述, 因为实际上并没有什么泛化的错误, 只是损失函数低得吓人. 因此如果想真正描述策略性能, 我们应该关心期望回报而不是损失函数.</p>
+<h1 id="EGLP-定理"><a href="#EGLP-定理" class="headerlink" title="EGLP 定理"></a>EGLP 定理</h1><p>在这里我们会推导出一个在策略梯度中被广泛使用的一个中间结果, 我们称其为梯度对数概率期望 ($\text{Expect Grad-Log-Prob, EGLP}$) 定理.<br>$$<br>\begin{aligned}<br>\int_xP_{\theta}(x)&amp;=1\\<br>\nabla_\theta\int_xP_\theta(x)&amp;=\nabla_\theta1\\<br>\nabla_\theta\int_xP_\theta(x)&amp;=0\\<br>\int_x\nabla_\theta P_\theta(x)&amp;=0\\<br>\int_xP_\theta(x)\nabla_{\theta}\log P_\theta(x)&amp;=0\\<br>\mathop{\mathrm{E}}_{x\sim P_\theta}[\nabla_\theta\log P_\theta(x)]&amp;=0<br>\end{aligned}<br>$$</p>
+<h1 id="别让过去影响你"><a href="#别让过去影响你" class="headerlink" title="别让过去影响你"></a>别让过去影响你</h1><p>梯度更新表达式<br>$$<br>\nabla_\theta J(\pi_\theta)=\mathop{\mathrm{E}}<em>{\tau\sim\pi_0}\left[\sum_{t=0}^{T}\nabla_\theta \log\pi_0(a_t\mid s_t)R(\tau)\right]<br>$$<br>每次更新, 都可以让每个动作的对数概率随着 $R(\tau)$ (采取动作的总回报) 成比例增加. 但这意义不大. 代理人应该根据其采取行动后的后果 (好还是坏) 来决定如何更改 (加强) 策略, 而采取行动之前的奖励和这一步行动的好坏没有直接关系. 事实上, 这一直觉在数学上也有很好的表达. 可以证明, 梯度更新表达式也可以写成如下等价形式.<br>$$<br>\nabla_\theta J(\pi_\theta)=\mathop{\mathrm{E}}</em>{\tau\sim\pi_\theta}\left[\sum_{t=0}^{T}\nabla_\theta \log\pi_\theta(a_t\mid s_t)\sum_{t’=t}^TR(s_{t’},a_{t’},s_{t’+1})\right]<br>$$<br>这被称为<strong>奖励策略梯度</strong> ($\text{reward-to-go policy gradient}$).</p>
+<p>证明过程比较繁琐, 不想看的可以略过.</p>
+<h2 id="证明"><a href="#证明" class="headerlink" title="证明"></a>证明</h2><p>我们先提出一个函数<br>$$<br>\mathop{\mathrm{E}}<em>{\tau\sim \pi_\theta}[f(t,t’)]=\mathop{\mathrm{E}}_{\tau\sim\pi_\theta}[\nabla_\theta\log \pi_\theta(a_t\mid s_t)R(s_{t’},a</em>{t’},s_{t’+1})]<br>$$<br>如果我们能证明当 $t’&lt;t$ 时, 该式为 $0$ , 我们就能证明两种策略梯度的表达是等价的. 在 $t$ 与 $t’$ 时刻, 函数 $f(t,t’)$ 只与 $s_t,a_t,s_{t’},a_{t’},s_{t’+1}$ 有关, 于是我们有<br>$$<br>\begin{aligned}<br>\mathop{\mathrm{E}}<em>{\tau\sim\pi_\theta}[f(t,t’)]&amp;= \int_\tau P(\tau\mid \pi_\theta)f(t,t’)<br>\\&amp;=\int_{s_t,a_t,s</em>{t’},a_{t’},s_{t’+1}}P(s_t,a_t,s_{t’},a_{t’},s_{t’+1}\mid\pi_\theta)f(t,t’)<br>\\&amp;=\mathop{\mathrm{E}}<em>{s_t,a_t,s</em>{t’},a_{t’},s_{t’+1}\sim\pi_\theta}[f(t,t’)]<br>\end{aligned}<br>$$<br>根据贝叶斯法则, 我们有<br>$$<br>\begin{aligned}<br>\mathop{\mathrm{E}}<em>{A,B}[f(A,B)]&amp;=\int</em>{A,B}P(A,B)f(A,B)<br>\\&amp;=\int_A\int_BP(B\mid A)P(A)f(A,B)<br>\\&amp;=\int_AP(A)\int_BP(B\mid A)f(A,B)<br>\\&amp;=\int_AP(A)\mathop{\mathrm{E}}<em>{B}\Big[f(A,B)\Big|A\Big]<br>\\&amp;=\mathop{\mathrm{E}}<em>A\bigg[\mathop{\mathrm{E}}</em>{B}\Big[f(A,B)\Big|A\Big]\bigg]<br>\end{aligned}<br>$$<br>若 $f(A,B)=h(A)g(B)$ , 那么还有<br>$$<br>\begin{aligned}<br>\mathop{\mathrm{E}}</em>{A,B}[f(A,B)]&amp;=\mathop{\mathrm{E}}<em>A\bigg[\mathop{\mathrm{E}}</em>{B}\Big[f(A,B)\Big|A\Big]\bigg]<br>\\&amp;=\mathop{\mathrm{E}}<em>A\bigg[\mathop{\mathrm{E}}</em>{B}\Big[h(A)g(B)\Big|A\Big]\bigg]<br>\\&amp;=\mathop{\mathrm{E}}<em>A\bigg[h(A)\mathop{\mathrm{E}}</em>{B}\Big[g(B)\Big|A\Big]\bigg]<br>\end{aligned}<br>$$<br>因此就有<br>$$<br>\begin{aligned}<br>\mathop{\mathrm{E}}<em>{\tau\sim\pi_\theta}[f(t,t’)]&amp;=\mathop{\mathrm{E}}_{s_t,a_t,s</em>{t’},a_{t’},s_{t’+1}\sim\pi_\theta}[f(t,t’)]\\<br>&amp;=\mathop{\mathrm{E}}<em>{s</em>{t’},a_{t’},s_{t’+1}\sim\pi_\theta}\bigg[\mathop{\mathrm{E}}<em>{s_t,a_t\sim\pi_\theta}\Big[f(t,t’)\Big|s_{t’},a</em>{t’},s_{t’+1}\Big]\bigg]\\<br>&amp;=\mathop{\mathrm{E}}<em>{s</em>{t’},a_{t’},s_{t’+1}\sim\pi_\theta}\bigg[\mathop{\mathrm{E}}<em>{s_t,a_t\sim\pi_\theta}\Big[\nabla_\theta\log \pi_\theta(a_t\mid s_t)R(s_{t’},a</em>{t’},s_{t’+1})\Big|s_{t’},a_{t’},s_{t’+1}\Big]\bigg]\\<br>&amp;=\mathop{\mathrm{E}}<em>{s</em>{t’},a_{t’},s_{t’+1}\sim\pi_\theta}\bigg[R(s_{t’},a_{t’},s_{t’+1})\mathop{\mathrm{E}}<em>{s_t,a_t\sim\pi_\theta}\Big[\nabla_\theta\log \pi_\theta(a_t\mid s_t)\Big|s_{t’},a</em>{t’},s_{t’+1}\Big]\bigg]<br>\end{aligned}<br>$$<br>而<br>$$<br>\begin{aligned}<br>\mathop{\mathrm{E}}<em>{s_t,a_t\sim\pi_\theta}\Big[\nabla_\theta\log \pi_\theta(a_t\mid s_t)\Big|s_{t’},a</em>{t’},s_{t’+1}\Big]=\int_{s_t,a_t}P(s_t,a_t\mid\pi_\theta, s_{t’},a_{t’},s_{t’+1})\nabla_\theta\log \pi_\theta(a_t\mid s_t)<br>\end{aligned}<br>$$<br>当 $t’&lt;t$ 时, 我们可以分解 $P(s_t,a_t\mid\pi_\theta, s_{t’},a_{t’},s_{t’+1})$<br>$$<br>\begin{aligned}<br>P(s_t,a_t\mid\pi_\theta, s_{t’},a_{t’},s_{t’+1})&amp;=P(a_t\mid\pi_{\theta}, s_t,a_{t’},s_{t’+1})P(s_t\mid\pi_\theta, s_{t’},a_{t’},s_{t’+1})\\<br>&amp;=\pi_{\theta}(a_t\mid s_t,a_{t’},s_{t’+1})P(s_t\mid\pi_\theta, s_{t’},a_{t’},s_{t’+1})\\<br>&amp;=\pi_{\theta}(a_t\mid s_t)P(s_t\mid\pi_\theta, s_{t’},a_{t’},s_{t’+1})<br>\end{aligned}<br>$$<br>这是因为 $a_t$ 在当前环境 $s_t$ 已知晓时, 与之前做过的选择与之前经历的环境并无关系.</p>
+<p>因此有<br>$$<br>\begin{aligned}<br>\mathop{\mathrm{E}}<em>{s_t,a_t\sim\pi_\theta}\Big[\nabla_\theta\log \pi_\theta(a_t\mid s_t)\Big|s_{t’},a</em>{t’},s_{t’+1}\Big]&amp;=\int_{s_t,a_t}P(s_t,a_t\mid\pi_\theta, s_{t’},a_{t’},s_{t’+1})\nabla_\theta\log \pi_\theta(a_t\mid s_t)\\&amp;=\int_{s_t,a_t}\pi_{\theta}(a_t\mid s_t)P(s_t\mid\pi_\theta, s_{t’},a_{t’},s_{t’+1})\nabla_\theta\log \pi_\theta(a_t\mid s_t)\\<br>&amp;=\int_{s_t}P(s_t\mid\pi_\theta, s_{t’},a_{t’},s_{t’+1})\int_{a_t}\pi_{\theta}(a_t\mid s_t)\nabla_\theta\log \pi_\theta(a_t\mid s_t)\\<br>&amp;=\mathop{\mathrm{E}}<em>{s_t\sim\pi_\theta}\bigg[\mathop{\mathrm{E}}</em>{a_t\sim\pi_\theta}\Big[\nabla_\theta \log\pi_\theta(a_t\mid s_t)\Big|s_t\Big]\bigg|s_{t’},a_{t’},s_{t’+1}\bigg]<br>\end{aligned}<br>$$<br>此时就要用到我们的 $\text{EGLP}$ 定理了.<br>$$<br>\because \int_{a_t}\pi_\theta(a_t\mid s_t)\Big|s_t=1\\<br>\therefore \mathop{\mathrm{E}}_{a_t\sim\pi_\theta}\Big[\nabla_\theta \log\pi_\theta(a_t\mid s_t)\Big|s_t\Big] =0<br>$$<br>因此当 $t’&lt;t$ 时 $\mathop{\mathrm{E}}_{\tau\sim\pi_\theta}[f(t,t’)]=0$.</p>
+<p>而当 $t’\geqslant t$ 时, 无法将 $P(s_t,a_t\mid\pi_\theta, s_{t’},a_{t’},s_{t’+1})$ 分解成该形式, 所以就不会有这个结果. 我们可以举个例子. 如果现在有 $80%$ 的几率会下雨, 而你打算如果不下雨, 就有 $90%$ 的可能会出去买水果. 此时, 无论之前发生了什么 (也许昨天下雨了 (环境) , 也许前天买了水果 (动作)) , 现在买水果的概率都是 $(1-80%)\times90%=16%$ . 但是如果这个时候, 未来的你突然穿越回来, 告诉你你后来买了水果, 那么这时下雨的概率其实就改变了, 变得更倾向于不下雨 (事实上如果你后来买了水果, 不下雨的概率就会是 $1$ ). 如果没买, 则相反. 这就是未来影响现在而过去不影响现在.</p>
+<blockquote>
+<p>既然期望是相同的, 但根据这个式子来训练为什么会更好呢? 这是因为策略梯度需要用样本轨迹来估计, 而且最好是低方差的. 如果方差较大, 说明估计不太准确. 如果公式中包括过去的奖励, 虽然它们均值为 $0$ , 但方差并不是, 在公式中增加它们只会给策略梯度的样本估计增加噪音, 增加方差. 而这会导致需要较多的样本轨迹才能得到一个相对稳定的值 (收敛) . 删除它们后, 我们就可以用更少的样本轨迹得到低方差的估计, 也就是说更容易收敛. 举个例子, 如果你要估计一系列数字的期望 (也就是算平均值) , 它们服从的概率分布的期望其实都是 $50$, 但是一个方差很大, 一会 $100$ 一会 $20$ 一会 $3$, 你需要很多数字才能得到一个较为准确的值. 而另一个方差很小, 基本就是 $50.3$ , $49.8$ , $49.5$ 这样, 只需要几个数字就能估计得差不多.</p>
+</blockquote>
+<h1 id="策略梯度的基线"><a href="#策略梯度的基线" class="headerlink" title="策略梯度的基线"></a>策略梯度的基线</h1><p>由 $\text{EGLP}$ 可以得到一个非常直接的结论: 如果一个函数 $b(s_t)$ 只依赖于状态 $s_t$ , 那么有<br>$$<br>\mathop{\mathrm{E}}<em>{a_t\sim\pi_\theta}[\nabla_\theta \log \pi_\theta(a_t\mid s_t)b(s_t)]=0<br>$$<br>这使得我们可以在策略梯度的表达式中任意加上 (或删除) 这样的项而不改变最终结果, 比如说<br>$$<br>\begin{aligned}<br>\nabla_\theta J(\pi_\theta)&amp;=\mathop{\mathrm{E}}_{\tau\sim\pi_\theta}\left[\sum_{t=0}^{T}\nabla_\theta \log\pi_\theta(a_t\mid s_t)\sum</em>{t’=t}^TR(s_{t’},a_{t’},s_{t’+1})\right]\\<br>&amp;=\mathop{\mathrm{E}}<em>{\tau\sim\pi_\theta}\left[\sum_{t=0}^{T}\nabla_\theta \log\pi_\theta(a_t\mid s_t)\left(\sum</em>{t’=t}^TR(s_{t’},a_{t’},s_{t’+1})-b(s_t)\right)\right]<br>\end{aligned}<br>$$<br>函数 $b$ 被称为<strong>基线</strong> ($\text{baseline}$).</p>
+<p>基线函数一般是<strong>策略上的价值函数</strong> ($\text{on-policy value function}$) $V^\pi(s_t)$ . 稍微回想一下, 这个函数给出了代理人从状态 $s_t$ 开始, 使用策略 $\pi$ 以后的平均 (期望) 回报.<br>$$<br>V^{\pi}(s) = \mathop{\mathrm E}<em>{\tau\sim\pi}[R(\tau)\mid s_0 = s]<br>$$<br>经验上, 让基线 $b(s_t)=V^\pi(s)$ 对降低策略梯度的样本估计的方差有好处, 这会让策略学习更快, 更稳定. 从概念上来看, 这也很有意义: 它体现了一个直觉, 如果代理人得到了它所期望的 (即 $\sum</em>{t’=t}^TR(s_{t’},a_{t’},s_{t’+1})=V^\pi(s)$) , 他会对此 “感到” 中立 ( “中立” 在数学上看来即值为 $0$ ).</p>
+<p>事实上, $V^\pi(s_t)$ 并不能被准确计算, 因此应该使用它的估计. 通常我们会使用一个与策略同步更新 (这样就能总是估计最近的策略的价值函数) 的神经网络 $V_\phi(s_t)$ 来估计它.</p>
+<h1 id="策略梯度的其他形式"><a href="#策略梯度的其他形式" class="headerlink" title="策略梯度的其他形式"></a>策略梯度的其他形式</h1><p>我们已经见到了策略梯度的很多等价形式<br>$$<br>\nabla_\theta J(\pi_\theta)=\mathop{\mathrm{E}}<em>{\tau\sim\pi_0}\left[\sum_{t=0}^{T}\nabla_\theta \log\pi_0(a_t\mid s_t)\Phi_t\right]<br>$$<br>&nbsp;$\Phi_t$ 可以是<br>$$<br>\Phi_t=R(\tau)<br>$$<br>又或者<br>$$<br>\Phi_t=\sum</em>{t’=t}^TR(s_{t’},a_{t’},s_{t’+1})<br>$$<br>再或者<br>$$<br>\Phi_t=\sum_{t’=t}^TR(s_{t’},a_{t’},s_{t’+1})-b(s_t)<br>$$<br>但还有两种重要的形式.</p>
+<ol>
+<li>状态-动作价值函数</li>
+</ol>
+<p>$$<br>\Phi_t=Q^{\pi_\theta}(s_t,a_t)<br>$$</p>
+<p>证明可以看<a target="_blank" rel="noopener" href="https://spinningup.openai.com/en/latest/spinningup/extra_pg_proof2.html">这里</a>.</p>
+<ol start="2">
+<li>优势方程</li>
+</ol>
+<p>$$<br>\Phi_t=A^{\pi}(s_t,a_t)<br>$$</p>
+<p>而<br>$$<br>A^{\pi}(s_t,a_t)=Q^{\pi}(s_t,a_t)-V^{\pi}(s_t)<br>$$<br>由基线得知等价.</p>
+<blockquote>
+<p>为了更详细的了解这个主题, 你应该阅读 <a target="_blank" rel="noopener" href="https://arxiv.org/abs/1506.02438">Generalized Advantage Estimation</a> (GAE). 也可以参考我的文章 <a target="_blank" rel="noopener" href="https://yunist.cn/ML/RL/primer/GAE/">GAE 算法</a> .</p>
+</blockquote>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">云玩家</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://example.com/ML/RL/primer/opt_param/">http://example.com/ML/RL/primer/opt_param/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://example.com" target="_blank">云玩家</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/">强化学习</a><a class="post-meta__tags" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a></div><div class="post_share"><div class="social-share" data-image="/ML/RL/primer/opt_param/opt_param.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><!-- - var pagination_cover = prev.cover === false ? prev.randomcover : prev.cover--><a href="/ML/framework/Pytroch/pytorch_api/"><img class="prev-cover" src="https://cdn.jsdelivr.net/gh/cnyist/blog/ML/framework/Pytroch/pytorch_api/pytorch_api.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">一份 Pytorch API 指南</div></div></a></div><!-- - var pagination_cover = next.cover == false ? next.randomcover : next.cover--><div class="next-post pull-right"><a href="/math/linear_algebra/prove_1/"><img class="next-cover" src="https://cdn.jsdelivr.net/gh/cnyist/blog/math/linear_algebra/prove_1/prove_1.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">线性代数命题证明 (一)</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span> 相关推荐</span></div><div class="relatedPosts-list"><div><a href="/scribble/RL_papers_word/" title="强化学习类论文常用表达"><img class="cover" src="https://cdn.jsdelivr.net/gh/cnyist/blog/scribble/RL_papers_word/RL_papers_word.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-09-13</div><div class="title">强化学习类论文常用表达</div></div></a></div><div><a href="/ML/RL/primer/Intro_to_Policy_Optimization_code/" title="Intro to Policy Optimization 代码详解"><img class="cover" src="https://cdn.jsdelivr.net/gh/cnyist/blog/ML/RL/primer/Intro_to_Policy_Optimization_code/Intro_to_Policy_Optimization_code.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-06-25</div><div class="title">Intro to Policy Optimization 代码详解</div></div></a></div><div><a href="/ML/RL/primer/RL_demo/" title="强化学习入门 Demo"><img class="cover" src="https://cdn.jsdelivr.net/gh/cnyist/blog/ML/RL/primer/RL_demo/RL_demo.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-04-27</div><div class="title">强化学习入门 Demo</div></div></a></div><div><a href="/ML/RL/primer/algorithm_classify/" title="RL 算法分类"><img class="cover" src="https://cdn.jsdelivr.net/gh/cnyist/blog/ML/RL/primer/algorithm_classify/1.svg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-05-23</div><div class="title">RL 算法分类</div></div></a></div><div><a href="/ML/RL/primer/basic_concepts/" title="基本概念"><img class="cover" src="https://cdn.jsdelivr.net/gh/cnyist/blog/ML/RL/primer/basic_concepts/basic_concepts.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-05-03</div><div class="title">基本概念</div></div></a></div><div><a href="/ML/RL/spinningup/begin/" title="Spinning Up 研究笔记 (零) - 开端"><img class="cover" src="https://cdn.jsdelivr.net/gh/cnyist/blog/ML/RL/spinningup/begin/begin.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-07-07</div><div class="title">Spinning Up 研究笔记 (零) - 开端</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-info-avatar is-center"><img class="avatar-img" src="https://cdn.jsdelivr.net/gh/cnyist/blog/img/avatar.svg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/><div class="author-info__name">云玩家</div><div class="author-info__description">云玩家's blog</div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">61</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">35</div></a></div><div class="card-info-data-item is-center"><a href="/categories/"><div class="headline">分类</div><div class="length-num">24</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/cnyist" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="https://blog.csdn.net/chnyist" target="_blank" title="CSDN"><i class="fas iconfont icon-CN_csdnnet"></i></a><a class="social-icon" href="https://www.zhihu.com/people/cnyist" target="_blank" title="知乎"><i class="fas iconfont icon-zhihu"></i></a><a class="social-icon" href="mailto:371622558@qq.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%8E%A8%E5%AF%BC%E6%9C%80%E7%AE%80%E5%8D%95%E7%9A%84%E7%AD%96%E7%95%A5%E6%A2%AF%E5%BA%A6"><span class="toc-number">1.</span> <span class="toc-text">推导最简单的策略梯度</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0"><span class="toc-number">2.</span> <span class="toc-text">损失函数</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%8E%E5%8F%82%E6%95%B0%E5%85%B3%E7%B3%BB"><span class="toc-number">2.1.</span> <span class="toc-text">与参数关系</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8F%8F%E8%BF%B0%E6%80%A7%E8%83%BD"><span class="toc-number">2.2.</span> <span class="toc-text">描述性能</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#EGLP-%E5%AE%9A%E7%90%86"><span class="toc-number">3.</span> <span class="toc-text">EGLP 定理</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%88%AB%E8%AE%A9%E8%BF%87%E5%8E%BB%E5%BD%B1%E5%93%8D%E4%BD%A0"><span class="toc-number">4.</span> <span class="toc-text">别让过去影响你</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AF%81%E6%98%8E"><span class="toc-number">4.1.</span> <span class="toc-text">证明</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AD%96%E7%95%A5%E6%A2%AF%E5%BA%A6%E7%9A%84%E5%9F%BA%E7%BA%BF"><span class="toc-number">5.</span> <span class="toc-text">策略梯度的基线</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AD%96%E7%95%A5%E6%A2%AF%E5%BA%A6%E7%9A%84%E5%85%B6%E4%BB%96%E5%BD%A2%E5%BC%8F"><span class="toc-number">6.</span> <span class="toc-text">策略梯度的其他形式</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><!-- - let post_cover = article.cover--><div class="aside-list-item"><a class="thumbnail" href="/math/mathematical_analysis/mathematical_analysis_practice/1/" title="数学分析练习题 (一)"><img src="https://cdn.jsdelivr.net/gh/cnyist/blog/math/mathematical_analysis/mathematical_analysis_practice/1/1.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="数学分析练习题 (一)"/></a><div class="content"><a class="title" href="/math/mathematical_analysis/mathematical_analysis_practice/1/" title="数学分析练习题 (一)">数学分析练习题 (一)</a><time datetime="2020-12-20T06:38:07.000Z" title="发表于 2020-12-20 14:38:07">2020-12-20</time></div></div><!-- - let post_cover = article.cover--><div class="aside-list-item"><a class="thumbnail" href="/scribble/player_in_blog/" title="为你的博客添加一个播放器"><img src="https://cdn.jsdelivr.net/gh/cnyist/blog/scribble/player_in_blog/player_in_blog.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="为你的博客添加一个播放器"/></a><div class="content"><a class="title" href="/scribble/player_in_blog/" title="为你的博客添加一个播放器">为你的博客添加一个播放器</a><time datetime="2020-11-29T08:05:16.000Z" title="发表于 2020-11-29 16:05:16">2020-11-29</time></div></div><!-- - let post_cover = article.cover--><div class="aside-list-item"><a class="thumbnail" href="/math/other/why_pi_not_4/" title="π 为什么会等于四"><img src="https://cdn.jsdelivr.net/gh/cnyist/blog/math/other/why_pi_not_4/1.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="π 为什么会等于四"/></a><div class="content"><a class="title" href="/math/other/why_pi_not_4/" title="π 为什么会等于四">π 为什么会等于四</a><time datetime="2020-10-18T08:07:34.000Z" title="发表于 2020-10-18 16:07:34">2020-10-18</time></div></div><!-- - let post_cover = article.cover--><div class="aside-list-item"><a class="thumbnail" href="/scribble/RL_papers_word/" title="强化学习类论文常用表达"><img src="https://cdn.jsdelivr.net/gh/cnyist/blog/scribble/RL_papers_word/RL_papers_word.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="强化学习类论文常用表达"/></a><div class="content"><a class="title" href="/scribble/RL_papers_word/" title="强化学习类论文常用表达">强化学习类论文常用表达</a><time datetime="2020-09-13T06:13:47.000Z" title="发表于 2020-09-13 14:13:47">2020-09-13</time></div></div><!-- - let post_cover = article.cover--><div class="aside-list-item"><a class="thumbnail" href="/math/other/Peano_fifth_axiom/" title="理解皮亚诺公理第五条"><img src="https://cdn.jsdelivr.net/gh/cnyist/blog/math/other/Peano_fifth_axiom/Peano_fifth_axiom.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="理解皮亚诺公理第五条"/></a><div class="content"><a class="title" href="/math/other/Peano_fifth_axiom/" title="理解皮亚诺公理第五条">理解皮亚诺公理第五条</a><time datetime="2020-09-13T03:09:22.000Z" title="发表于 2020-09-13 11:09:22">2020-09-13</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2021 By 云玩家</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer><script>document.getElementById('web_bg').style = 'background-image: url("' + get_rand_jsd_pic('cnyist', 'banner', '/', 60, '-min.jpg') + '")'</script></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    loader: {
+      source: {
+        '[tex]/amsCd': '[tex]/amscd'
+      }
+    },
+    tex: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"]],
+      tags: 'ams'
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, ''],
+        addClass: [200,() => {
+          document.querySelectorAll('mjx-container:not([display=\'true\']').forEach( node => {
+            const target = node.parentNode
+            if (!target.classList.contains('has-jax')) {
+              target.classList.add('mathjax-overflow')
+            }
+          })
+        }, '', false]
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typeset()
+}</script><script>(()=>{
+  const $countDom = document.getElementById('twikoo-count')
+  const init = () => {
+    let initData = {
+      el: '#twikoo-wrap',
+      envId: 'yunist-147dfe',
+      region: ''
+    }
+
+    if (false) {
+      const otherData = false
+      initData = Object.assign(initData, otherData)
+    }
+    
+    twikoo.init(initData)
+  }
+
+  const getCount = () => {
+    twikoo.getCommentsCount({
+      envId: 'yunist-147dfe',
+      region: '',
+      urls: [window.location.pathname],
+      includeReply: false
+    }).then(function (res) {
+      $countDom.innerText = res[0].count
+    }).catch(function (err) {
+      console.error(err);
+    });
+  }
+
+  const loadTwikoo = (bool = false) => {
+    if (typeof twikoo === 'object') {
+      init()
+      bool && $countDom && setTimeout(getCount,0)
+    } else {
+      getScript('https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js').then(()=> {
+        init()
+        bool && $countDom && setTimeout(getCount,0)
+      })
+    }
+  }
+
+  if ('Twikoo' === 'Twikoo' || !false) {
+    if (false) btf.loadComment(document.getElementById('twikoo-wrap'), loadTwikoo)
+    else loadTwikoo(true)
+  } else {
+    window.loadOtherComment = () => {
+      loadTwikoo()
+    }
+  }
+})()</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

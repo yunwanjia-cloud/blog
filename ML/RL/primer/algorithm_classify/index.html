@@ -1,0 +1,252 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>RL 算法分类 | 云玩家</title><meta name="keywords" content="强化学习,机器学习"><meta name="author" content="云玩家"><meta name="copyright" content="云玩家"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="有模型与无模型强化学习的一个最重要的分支即为有模型 ($\textrm{Model-Base}$) 与无模型 ($\textrm{Model-Free}$) 学习. 它们的区别在于, 代理人 ($\textrm{Agent}$, 即执行算法的主体) 是否获得环境的模型 ($\textrm{Model}$). 有了模型, 就可以预知状态转移以及回报. 有模型有模型能够让代理人在做出决策前先思考,">
+<meta property="og:type" content="article">
+<meta property="og:title" content="RL 算法分类">
+<meta property="og:url" content="http://example.com/ML/RL/primer/algorithm_classify/index.html">
+<meta property="og:site_name" content="云玩家">
+<meta property="og:description" content="有模型与无模型强化学习的一个最重要的分支即为有模型 ($\textrm{Model-Base}$) 与无模型 ($\textrm{Model-Free}$) 学习. 它们的区别在于, 代理人 ($\textrm{Agent}$, 即执行算法的主体) 是否获得环境的模型 ($\textrm{Model}$). 有了模型, 就可以预知状态转移以及回报. 有模型有模型能够让代理人在做出决策前先思考,">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/ML/RL/primer/algorithm_classify/1.svg">
+<meta property="article:published_time" content="2020-05-22T16:08:36.000Z">
+<meta property="article:modified_time" content="2021-02-07T11:06:51.023Z">
+<meta property="article:author" content="云玩家">
+<meta property="article:tag" content="强化学习">
+<meta property="article:tag" content="机器学习">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/ML/RL/primer/algorithm_classify/1.svg"><link rel="shortcut icon" href="/img/favicon.ico"><link rel="canonical" href="http://example.com/ML/RL/primer/algorithm_classify/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//s4.cnzz.com"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script async="async" data-pjax="data-pjax" src="https://s4.cnzz.com/z_stat.php?id=1278869595&amp;web_id=1278869595"></script><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+}</script><script src="/js/yuntools.js"></script><script id="config-diff">var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2021-02-07 19:06:51'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    })(window)</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/cnyist/blog/css/font.css"><meta name="generator" content="Hexo 5.3.0"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" src="https://cdn.jsdelivr.net/gh/cnyist/blog/img/avatar.svg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">61</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">35</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">24</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/speak/"><i class="fa-fw fas fa-comment"></i><span> 说说</span></a></div><div class="menus_item"><a class="site-page" href="/chat/"><i class="fa-fw fas fa-comments"></i><span> 闲聊室</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> about</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw iconfont icon-Web"></i><span> 镜像站点</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page" target="_blank" rel="noopener" href="https://yunist.gitee.io"><i class="fa-fw iconfont icon-gitee-fill-round"></i><span> Gitee Pages</span></a></li></ul></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/ML/RL/primer/algorithm_classify/1.svg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">云玩家</a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/speak/"><i class="fa-fw fas fa-comment"></i><span> 说说</span></a></div><div class="menus_item"><a class="site-page" href="/chat/"><i class="fa-fw fas fa-comments"></i><span> 闲聊室</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> about</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw iconfont icon-Web"></i><span> 镜像站点</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page" target="_blank" rel="noopener" href="https://yunist.gitee.io"><i class="fa-fw iconfont icon-gitee-fill-round"></i><span> Gitee Pages</span></a></li></ul></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">RL 算法分类</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2020-05-22T16:08:36.000Z" title="发表于 2020-05-23 00:08:36">2020-05-23</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2021-02-07T11:06:51.023Z" title="更新于 2021-02-07 19:06:51">2021-02-07</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/">强化学习</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/%E5%85%A5%E9%97%A8/">入门</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span><span class="post-meta-separator">|</span><span class="post-meta-commentcount"><i class="far fa-comments fa-fw post-meta-icon"></i><span class="post-meta-label">评论数:</span><a href="/ML/RL/primer/algorithm_classify/#post-comment"><span id="twikoo-count"></span></a></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p><img src="1.svg"></p>
+<h1 id="有模型与无模型"><a href="#有模型与无模型" class="headerlink" title="有模型与无模型"></a>有模型与无模型</h1><p>强化学习的一个最重要的分支即为<strong>有模型</strong> ($\textrm{Model-Base}$) 与<strong>无模型</strong> ($\textrm{Model-Free}$) 学习. 它们的区别在于, 代理人 ($\textrm{Agent}$, 即执行算法的主体) 是否获得环境的模型 ($\textrm{Model}$). 有了模型, 就可以预知状态转移以及回报.</p>
+<h2 id="有模型"><a href="#有模型" class="headerlink" title="有模型"></a>有模型</h2><p>有模型能够让代理人在做出决策前先思考, 看看在做出某个可能的动作后会发生什么, 并在可能的动作中选择出确切的决策. 与无模型相比, 能够大大提高样本效率 ($\textrm{sample efficiency}$, 你从每条样本中得到的越多, 样本效率就越高, 详情可见 <a target="_blank" rel="noopener" href="https://ai.stackexchange.com/questions/5246/what-is-sample-efficiency-and-how-can-importance-sampling-be-used-to-achieve-it">What is sample efficiency?</a>). </p>
+<p>但是有模型学习同样也有缺点, <strong>得到一个很好描述现实的模型通常是不可能的.</strong> 并且代理人有可能在模型上学到一些 “偏见” (可以类比监督学习中的过拟合), 这使得代理人在模型中表现德很好, 但是在真实环境中表现并不是很好 (甚至很差) .</p>
+<h2 id="无模型"><a href="#无模型" class="headerlink" title="无模型"></a>无模型</h2><p>无模型就比较好介绍了, 就是没有这个模型.</p>
+<h1 id="如何学习"><a href="#如何学习" class="headerlink" title="如何学习"></a>如何学习</h1><h2 id="无模型-1"><a href="#无模型-1" class="headerlink" title="无模型"></a>无模型</h2><h3 id="参数优化"><a href="#参数优化" class="headerlink" title="参数优化"></a>参数优化</h3><p>参数优化方法将策略表示为一个与 $\theta$ 有关的函数 $\pi_{\theta}(a\mid s)$ . 优化参数 $\theta$ 可以直接用<strong>性能指标</strong> ($\textrm{performance objective}$ , 可以类比损失函数) $J(\pi_{\theta})$ 来进行<strong>梯度提升</strong> ($\textrm{gradient ascent}$) , 也可以使用性能指标的近似 (当性能指标本身难以获得时) 来间接的优化.</p>
+<p>参数优化一般是<strong>同策略</strong> ($\textrm{on-policy}$) 的, 即<strong>策略改进和策略评估的对象是同一个策略</strong>, 与之相对的还有<strong>异策略</strong> ($\textrm{off-policy}$),  详情可见 <a target="_blank" rel="noopener" href="https://stats.stackexchange.com/questions/184657/what-is-the-difference-between-off-policy-and-on-policy-learning">What is the difference between off-policy and on-policy learning ?</a></p>
+<h3 id="Q-Learning"><a href="#Q-Learning" class="headerlink" title="Q-Learning"></a>Q-Learning</h3><p> &nbsp;$\textrm{Q-Learning}$ 方法会学习一个近似器 ($\textrm{approximator}$) $Q_{\theta}(s,a)$ 来近似动作-价值函数, 优化的过程常常使用异策略的方法, 即可以不理会代理人真正选择的动作所产生的数据, 而使用其他数据 (比如说最优动作产生的数据). 而得到 $Q_{\theta}(s,a)$ 后, 每个状态的动作如下给出<br>$$<br>a(s)=\mathop{\arg\max}<em>{a}Q</em>{\theta}(s,a)<br>$$</p>
+<h3 id="优缺点"><a href="#优缺点" class="headerlink" title="优缺点"></a>优缺点</h3><p>参数优化 与 $\textrm{Q-Learning}$ 各自有其优缺点. 由于参数优化法直接优化你想要的 (策略 $\pi$) , 这使得它更加稳固与可靠. 而 $\textrm{Q-Learning}$ 通过优化近似动作-价值函数 $Q_{\theta}(s,a)$ 来间接优化策略 $\pi$ , 使得它并没有那么稳固 ($\textrm{Q-Learning}$ 有许多失败的模式), 但是当它生效时, 样本效率会非常高, 它可以高效的利用信息. </p>
+<h2 id="有模型-1"><a href="#有模型-1" class="headerlink" title="有模型"></a>有模型</h2><p>在有模型中, 模型要么被给出, 要么要学习.</p>
+<h3 id="纯规划-Pure-Planning"><a href="#纯规划-Pure-Planning" class="headerlink" title="纯规划 (Pure Planning)"></a>纯规划 (Pure Planning)</h3><p>纯规划是一个最基础的算法, 它不显式的表示策略, 而是用纯规划技术比如<strong>模型预测控制</strong> ($\textrm{model-predictive control, MPC}$) 来选择动作. 每次代理人观察环境时, 它会计算出一个计划 (行动的序列) , 并且这个计划相对于这个模型来说是最优的, 然后执行该计划的第一个动作 (即当前最优动作) , 然后舍弃该计划其余动作. 这种计算在每次代理人与环境交互的时候都会执行一次, 并产生一个新计划.</p>
+<h3 id="专家迭代-Expert-Iteration"><a href="#专家迭代-Expert-Iteration" class="headerlink" title="专家迭代 (Expert Iteration)"></a>专家迭代 (Expert Iteration)</h3><p>比纯计划更进一步, 专家迭代学习并使用了一个显式的策略 $\pi_{\theta}(a\mid s)$ . 代理人在模型中使用一种规划算法 (比如蒙特卡罗搜索树) 来采样, 然后为计划生成候选动作, 这要比单纯的基于策略做出动作效果要好. 因此称之为 “专家” .</p>
+<h3 id="无模型的数据增强-Data-Augmentation"><a href="#无模型的数据增强-Data-Augmentation" class="headerlink" title="无模型的数据增强 (Data Augmentation)"></a>无模型的数据增强 (Data Augmentation)</h3><p>利用在模型上采样的数据, 来训练无模型策略, 可以理解为扩充 (增强) 了数据. 可以使用虚拟数据 (采样生成的数据) 和真实数据的混合, 或者直接全部使用虚拟数据.</p>
+<h3 id="规划嵌入策略"><a href="#规划嵌入策略" class="headerlink" title="规划嵌入策略"></a>规划嵌入策略</h3><p>将规划本身也嵌入策略中, 作为其子部分. 这样策略不仅要考虑当前动作, 还要考虑当前是否要进行规划以及如何规划 (规划本身也会影响动作的选择) . 这样当模型和现实有较大差距时, 策略会学着去不做规划.</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">云玩家</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://example.com/ML/RL/primer/algorithm_classify/">http://example.com/ML/RL/primer/algorithm_classify/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://example.com" target="_blank">云玩家</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/">强化学习</a><a class="post-meta__tags" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a></div><div class="post_share"><div class="social-share" data-image="/ML/RL/primer/algorithm_classify/1.svg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><!-- - var pagination_cover = prev.cover === false ? prev.randomcover : prev.cover--><a href="/math/probability_theory/hypergeometric_distribution/"><img class="prev-cover" src="https://cdn.jsdelivr.net/gh/cnyist/blog/math/probability_theory/hypergeometric_distribution/hypergeometric_distribution.jpeg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">超几何分布抽取概率证明</div></div></a></div><!-- - var pagination_cover = next.cover == false ? next.randomcover : next.cover--><div class="next-post pull-right"><a href="/hexo/hexo_modify_theme_butterfly/"><img class="next-cover" src="https://cdn.jsdelivr.net/gh/cnyist/blog/hexo/hexo_modify_theme_butterfly/hexo_modify_theme_butterfly.svg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Hexo modify theme butterfly</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span> 相关推荐</span></div><div class="relatedPosts-list"><div><a href="/scribble/RL_papers_word/" title="强化学习类论文常用表达"><img class="cover" src="https://cdn.jsdelivr.net/gh/cnyist/blog/scribble/RL_papers_word/RL_papers_word.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-09-13</div><div class="title">强化学习类论文常用表达</div></div></a></div><div><a href="/ML/RL/primer/Intro_to_Policy_Optimization_code/" title="Intro to Policy Optimization 代码详解"><img class="cover" src="https://cdn.jsdelivr.net/gh/cnyist/blog/ML/RL/primer/Intro_to_Policy_Optimization_code/Intro_to_Policy_Optimization_code.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-06-25</div><div class="title">Intro to Policy Optimization 代码详解</div></div></a></div><div><a href="/ML/RL/primer/RL_demo/" title="强化学习入门 Demo"><img class="cover" src="https://cdn.jsdelivr.net/gh/cnyist/blog/ML/RL/primer/RL_demo/RL_demo.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-04-27</div><div class="title">强化学习入门 Demo</div></div></a></div><div><a href="/ML/RL/primer/basic_concepts/" title="基本概念"><img class="cover" src="https://cdn.jsdelivr.net/gh/cnyist/blog/ML/RL/primer/basic_concepts/basic_concepts.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-05-03</div><div class="title">基本概念</div></div></a></div><div><a href="/ML/RL/primer/opt_param/" title="参数优化"><img class="cover" src="https://cdn.jsdelivr.net/gh/cnyist/blog/ML/RL/primer/opt_param/opt_param.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-06-07</div><div class="title">参数优化</div></div></a></div><div><a href="/ML/RL/spinningup/begin/" title="Spinning Up 研究笔记 (零) - 开端"><img class="cover" src="https://cdn.jsdelivr.net/gh/cnyist/blog/ML/RL/spinningup/begin/begin.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-07-07</div><div class="title">Spinning Up 研究笔记 (零) - 开端</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-info-avatar is-center"><img class="avatar-img" src="https://cdn.jsdelivr.net/gh/cnyist/blog/img/avatar.svg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/><div class="author-info__name">云玩家</div><div class="author-info__description">云玩家's blog</div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">61</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">35</div></a></div><div class="card-info-data-item is-center"><a href="/categories/"><div class="headline">分类</div><div class="length-num">24</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/cnyist" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="https://blog.csdn.net/chnyist" target="_blank" title="CSDN"><i class="fas iconfont icon-CN_csdnnet"></i></a><a class="social-icon" href="https://www.zhihu.com/people/cnyist" target="_blank" title="知乎"><i class="fas iconfont icon-zhihu"></i></a><a class="social-icon" href="mailto:371622558@qq.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%9C%89%E6%A8%A1%E5%9E%8B%E4%B8%8E%E6%97%A0%E6%A8%A1%E5%9E%8B"><span class="toc-number">1.</span> <span class="toc-text">有模型与无模型</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%89%E6%A8%A1%E5%9E%8B"><span class="toc-number">1.1.</span> <span class="toc-text">有模型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%97%A0%E6%A8%A1%E5%9E%8B"><span class="toc-number">1.2.</span> <span class="toc-text">无模型</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E5%AD%A6%E4%B9%A0"><span class="toc-number">2.</span> <span class="toc-text">如何学习</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%97%A0%E6%A8%A1%E5%9E%8B-1"><span class="toc-number">2.1.</span> <span class="toc-text">无模型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%82%E6%95%B0%E4%BC%98%E5%8C%96"><span class="toc-number">2.1.1.</span> <span class="toc-text">参数优化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Q-Learning"><span class="toc-number">2.1.2.</span> <span class="toc-text">Q-Learning</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BC%98%E7%BC%BA%E7%82%B9"><span class="toc-number">2.1.3.</span> <span class="toc-text">优缺点</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%89%E6%A8%A1%E5%9E%8B-1"><span class="toc-number">2.2.</span> <span class="toc-text">有模型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BA%AF%E8%A7%84%E5%88%92-Pure-Planning"><span class="toc-number">2.2.1.</span> <span class="toc-text">纯规划 (Pure Planning)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%93%E5%AE%B6%E8%BF%AD%E4%BB%A3-Expert-Iteration"><span class="toc-number">2.2.2.</span> <span class="toc-text">专家迭代 (Expert Iteration)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%97%A0%E6%A8%A1%E5%9E%8B%E7%9A%84%E6%95%B0%E6%8D%AE%E5%A2%9E%E5%BC%BA-Data-Augmentation"><span class="toc-number">2.2.3.</span> <span class="toc-text">无模型的数据增强 (Data Augmentation)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A7%84%E5%88%92%E5%B5%8C%E5%85%A5%E7%AD%96%E7%95%A5"><span class="toc-number">2.2.4.</span> <span class="toc-text">规划嵌入策略</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><!-- - let post_cover = article.cover--><div class="aside-list-item"><a class="thumbnail" href="/math/mathematical_analysis/mathematical_analysis_practice/1/" title="数学分析练习题 (一)"><img src="https://cdn.jsdelivr.net/gh/cnyist/blog/math/mathematical_analysis/mathematical_analysis_practice/1/1.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="数学分析练习题 (一)"/></a><div class="content"><a class="title" href="/math/mathematical_analysis/mathematical_analysis_practice/1/" title="数学分析练习题 (一)">数学分析练习题 (一)</a><time datetime="2020-12-20T06:38:07.000Z" title="发表于 2020-12-20 14:38:07">2020-12-20</time></div></div><!-- - let post_cover = article.cover--><div class="aside-list-item"><a class="thumbnail" href="/scribble/player_in_blog/" title="为你的博客添加一个播放器"><img src="https://cdn.jsdelivr.net/gh/cnyist/blog/scribble/player_in_blog/player_in_blog.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="为你的博客添加一个播放器"/></a><div class="content"><a class="title" href="/scribble/player_in_blog/" title="为你的博客添加一个播放器">为你的博客添加一个播放器</a><time datetime="2020-11-29T08:05:16.000Z" title="发表于 2020-11-29 16:05:16">2020-11-29</time></div></div><!-- - let post_cover = article.cover--><div class="aside-list-item"><a class="thumbnail" href="/math/other/why_pi_not_4/" title="π 为什么会等于四"><img src="https://cdn.jsdelivr.net/gh/cnyist/blog/math/other/why_pi_not_4/1.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="π 为什么会等于四"/></a><div class="content"><a class="title" href="/math/other/why_pi_not_4/" title="π 为什么会等于四">π 为什么会等于四</a><time datetime="2020-10-18T08:07:34.000Z" title="发表于 2020-10-18 16:07:34">2020-10-18</time></div></div><!-- - let post_cover = article.cover--><div class="aside-list-item"><a class="thumbnail" href="/scribble/RL_papers_word/" title="强化学习类论文常用表达"><img src="https://cdn.jsdelivr.net/gh/cnyist/blog/scribble/RL_papers_word/RL_papers_word.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="强化学习类论文常用表达"/></a><div class="content"><a class="title" href="/scribble/RL_papers_word/" title="强化学习类论文常用表达">强化学习类论文常用表达</a><time datetime="2020-09-13T06:13:47.000Z" title="发表于 2020-09-13 14:13:47">2020-09-13</time></div></div><!-- - let post_cover = article.cover--><div class="aside-list-item"><a class="thumbnail" href="/math/other/Peano_fifth_axiom/" title="理解皮亚诺公理第五条"><img src="https://cdn.jsdelivr.net/gh/cnyist/blog/math/other/Peano_fifth_axiom/Peano_fifth_axiom.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="理解皮亚诺公理第五条"/></a><div class="content"><a class="title" href="/math/other/Peano_fifth_axiom/" title="理解皮亚诺公理第五条">理解皮亚诺公理第五条</a><time datetime="2020-09-13T03:09:22.000Z" title="发表于 2020-09-13 11:09:22">2020-09-13</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2021 By 云玩家</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer><script>document.getElementById('web_bg').style = 'background-image: url("' + get_rand_jsd_pic('cnyist', 'banner', '/', 60, '-min.jpg') + '")'</script></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    loader: {
+      source: {
+        '[tex]/amsCd': '[tex]/amscd'
+      }
+    },
+    tex: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"]],
+      tags: 'ams'
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, ''],
+        addClass: [200,() => {
+          document.querySelectorAll('mjx-container:not([display=\'true\']').forEach( node => {
+            const target = node.parentNode
+            if (!target.classList.contains('has-jax')) {
+              target.classList.add('mathjax-overflow')
+            }
+          })
+        }, '', false]
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typeset()
+}</script><script>(()=>{
+  const $countDom = document.getElementById('twikoo-count')
+  const init = () => {
+    let initData = {
+      el: '#twikoo-wrap',
+      envId: 'yunist-147dfe',
+      region: ''
+    }
+
+    if (false) {
+      const otherData = false
+      initData = Object.assign(initData, otherData)
+    }
+    
+    twikoo.init(initData)
+  }
+
+  const getCount = () => {
+    twikoo.getCommentsCount({
+      envId: 'yunist-147dfe',
+      region: '',
+      urls: [window.location.pathname],
+      includeReply: false
+    }).then(function (res) {
+      $countDom.innerText = res[0].count
+    }).catch(function (err) {
+      console.error(err);
+    });
+  }
+
+  const loadTwikoo = (bool = false) => {
+    if (typeof twikoo === 'object') {
+      init()
+      bool && $countDom && setTimeout(getCount,0)
+    } else {
+      getScript('https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js').then(()=> {
+        init()
+        bool && $countDom && setTimeout(getCount,0)
+      })
+    }
+  }
+
+  if ('Twikoo' === 'Twikoo' || !false) {
+    if (false) btf.loadComment(document.getElementById('twikoo-wrap'), loadTwikoo)
+    else loadTwikoo(true)
+  } else {
+    window.loadOtherComment = () => {
+      loadTwikoo()
+    }
+  }
+})()</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

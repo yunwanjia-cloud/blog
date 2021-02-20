@@ -642,9 +642,9 @@
             
             <tag> 数学 </tag>
             
-            <tag> 分布 </tag>
-            
             <tag> 概率论 </tag>
+            
+            <tag> 分布 </tag>
             
         </tags>
       
@@ -857,9 +857,9 @@
       
         <tags>
             
-            <tag> LaTeX </tag>
-            
             <tag> 数学 </tag>
+            
+            <tag> LaTeX </tag>
             
         </tags>
       
@@ -886,9 +886,9 @@
       
         <tags>
             
-            <tag> 数学 </tag>
-            
             <tag> 机器学习 </tag>
+            
+            <tag> 数学 </tag>
             
             <tag> 概率图模型 </tag>
             
@@ -915,15 +915,15 @@
       
         <tags>
             
-            <tag> 问题 </tag>
-            
             <tag> Hexo </tag>
             
             <tag> 搭建站点 </tag>
             
-            <tag> Valine </tag>
-            
             <tag> 教程 </tag>
+            
+            <tag> 问题 </tag>
+            
+            <tag> Valine </tag>
             
         </tags>
       
@@ -948,11 +948,11 @@
       
         <tags>
             
-            <tag> 问题 </tag>
-            
             <tag> Hexo </tag>
             
             <tag> 搭建站点 </tag>
+            
+            <tag> 问题 </tag>
             
         </tags>
       
@@ -1008,11 +1008,11 @@
             
             <tag> 数学 </tag>
             
+            <tag> 概率论 </tag>
+            
             <tag> 函数 </tag>
             
             <tag> 分布 </tag>
-            
-            <tag> 概率论 </tag>
             
         </tags>
       
@@ -1097,11 +1097,11 @@
       
         <tags>
             
-            <tag> 问题 </tag>
-            
             <tag> Hexo </tag>
             
             <tag> 搭建站点 </tag>
+            
+            <tag> 问题 </tag>
             
             <tag> Valine </tag>
             
@@ -1132,9 +1132,9 @@
             
             <tag> 数学 </tag>
             
-            <tag> 函数 </tag>
-            
             <tag> 概率论 </tag>
+            
+            <tag> 函数 </tag>
             
         </tags>
       
@@ -1184,11 +1184,11 @@
       
         <tags>
             
-            <tag> 问题 </tag>
-            
             <tag> Hexo </tag>
             
             <tag> 搭建站点 </tag>
+            
+            <tag> 问题 </tag>
             
         </tags>
       
@@ -1337,11 +1337,11 @@
       
         <tags>
             
-            <tag> 问题 </tag>
-            
             <tag> Hexo </tag>
             
             <tag> 搭建站点 </tag>
+            
+            <tag> 问题 </tag>
             
             <tag> Valine </tag>
             

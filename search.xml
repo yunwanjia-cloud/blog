@@ -165,9 +165,9 @@
             
             <tag> 机器学习 </tag>
             
-            <tag> 英语 </tag>
-            
             <tag> 强化学习 </tag>
+            
+            <tag> 英语 </tag>
             
             <tag> 论文 </tag>
             
@@ -384,13 +384,13 @@
             
             <tag> Python </tag>
             
-            <tag> 强化学习 </tag>
+            <tag> Pytorch </tag>
             
-            <tag> Spinning Up </tag>
+            <tag> 强化学习 </tag>
             
             <tag> 代码实例 </tag>
             
-            <tag> Pytorch </tag>
+            <tag> Spinning Up </tag>
             
         </tags>
       
@@ -456,11 +456,11 @@
             
             <tag> Python </tag>
             
+            <tag> Pytorch </tag>
+            
             <tag> 强化学习 </tag>
             
             <tag> 代码实例 </tag>
-            
-            <tag> Pytorch </tag>
             
         </tags>
       
@@ -520,9 +520,9 @@
             
             <tag> 机器学习 </tag>
             
-            <tag> Pytorch </tag>
-            
             <tag> 框架 </tag>
+            
+            <tag> Pytorch </tag>
             
         </tags>
       

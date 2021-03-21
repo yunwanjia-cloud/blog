@@ -194,9 +194,9 @@
             
             <tag> 机器学习 </tag>
             
-            <tag> 强化学习 </tag>
-            
             <tag> 英语 </tag>
+            
+            <tag> 强化学习 </tag>
             
             <tag> 论文 </tag>
             
@@ -1113,20 +1113,20 @@
       
       <categories>
           
-          <category> Hexo </category>
-          
           <category> Git </category>
+          
+          <category> Hexo </category>
           
       </categories>
       
       
         <tags>
             
+            <tag> Git </tag>
+            
             <tag> Hexo </tag>
             
             <tag> 搭建站点 </tag>
-            
-            <tag> Git </tag>
             
             <tag> 教程 </tag>
             

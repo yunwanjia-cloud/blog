@@ -8,7 +8,7 @@
       <link href="math/other/conical_section_conclusion/"/>
       <url>math/other/conical_section_conclusion/</url>
       
-        <content type="html"><![CDATA[<p>最近推了一个圆锥曲线的结论, 因此记录一下.</p><p>先上结论:</p><p>若有圆锥曲线 $\frac{x^2}{A}+\frac{y^2}{B}=1$ ,$A$ 与 $B$ 不同时取负数 (这样就同时代表了双曲线和椭圆) , 那么对于一个在该圆锥曲线上的点 $P_1(x_1,y_1)$ 来说, 存在一个点 $P_2(\frac{(A-B)}{(A+B)}x_1,\frac{B-A}{A+B}y_1)$ . 若作直线 $l_1, l_2$ 过点 $P_0$ 且相互垂直, 那么这两条直线与该圆锥曲线异于 $P_0$ 的两个交点 $M,N$ 的连线恒过点 $P_1$ .</p><script src="https://cdn.geogebra.org/apps/deployggb.js"></script><div id="ggbApplet"></div><script>var parameters = {"id": "ggbApplet","width":100%,"height":100%,"showToolBar":true,"language":"zh","filename":"https://cdn.jsdelivr.net/ghivr.net/gh/yunist/blog/ggb/conical_section_conclude_1.ggb",};// is3D=is 3D applet using 3D view, AV=Algebra View, SV=Spreadsheet View, CV=CAS View, EV2=Graphics View 2, CP=Construction Protocol, PC=Probability Calculator DA=Data Analysis, FI=Function Inspector, macro=Macrosvar views = {'is3D': 0,'AV': 0,'SV': 0,'CV': 0,'EV2': 0,'CP': 0,'PC': 0,'DA': 0,'FI': 0,'macro': 0};var applet = new GGBApplet(parameters, '5.0', views);window.onload = function() {applet.inject('ggbApplet')};applet.setPreviewImage('data:image/gif;base64,R0lGODlhAQABAAAAADs=','https://www.geogebra.org/images/GeoGebra_loading.png','https://www.geogebra.org/images/applet_play.png');</script><p>对于形如 $y^2=2px$ 的抛物线也有类似结论, 不过 $P_2$ 为 $(2p+x,-y)$.</p>]]></content>
+        <content type="html"><![CDATA[<p>最近推了一个圆锥曲线的结论, 因此记录一下.</p><p>先上结论:</p><p>若有圆锥曲线 $\frac{x^2}{A}+\frac{y^2}{B}=1$ ,$A$ 与 $B$ 不同时取负数 (这样就同时代表了双曲线和椭圆) , 那么对于一个在该圆锥曲线上的点 $P_1(x_1,y_1)$ 来说, 存在一个点 $P_2(\frac{(A-B)}{(A+B)}x_1,\frac{B-A}{A+B}y_1)$ . 若作直线 $l_1, l_2$ 过点 $P_0$ 且相互垂直, 那么这两条直线与该圆锥曲线异于 $P_0$ 的两个交点 $M,N$ 的连线恒过点 $P_1$ .</p><script src="https://cdn.geogebra.org/apps/deployggb.js"></script><div id="ggbApplet"></div><script>var parameters = {"id": "ggbApplet","showToolBar":true,"language":"zh","filename":"https://cdn.jsdelivr.net/gh/cnyist/blog/ggb/conical_section_conclude_1.ggb",};// is3D=is 3D applet using 3D view, AV=Algebra View, SV=Spreadsheet View, CV=CAS View, EV2=Graphics View 2, CP=Construction Protocol, PC=Probability Calculator DA=Data Analysis, FI=Function Inspector, macro=Macrosvar views = {'is3D': 0,'AV': 0,'SV': 0,'CV': 0,'EV2': 0,'CP': 0,'PC': 0,'DA': 0,'FI': 0,'macro': 0};var applet = new GGBApplet(parameters, '5.0', views);window.onload = function() {applet.inject('ggbApplet')};applet.setPreviewImage('data:image/gif;base64,R0lGODlhAQABAAAAADs=','https://www.geogebra.org/images/GeoGebra_loading.png','https://www.geogebra.org/images/applet_play.png');</script><p>对于形如 $y^2=2px$ 的抛物线也有类似结论, 不过 $P_2$ 为 $(2p+x,-y)$.</p>]]></content>
       
       
       <categories>
@@ -415,11 +415,11 @@
             
             <tag> 强化学习 </tag>
             
-            <tag> Spinning Up </tag>
+            <tag> 代码实例 </tag>
             
             <tag> Pytorch </tag>
             
-            <tag> 代码实例 </tag>
+            <tag> Spinning Up </tag>
             
         </tags>
       
@@ -487,9 +487,9 @@
             
             <tag> 强化学习 </tag>
             
-            <tag> Pytorch </tag>
-            
             <tag> 代码实例 </tag>
+            
+            <tag> Pytorch </tag>
             
         </tags>
       
@@ -549,9 +549,9 @@
             
             <tag> 机器学习 </tag>
             
-            <tag> 框架 </tag>
-            
             <tag> Pytorch </tag>
+            
+            <tag> 框架 </tag>
             
         </tags>
       

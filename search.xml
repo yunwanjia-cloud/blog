@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>在网页中嵌入 GGB 最简单的方法</title>
+      <link href="scribble/ggb_insert/"/>
+      <url>scribble/ggb_insert/</url>
+      
+        <content type="html"><![CDATA[<p>一开始我是想要用官网的 js 解析 <code>.ggb</code> 文件的, 结果发现速度太慢还一堆问题… 最后发现直接分享然后 iframe 引用才是最快最方便的.</p><p>打开 GeoGebra , 然后在制作好的图中点击分享 (如下图)</p><p><img src="1.png"></p><p>然后就会进入登录界面, 有账号直接登录, 没有就注册.</p><p>接着进入 <a href="https://www.geogebra.org/">GGB 官网</a> , 登录并进入个人主页</p><p><img src="2.png"></p><p>接着看 <code>资源</code> 中是否有你分享的图, 如果没有, 重新回到 GGB 再次尝试分享.</p><p>然后点击进入你要嵌入到网页的资源, 查看该资源 ID .</p><p><img src="3.png"></p><p>记下 ID, 然后就可以在需要展示 GGB 的地方用 iframe 引用了</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;iframe </span><br><span class="line">frameborder&#x3D;&quot;no&quot;</span><br><span class="line">title&#x3D;&quot;随便写&quot; </span><br><span class="line">src&#x3D;&quot;https:&#x2F;&#x2F;www.geogebra.org&#x2F;material&#x2F;iframe&#x2F;id&#x2F;刚刚记下的 ID&#x2F;smb&#x2F;false&#x2F;stb&#x2F;false&#x2F;stbh&#x2F;false&#x2F;ai&#x2F;false&#x2F;asb&#x2F;false&#x2F;sri&#x2F;true&#x2F;rc&#x2F;false&#x2F;ld&#x2F;false&#x2F;sdz&#x2F;true&#x2F;ctl&#x2F;false&#x2F;&quot; </span><br><span class="line">width&#x3D;100% </span><br><span class="line">height&#x3D;&quot;480px&quot;&gt;</span><br><span class="line">&lt;&#x2F;iframe&gt;</span><br></pre></td></tr></table></figure><p>比如</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;iframe </span><br><span class="line">frameborder&#x3D;&quot;no&quot;</span><br><span class="line">title&#x3D;&quot;垂点抛物线&quot; src&#x3D;&quot;https:&#x2F;&#x2F;www.geogebra.org&#x2F;material&#x2F;iframe&#x2F;id&#x2F;myysrpxf&#x2F;smb&#x2F;false&#x2F;stb&#x2F;false&#x2F;stbh&#x2F;false&#x2F;ai&#x2F;false&#x2F;asb&#x2F;false&#x2F;sri&#x2F;true&#x2F;rc&#x2F;false&#x2F;ld&#x2F;false&#x2F;sdz&#x2F;true&#x2F;ctl&#x2F;false&#x2F;&quot; </span><br><span class="line">width&#x3D;100% </span><br><span class="line">height&#x3D;&quot;480px&quot;&gt;</span><br><span class="line">&lt;&#x2F;iframe&gt;</span><br></pre></td></tr></table></figure><p>就会有这样的效果:</p><iframe frameborder="no"title="垂点抛物线" src="https://www.geogebra.org/material/iframe/id/myysrpxf/smb/false/stb/false/stbh/false/ai/false/asb/false/sri/true/rc/false/ld/false/sdz/true/ctl/false/" width=100% height="480px"></iframe>]]></content>
+      
+      
+      <categories>
+          
+          <category> 杂文 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 教程 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>圆锥曲线二级结论</title>
       <link href="math/other/conical_section_conclusion/"/>
       <url>math/other/conical_section_conclusion/</url>
@@ -756,9 +781,9 @@
       
         <tags>
             
-            <tag> 搭建站点 </tag>
-            
             <tag> Hexo </tag>
+            
+            <tag> 搭建站点 </tag>
             
         </tags>
       
@@ -814,9 +839,9 @@
       
         <tags>
             
-            <tag> 搭建站点 </tag>
-            
             <tag> Hexo </tag>
+            
+            <tag> 搭建站点 </tag>
             
         </tags>
       
@@ -973,13 +998,13 @@
             
             <tag> 问题 </tag>
             
-            <tag> 搭建站点 </tag>
-            
-            <tag> 教程 </tag>
-            
             <tag> Hexo </tag>
             
+            <tag> 搭建站点 </tag>
+            
             <tag> Valine </tag>
+            
+            <tag> 教程 </tag>
             
         </tags>
       
@@ -1006,9 +1031,9 @@
             
             <tag> 问题 </tag>
             
-            <tag> 搭建站点 </tag>
-            
             <tag> Hexo </tag>
+            
+            <tag> 搭建站点 </tag>
             
         </tags>
       
@@ -1033,9 +1058,9 @@
       
         <tags>
             
-            <tag> 搭建站点 </tag>
-            
             <tag> Hexo </tag>
+            
+            <tag> 搭建站点 </tag>
             
         </tags>
       
@@ -1064,11 +1089,11 @@
             
             <tag> 数学 </tag>
             
+            <tag> 函数 </tag>
+            
             <tag> 分布 </tag>
             
             <tag> 概率论 </tag>
-            
-            <tag> 函数 </tag>
             
         </tags>
       
@@ -1124,11 +1149,11 @@
             
             <tag> Git </tag>
             
+            <tag> Hexo </tag>
+            
             <tag> 搭建站点 </tag>
             
             <tag> 教程 </tag>
-            
-            <tag> Hexo </tag>
             
         </tags>
       
@@ -1155,9 +1180,9 @@
             
             <tag> 问题 </tag>
             
-            <tag> 搭建站点 </tag>
-            
             <tag> Hexo </tag>
+            
+            <tag> 搭建站点 </tag>
             
             <tag> Valine </tag>
             
@@ -1188,9 +1213,9 @@
             
             <tag> 数学 </tag>
             
-            <tag> 概率论 </tag>
-            
             <tag> 函数 </tag>
+            
+            <tag> 概率论 </tag>
             
         </tags>
       
@@ -1242,9 +1267,9 @@
             
             <tag> 问题 </tag>
             
-            <tag> 搭建站点 </tag>
-            
             <tag> Hexo </tag>
+            
+            <tag> 搭建站点 </tag>
             
         </tags>
       
@@ -1364,11 +1389,11 @@
       
         <tags>
             
+            <tag> Hexo </tag>
+            
             <tag> 搭建站点 </tag>
             
             <tag> 教程 </tag>
-            
-            <tag> Hexo </tag>
             
         </tags>
       
@@ -1395,9 +1420,9 @@
             
             <tag> 问题 </tag>
             
-            <tag> 搭建站点 </tag>
-            
             <tag> Hexo </tag>
+            
+            <tag> 搭建站点 </tag>
             
             <tag> Valine </tag>
             

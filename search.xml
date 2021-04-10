@@ -62,7 +62,7 @@
       <link href="hexo/hexo_conflict_mathjax/"/>
       <url>hexo/hexo_conflict_mathjax/</url>
       
-        <content type="html"><![CDATA[<p>将 Hexo 升级到 5.0 后, 发现 MathJax 与 Hexo 仍然有冲突. 然而网上大部分的方法对 5.0 版本的 Hexo 都没有用.</p><p>摸索许久后, 找到了一个比较不错的方法解决该问题. 即在公式前后加上  与  , 即</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;% raw %&#125;</span><br><span class="line">$$</span><br><span class="line">xxxxxx (公式内容)</span><br><span class="line">$$</span><br><span class="line">&#123;% endraw %&#125;</span><br></pre></td></tr></table></figure><p>就可以完美解决.</p><p><del>这绝对不是水文.</del></p>]]></content>
+        <content type="html"><![CDATA[<p>将 Hexo 升级到 5.0 后, 发现 MathJax 与 Hexo 仍然有冲突. 然而网上大部分的方法对 5.0 版本的 Hexo 都没有用.</p><p>摸索许久后, 找到了一个比较不错的方法解决该问题. 即在公式前后加上 <code>` 与 `</code> , 即</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;% raw %&#125;</span><br><span class="line">$$</span><br><span class="line">xxxxxx (公式内容)</span><br><span class="line">$$</span><br><span class="line">&#123;% endraw %&#125;</span><br></pre></td></tr></table></figure><p>就可以完美解决.</p><p><del>这绝对不是水文.</del></p>]]></content>
       
       
       <categories>
@@ -219,9 +219,9 @@
             
             <tag> 机器学习 </tag>
             
-            <tag> 英语 </tag>
-            
             <tag> 强化学习 </tag>
+            
+            <tag> 英语 </tag>
             
             <tag> 论文 </tag>
             
@@ -1138,20 +1138,20 @@
       
       <categories>
           
-          <category> Git </category>
-          
           <category> Hexo </category>
+          
+          <category> Git </category>
           
       </categories>
       
       
         <tags>
             
-            <tag> Git </tag>
-            
             <tag> Hexo </tag>
             
             <tag> 搭建站点 </tag>
+            
+            <tag> Git </tag>
             
             <tag> 教程 </tag>
             

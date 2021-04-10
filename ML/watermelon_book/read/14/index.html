@@ -1,0 +1,364 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>读懂西瓜书 14 : 概率图模型 | 云玩家</title><meta name="keywords" content="机器学习,概率图模型,西瓜书"><meta name="author" content="云玩家"><meta name="copyright" content="云玩家"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="马尔可夫性本章最重要的概念就是马尔可夫性. 马尔可夫性是指变量的状态只与其前一个时刻的状态有关, 而与其他的状态无关, 称为 “无后效性” . 这里可以作一个拓展, 即指变量的状态只与其周围的变量状态有关, 这里的 ‘周围’ 既可以是时间也可以是空间. 隐马尔可夫模型隐马尔可夫模型包括两条链, 一条是由可观测的状态组成的, 一条是由不可观测的状态 (隐变量) 组成的. 那么究竟是什么呢, 我们举个">
+<meta property="og:type" content="article">
+<meta property="og:title" content="读懂西瓜书 14 : 概率图模型">
+<meta property="og:url" content="http://example.com/ML/watermelon_book/read/14/index.html">
+<meta property="og:site_name" content="云玩家">
+<meta property="og:description" content="马尔可夫性本章最重要的概念就是马尔可夫性. 马尔可夫性是指变量的状态只与其前一个时刻的状态有关, 而与其他的状态无关, 称为 “无后效性” . 这里可以作一个拓展, 即指变量的状态只与其周围的变量状态有关, 这里的 ‘周围’ 既可以是时间也可以是空间. 隐马尔可夫模型隐马尔可夫模型包括两条链, 一条是由可观测的状态组成的, 一条是由不可观测的状态 (隐变量) 组成的. 那么究竟是什么呢, 我们举个">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/ML/watermelon_book/read/14/14.png">
+<meta property="article:published_time" content="2020-03-22T12:29:46.000Z">
+<meta property="article:modified_time" content="2021-02-07T11:16:41.819Z">
+<meta property="article:author" content="云玩家">
+<meta property="article:tag" content="机器学习">
+<meta property="article:tag" content="概率图模型">
+<meta property="article:tag" content="西瓜书">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/ML/watermelon_book/read/14/14.png"><link rel="shortcut icon" href="/img/favicon.ico"><link rel="canonical" href="http://example.com/ML/watermelon_book/read/14/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//s4.cnzz.com"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script async="async" data-pjax="data-pjax" src="https://s4.cnzz.com/z_stat.php?id=1278869595&amp;web_id=1278869595"></script><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+}</script><script src="/js/yuntools.js"></script><script id="config-diff">var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2021-02-07 19:16:41'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    })(window)</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/cnyist/blog/css/font.css"><meta name="generator" content="Hexo 5.3.0"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" src="https://cdn.jsdelivr.net/gh/cnyist/blog/img/avatar.svg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">65</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">37</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">24</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/speak/"><i class="fa-fw fas fa-comment"></i><span> 说说</span></a></div><div class="menus_item"><a class="site-page" href="/chat/"><i class="fa-fw fas fa-comments"></i><span> 闲聊室</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> about</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw iconfont icon-Web"></i><span> 镜像站点</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page" target="_blank" rel="noopener" href="https://yunist.gitee.io"><i class="fa-fw iconfont icon-gitee-fill-round"></i><span> Gitee Pages</span></a></li></ul></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/ML/watermelon_book/read/14/14.png')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">云玩家</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/speak/"><i class="fa-fw fas fa-comment"></i><span> 说说</span></a></div><div class="menus_item"><a class="site-page" href="/chat/"><i class="fa-fw fas fa-comments"></i><span> 闲聊室</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> about</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw iconfont icon-Web"></i><span> 镜像站点</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page" target="_blank" rel="noopener" href="https://yunist.gitee.io"><i class="fa-fw iconfont icon-gitee-fill-round"></i><span> Gitee Pages</span></a></li></ul></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">读懂西瓜书 14 : 概率图模型</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2020-03-22T12:29:46.000Z" title="发表于 2020-03-22 20:29:46">2020-03-22</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2021-02-07T11:16:41.819Z" title="更新于 2021-02-07 19:16:41">2021-02-07</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E6%A8%A1%E5%9E%8B/">模型</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E8%A5%BF%E7%93%9C%E4%B9%A6/">西瓜书</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E8%A5%BF%E7%93%9C%E4%B9%A6/%E8%AF%BB%E6%87%82%E8%A5%BF%E7%93%9C%E4%B9%A6/">读懂西瓜书</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span><span class="post-meta-separator">|</span><span class="post-meta-commentcount"><i class="far fa-comments fa-fw post-meta-icon"></i><span class="post-meta-label">评论数:</span><a href="/ML/watermelon_book/read/14/#post-comment"><span id="twikoo-count"></span></a></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="马尔可夫性"><a href="#马尔可夫性" class="headerlink" title="马尔可夫性"></a>马尔可夫性</h1><p>本章最重要的概念就是马尔可夫性. 马尔可夫性是指变量的状态只与其前一个时刻的状态有关, 而与其他的状态无关, 称为 “无后效性” . 这里可以作一个拓展, 即指变量的状态只与其周围的变量状态有关, 这里的 ‘周围’ 既可以是时间也可以是空间.</p>
+<h1 id="隐马尔可夫模型"><a href="#隐马尔可夫模型" class="headerlink" title="隐马尔可夫模型"></a>隐马尔可夫模型</h1><p>隐马尔可夫模型包括两条链, 一条是由可观测的状态组成的, 一条是由不可观测的状态 (隐变量) 组成的. 那么究竟是什么呢, 我们举个例子.</p>
+<p>假设每天的天气只与前一天的天气有关. 比如今天如果是晴天, 那么明天有 $70%$ 的可能还是晴天, 有 $30%$ 的可能是阴天. 如果今天是阴天, 那么明天有 $50%$ 的可能是晴天, 有 $50%$ 的可能还是阴天. 一天只能有一种天气, 所以我们每天都能观测到一种天气, 这是可观测的. 比如经过一个星期, 我们得到了天气关于时间的一个序列</p>
+<table>
+<thead>
+<tr>
+<th align="center">1</th>
+<th align="center">2</th>
+<th align="center">3</th>
+<th align="center">4</th>
+<th align="center">5</th>
+<th align="center">6</th>
+<th align="center">7</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">晴</td>
+<td align="center">晴</td>
+<td align="center">晴</td>
+<td align="center">阴</td>
+<td align="center">阴</td>
+<td align="center">晴</td>
+<td align="center">晴</td>
+</tr>
+</tbody></table>
+<p>现在假设你有个朋友在国外, 你想要知道他们那边的天气, 但是你只了解你的朋友是在家里还是外出, 并不知道具体天气如何, 而且你还知道假如是晴天, 那么他有 $70%$ 的可能出去, 有 $30%$ 的可能呆在家, 如果是阴天, 那么有 $10%$ 的可能出去, 有 $90%$ 的可能呆在家. 假如又过了一个星期, 虽然这个星期里的天气是确实存在的, 可是你并不知道, 这就是那条由隐变量组成的 “隐链” . 你的朋友的状态和天气有关, 你也了解你的朋友的状态, 那么朋友这一个星期里的状态也构成一天链, 这就是由可观测的状态组成的 “明链” .</p>
+<table>
+<thead>
+<tr>
+<th align="center">1</th>
+<th align="center">2</th>
+<th align="center">3</th>
+<th align="center">4</th>
+<th align="center">5</th>
+<th align="center">6</th>
+<th align="center">7</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">出去</td>
+<td align="center">在家</td>
+<td align="center">晴</td>
+<td align="center">在家</td>
+<td align="center">在家</td>
+<td align="center">在家</td>
+<td align="center">出去</td>
+</tr>
+</tbody></table>
+<p>明链和暗链结合在一起, 就有了隐马尔可夫模型.</p>
+<p><img src="1.png"></p>
+<p>以上面的例子来说明. $y_i$ 就是第 $i$ 天的天气, $x_i$ 是你朋友第 $i$ 天的活动. 而状态转移概率 $\boldsymbol A$ 为<br>$$<br>\left[\begin{matrix}<br>0.7&amp;0.3\\<br>0.5&amp;0.5<br>\end{matrix}\right]<br>$$<br>输出观测概率 $\boldsymbol{B}$ 为<br>$$<br>\left[\begin{matrix}<br>0.7&amp;0.3\\<br>0.1&amp;0.9<br>\end{matrix}\right]<br>$$<br>初始状态概率 $\boldsymbol{\pi}$ 为<br>$$<br>\left[\begin{matrix}<br>1\\0<br>\end{matrix}\right]<br>$$<br>产生观测序列 ${x_1, x_2, \dots}$ 的过程书上已经有了, 这里不再详细叙述.</p>
+<p>当然, 一个确定的模型并不一定能产生确定的结果, 上面的例子只是一种可能结果, 还有其他很多种结果, 出现的概率各不相同.</p>
+<p>而隐马尔可夫模型的三个基本问题我们也用例子来说一下:</p>
+<ul>
+<li>即我们得到了朋友这一个星期的状态, 那么给定模型 $\lambda = [\boldsymbol{A},\boldsymbol{B} , \boldsymbol{\pi}]$ , 计算出出现这个状态的概率.</li>
+<li>给定模型 $\lambda = [\boldsymbol{A},\boldsymbol{B} , \boldsymbol{\pi}]$ 以及朋友这个星期的状态, 那么推测出这个星期朋友那里的天气是怎样的.</li>
+<li>给出朋友这个星期的状态, 如何调整参数 $\lambda$ 才能使朋友出现这样的状态的可能性最大.</li>
+</ul>
+<h1 id="马尔可夫随机场"><a href="#马尔可夫随机场" class="headerlink" title="马尔可夫随机场"></a>马尔可夫随机场</h1><h2 id="Hammersley-Clifford-定理"><a href="#Hammersley-Clifford-定理" class="headerlink" title="Hammersley-Clifford 定理"></a>Hammersley-Clifford 定理</h2><p>&nbsp;$\textrm{Hammersley-Clifford}$ 定理指出概率无向图模型的联合概率可以分解为定义在极大团上的势函数的乘积. 即<br>$$<br>P(\boldsymbol{\mathrm{x}}) = \frac{1}{Z}\prod_{Q\in \mathcal{C}}\psi_Q(\boldsymbol{\mathrm{x}}_Q)\\<br>$$<br>定理充分性的证明在西瓜书中其实已经给出. (即西瓜书中所说的简单的验证)</p>
+<h3 id="极大团"><a href="#极大团" class="headerlink" title="极大团"></a>极大团</h3><blockquote>
+<p>若在一个团中加入另外任何一个节点都不再写成团, 则称该团为 “极大团” (maximal); 换言之, 极大团就是不能被其他团所包含的团.</p>
+</blockquote>
+<p>换句话讲就是, 找不到这个团之外的一个结点和这个团中所有结点之间都有边, 那么这个团就是极大团. 可以利用反证法证明: 如果极大团被其他团所包含, 那么根据团的定义, 这个极大团之外还会有一个结点 (该结点在这个极大团之外却在那个包含这个极大团的团之内) 与团中所有节点都有边, 违背了极大团的定义, 因此不成立.</p>
+<h3 id="势函数"><a href="#势函数" class="headerlink" title="势函数"></a>势函数</h3><p>势函数从何而来, 为什么是这样定义? 相信你一开始也和我一脸懵逼. 现在我试着将我所理解的势函数尽我所能表达出来.</p>
+<p>势函数本身用来刻画某种 ‘偏好’ . 即你依靠经验认为结点之间应该有某种关系. 比如说你如果认为结点之间的值应该要差不多, 那么当它们的值确实差不多时, 你应该给出更高的分数, 如果他们的值相差较大, 你就应该给出更低的分数. 依靠这样的准则, 就可以构造出一个势函数, 来实现你的给分策略. 势函数的形式不是唯一的, 只不过常用指数函数来定义势函数. 使用指数函数的目的是为了满足非负性 (概率总不可能是负的吧) . </p>
+<p>至于势函数和后面提到的特征函数到底有什么根本上的区别… <del>好吧我也不清楚.</del></p>
+<h3 id="规范化因子"><a href="#规范化因子" class="headerlink" title="规范化因子"></a>规范化因子</h3><p>$$<br>P(\boldsymbol{\mathrm{x}}) = \frac{1}{Z}\prod_{Q\in \mathcal{C}}\psi_Q(\boldsymbol{\mathrm{x}}_Q)\\<br>$$</p>
+<p>其中 $Z = \sum_\boldsymbol{\mathrm{x}}\prod_{Q\in\mathcal{C}}\psi_Q(\boldsymbol{\mathrm{x}}_Q)$ 是规范化因子, 那么它究竟起到什么作用呢? 其实它起到的作用就是保证 $\sum_\boldsymbol{\mathrm{x}}P(\boldsymbol{\mathrm x}) = 1$ , 即保证我们算出的是一个 “概率” . 而概率具有的性质就是所有可能结果的概率和为 $1$ .</p>
+<h2 id="马尔可夫性-1"><a href="#马尔可夫性-1" class="headerlink" title="**马尔可夫性"></a>**马尔可夫性</h2><p>事实上, 这些 ‘**马尔可夫性’ 成立的前提都在于某个变量只与其相邻变量有关.</p>
+<h3 id="全局马尔可夫性"><a href="#全局马尔可夫性" class="headerlink" title="全局马尔可夫性"></a>全局马尔可夫性</h3><p>简单的来说, 就是两 ‘团’ 变量被中间的 ‘变量墙’ 隔开, 因此具有独立性.</p>
+<h3 id="局部马尔可夫性"><a href="#局部马尔可夫性" class="headerlink" title="局部马尔可夫性"></a>局部马尔可夫性</h3><p>可以形象的认为 $n^*(v)$ 像一圈围墙将 $v$ 包围了起来, 这堵墙存在时 (变量给定时) , 会将 $v$ 与外界分离 (即独立于外界) .</p>
+<p>这里说明一个可能不太清楚的点.</p>
+<blockquote>
+<p>令 $V$ 为图的结点集, $n(v)$ 为结点 $v$ 在图上的邻接结点, $n^*(v) = n(v) \cup {v}$ , 有 $\boldsymbol{\mathrm{x}}<em>v \perp \boldsymbol{\mathrm{x}}</em>{V\backslash n^*(v)}$ .</p>
+</blockquote>
+<p> 这里的 $\boldsymbol{\mathrm{x}}_{V\backslash n^*(v)}$ 中的 $V\backslash n^*(v)$ 应该是集合 $V$ 去除 $n^*(v)$ 集合. 所有的 $A\backslash B$ 运算都是集合 $A$ 去掉其中的集合 $B$ 部分.</p>
+<h3 id="成对马尔可夫性"><a href="#成对马尔可夫性" class="headerlink" title="成对马尔可夫性"></a>成对马尔可夫性</h3><p>只要两个变量不在同一条边上, 那么就可以将这两个变量完全用其他结点隔离开, 最极端的情况就是把除了这两个变量的节点都当成 ‘墙’ , 这两个变量的周围都是 ‘墙’ , 被这堵墙隔开后, 它们就具有独立性. 这就是成对马尔可夫性. 如果这两个变量在同一条边上, 那么无论是多厚的墙, 两个变量间还是有一条绳子 (边) 连着, 他们仍然不会分离, 不具有成对马尔可夫性.</p>
+<h1 id="条件随机场"><a href="#条件随机场" class="headerlink" title="条件随机场"></a>条件随机场</h1><p>条件随机场与隐马尔可夫模型、马尔可夫随机场的最主要区别在于条件随机场是判别式模型, 而隐马尔可夫模型和马尔科夫随机场是生成式模型. 顾名思义, 条件随机场就是有 ‘条件’ 的 马尔可夫 ‘随机场’ . 同样基于最大团定义了势函数, 只不过还多引入了一个特征函数.</p>
+<p>条件随机场的结构是任意的. 但是一般我们会考虑 “链式条件随机场” ($\mathrm{chain-structured;CRF}$).</p>
+<p><img src="2.png"></p>
+<h2 id="特征函数"><a href="#特征函数" class="headerlink" title="特征函数"></a>特征函数</h2><p>特征函数刻画了相邻变量之间的相关关系以及观测序列对它们的影响. </p>
+<h1 id="学习与推断"><a href="#学习与推断" class="headerlink" title="学习与推断"></a>学习与推断</h1><h2 id="变量消去"><a href="#变量消去" class="headerlink" title="变量消去"></a>变量消去</h2><p>变量消去一般用来求边缘概率 (可以理解为求和的过程可以一个个的 ‘消去’ 变量, 故为变量消去). 如果进行暴力求和来求边缘概率, 那么时间复杂度会达到可怕的 $O(N^T)$ , 其中 $N$ 是变量可能的取值数, $T$ 是要消去变量的总数. 这个复杂度可以说是基本上不可能进行求解的, 但好在我们有更快的算法, 那就是动态规划.</p>
+<h3 id="动态规划"><a href="#动态规划" class="headerlink" title="动态规划"></a>动态规划</h3><p>$$<br>\begin{aligned}<br>P(x_5) &amp;= \sum_{x_4}\sum_{x_3}\sum_{x_2}\sum_{x_1}P(x_1, x_2, x_3, x_4)\\<br>&amp;=\sum_{x_4}\sum_{x_3}\sum_{x_2}\sum_{x_1}P(x_1)P(x_2\mid x_1)P(x_3 \mid x_2)P(x_4 \mid x_3)P(x_5\mid x_3)<br>\end{aligned}<br>$$</p>
+<p>上式可以等价的表达为<br>$$<br>P(x_5) = \sum_{x_3}P(x_5\mid x_3)\sum_{x_4}P(x_4 \mid x_3)\sum_{x_2}P(x_3 \mid x_2)\sum_{x_1}P(x_1)P(x_2\mid x_1)<br>$$<br>注意一个问题, 这里面加不加括号都是一样的, 什么意思呢? 其实就是<br>$$<br>(\sum_ix_i)(\sum_jx_j) = \sum_i(x_i\sum_jx_j)<br>$$<br>首先我们从最后一个 $\sum$ 开始算<br>$$<br>\sum_{x_1}P(x_1)P(x_2\mid x_1)<br>$$<br>可以看到这只与 $x_2$ 有关, 即这是一个关于 $x_2$ 的函数, 我们简写为 $m_{12}(x_2)$ 那么我们再寻找 $x_2$ 从何而来<br>$$<br>\sum_{x_2}P(x_4\mid x_3)<br>$$<br>这里就有了 $x_2$ (前面的 $\sum$ 是对 $x_2$ 求和), 因此就可以结合起来<br>$$<br>\sum_{x_2}P(x_3\mid x_2)m_{12}(x_2)<br>$$<br>这是一个只与 $x_3$ 有关的函数, 同样简写为 $m_{23}(x_3)$ .</p>
+<p>我们按照这样的方法一个个去向前推进, 即每次寻找未提供的变量 (就是没有说这个变量具体的值, 又或者说目前的函数可以表达为只与这个变量有关的函数) 在哪 (即 $\sum$ 下的变量), 然后互相结合递推, 注意到, 可能有两个未提供的变量同时与一个 $\sum$ 有关, 比如 $\sum_{x_2}P(x_3\mid x_2)$ 和 $\sum_{x_4}P(x_4\mid x_3)$ 同时与 $x_3$ 有关, 于是分别求出, 再与 $\sum_{x_3}$ 结合.</p>
+<p>这样算法的复杂度就降为了 $O(NT)$ .</p>
+<p>但是就是有一个缺点, 再次计算另一个边缘分布时有些变量又要求一遍, 造成冗余计算.</p>
+<h2 id="信念传播"><a href="#信念传播" class="headerlink" title="信念传播"></a>信念传播</h2><p>信念传播其实就是基于变量消去做了一些改进, 可以理解为存储了中间变量 (比如 $m_{12}(x_2)$ ), 这样计算的时候直接使用就行了.</p>
+<h2 id="近似推断"><a href="#近似推断" class="headerlink" title="近似推断"></a>近似推断</h2><p>我们的目标是要计算函数 $f(x)$ 在概率密度函数 $p(x)$ 下的期望<br>$$<br>\mathbb{E}<em>p[f] = \int f(x)p(x)\mathrm{d}x<br>$$<br>由于积分比较困难, 所以可以根据 $p(x)$ 采样作无偏估计<br>$$<br>\hat{f} = \frac{1}{N}\sum^{N}</em>{i = 1}f(x_i)<br>$$<br>但是如果 $p(x)$ 较为复杂, 直接采样可能比较复杂, 因此就有了其他间接采样的方法. $\mathrm{MCMC}$ 就是概率图模型中最常用的方法.</p>
+<h3 id="MCMC-采样"><a href="#MCMC-采样" class="headerlink" title="MCMC 采样"></a>MCMC 采样</h3><p>&nbsp;$\mathrm{MCMC,(Markov;Chain;Monte;Carlo)}$ 方法是构造一条马尔可夫链, 此马尔科夫链的平稳分布正是 $p(x)$ . 也就是说, 运行马尔科夫链一段时间后 (即收敛到平稳分布), 此时产出的样本 $\mathrm{x}$ 近似服从分布 $p$ .</p>
+<p> 具体来说,  $\mathrm{MCMC}$ 有一个代表算法 $\mathrm{Metropolis-Hastings,(MH)}$ .</p>
+<h4 id="Metropolis-Hastings"><a href="#Metropolis-Hastings" class="headerlink" title="Metropolis-Hastings"></a>Metropolis-Hastings</h4><p>令转移核为 $p(x, x’)$<br>$$<br>p(x, x’) = q(x,x’)\alpha(x.x’)<br>$$<br>其中 $q(x, x’)$ 与 $\alpha(x,x’)$ 分别称为建议分布 $(\mathrm{proposal;distribution})$ 和接受分布 $(\mathrm{acceptance;distribution})$ . 建议分布是一个你自由选择的分布, 一般来说要比较容易抽样 (比如均匀分布) . 接受分布 $\alpha(x,x’)$ 是<br>$$<br>\alpha(x,x’) = min\left{1, \frac{p(x’)q(x’, x)}{p(x)q(x, x’)}\right}<br>$$<br>因此 $p(x, x’)$ 可以写为<br>$$<br>p(x, x’) = \left{<br>\begin{array}<br>qq(x, x’),&amp;p(x’)q(x’, x)\geqslant p(x)q(x, x’)\\<br>q(x’, x)\displaystyle\frac{p(x’)}{p(x)}, &amp;p(x’)q(x’, x) &lt; p(x)q(x, x’)<br>\end{array}<br>\right.<br>$$<br>假设在时刻 $(t - 1)$ 处于状态 $x$ , 即 $x_{t - 1} = x$, 那么有</p>
+<blockquote>
+<p>$1$. 按照建议分布 $q(x, x’)$ 抽取一个候选状态 $x’$</p>
+<p>$2$. 按照接受分布 $\alpha(x, x’)$ 决定是否接受 $x’$. 接受则产生下一个样本 $x_t = x’$ , 拒绝就让 $x_t = x_{t - 1}$. 同时 $t = t + 1$ , 然后回退到 $1$ 步骤.</p>
+</blockquote>
+<p>这个抽取样本过程等价于直接按照 $p(x, x’)$ 抽取. </p>
+<p>每次抽样时刻都会增加 $1,$$ . 那么当经过一段时间后, 马尔可夫链可以达到平稳分布, 而 $p(x),$$ 正是其平稳分布. 这是因为对于分布 $p(x),$$ 来说, 这个马尔可夫链是可逆的, 而可逆马尔科夫链是平稳分布的充分条件. 达到平稳分布后, 其后产生的样本即满足分布 $p(x),$$ , 此时我们就能轻松抽样了.</p>
+<h4 id="单变量-Metropolis-Hastings-算法"><a href="#单变量-Metropolis-Hastings-算法" class="headerlink" title="单变量 Metropolis-Hastings 算法"></a>单变量 Metropolis-Hastings 算法</h4><p>单变量 $\mathrm{MH}$ 算法与传统 $\mathrm{MH}$ 算法的区别就在于单变量 $\mathrm{MH}$ 算法是每一次样本产生是对多元变量的每一分量依次抽样, 从而实现对整个多元变量的一次抽样, 这大概就是 ‘单变量’ $\mathrm{MH}$ 算法名字的由来.</p>
+<h4 id="吉布斯采样"><a href="#吉布斯采样" class="headerlink" title="吉布斯采样"></a>吉布斯采样</h4><p>吉布斯采样是 $\mathrm{MH}$ 算法的特例, 更准确的说应该是单变量 $\mathrm{MH}$ 算法的特例. 它将建议分布 $q(x’, x)$ 设置成 $p(x_j\mid x’<em>{-j})$ , 即<br>$$<br>q(x, x’) = p(x’<em>j\mid x</em>{-j})<br>$$<br>&nbsp;$x</em>{-j}$ 即为除了 $x_{j}$ 外的其他分量的集合.</p>
+<p>这样就可以让接受概率 $\alpha = 1$ , 从而大大提高采样效率.</p>
+<h3 id="变分推断"><a href="#变分推断" class="headerlink" title="变分推断"></a>变分推断</h3><h4 id="EM-算法"><a href="#EM-算法" class="headerlink" title="EM 算法"></a>EM 算法</h4><p>&nbsp;$\mathrm{EM}$ 算法在 $7.6$ 节就已经作了一个介绍, 其分为 $\boldsymbol{\mathrm{E}}$ 步和 $\boldsymbol{\mathrm{M}}$ 步. 对于某时刻的 $\Theta_t$ 来说, 可以根据 $\Theta_t$ 与已观测变量 $\boldsymbol{\mathrm X}$ 计算隐变量 $\boldsymbol{\mathrm Z}$ 的分布 $P(\boldsymbol{\mathrm{Z}}\mid\boldsymbol{\mathrm{X}},\Theta_t)$ , 并且还要计算出一个与 $\Theta$ 有关的函数 $P(\boldsymbol{\mathrm{X}}, \boldsymbol{\mathrm{Z}}\mid\Theta)$ (以便后续 $\boldsymbol{\mathrm{M}}$ 步计算期望) . 然后 $\boldsymbol{\mathrm{M}}$ 步即令新的参数 $\Theta_{t + 1}$ 能够最大化对数似然<br>$$<br>\Theta_{t + 1} = \underset{\Theta}{\arg\max}\sum_{\boldsymbol{\mathrm{Z}}}P(\boldsymbol{\mathrm{Z}}\mid\boldsymbol{\mathrm{X}},\Theta_t)\ln P(\boldsymbol{\mathrm{X}}, \boldsymbol{\mathrm{Z}}\mid\Theta)<br>$$</p>
+<p>这个式子其实是对数似然函数在分布 $P(\boldsymbol{\mathrm{Z}}\mid\boldsymbol{\mathrm{X}},\Theta_t)$ 下的期望.</p>
+<h4 id="式-14-36-推导"><a href="#式-14-36-推导" class="headerlink" title="式 14.36 推导"></a>式 14.36 推导</h4><p>$$<br>\mathcal{L}(q) = \int q(\boldsymbol{\mathrm{z}})\ln \left{\frac{p(\boldsymbol{\mathrm{x}}, \boldsymbol{\mathrm{z}})}{q(\boldsymbol{\mathrm{z}})}\right}\mathrm{d}\boldsymbol{\mathrm{z}}<br>$$</p>
+<p>根据<br>$$<br>q(\boldsymbol{\mathrm{z}}) = \prod^{M}_{i = 1}q_i(\boldsymbol{\mathrm{z}}_i)<br>$$<br>为了简化, 我们将 $q_i(\boldsymbol{\mathrm{z}}_{i\not=j})$ 简写为 $q_i$</p>
+<p>代入可得<br>$$<br>\begin{aligned}<br>\mathcal{L}(q) &amp;= \int \prod_{i}q_i\ln \left{\frac{p(\boldsymbol{\mathrm{x}}, \boldsymbol{\mathrm{z}})}{q(\boldsymbol{\mathrm{z}})}\right}\mathrm{d}\boldsymbol{\mathrm{z}}\\<br>&amp;= \int \prod_{i}q_i\left{\ln p(\boldsymbol{\mathrm{x}}, \boldsymbol{\mathrm{z}}) - \sum_i \ln q_i\right}\mathrm{d}\boldsymbol{\mathrm{z}}\\<br>&amp;= \int \prod_{i}q_i\ln p(\boldsymbol{\mathrm{x}}, \boldsymbol{\mathrm{z}}) - \int\prod_{i}q_i\sum_i \ln q_i\mathrm{d}\boldsymbol{\mathrm{z}}\\<br>&amp;= \int q_j\prod_{i \not= j}q_i\ln p(\boldsymbol{\mathrm{x}}, \boldsymbol{\mathrm{z}})\mathrm{d}\boldsymbol{\mathrm{z}} - \int \prod_{i}q_i\sum_i \ln q_i\mathrm{d}\boldsymbol{\mathrm{z}}<br>\end{aligned}<br>$$<br>注意到<br>$$<br>\int f(x) \mathrm{d}x = \int \left{\int f(\boldsymbol{x})\mathrm{d}\boldsymbol{x}<em>{-i}\right}\mathrm{d}\boldsymbol{x}<em>i<br>$$<br>其中 $\boldsymbol{x}$ 是一个向量, $\boldsymbol{x}</em>{i}$ 是 $\boldsymbol{x}$ 的一个分量,  $\boldsymbol{x}</em>{-i}$ 是除了 $\boldsymbol{x}_{i}$ 以外的分量集合.</p>
+<p>更一般的, 可以将 $\boldsymbol{x}$ 拆分成互斥的分量集合, 然后像这样嵌套积分.</p>
+<p>因此<br>$$<br>\begin{aligned}<br>\mathcal{L}(q) &amp;= \int q_j\prod_{i \not= j}q_i\ln p(\boldsymbol{\mathrm{x}}, \boldsymbol{\mathrm{z}})\mathrm{d}\boldsymbol{\mathrm{z}} - \int \prod_{i}q_i\sum_i \ln q_i\mathrm{d}\boldsymbol{\mathrm{z}}\\<br>&amp;= \int\left{\int q_j\prod_{i \not= j}q_i\ln p(\boldsymbol{\mathrm{x}}, \boldsymbol{\mathrm{z}})\mathrm{d}\boldsymbol{\mathrm{z}}<em>{i\not=j}\right}\mathrm{d}\boldsymbol{\mathrm{z}}<em>j - \int \prod</em>{i}q_i\sum_i \ln q_i\mathrm{d}\boldsymbol{\mathrm{z}}<br>\end{aligned}<br>$$<br>**为了表达更清晰, 这里的符号和西瓜书稍稍不同, 这里 $\mathrm{d}\boldsymbol{\mathrm{z}}_{i\not  =j}$ 代表了对除了 $\boldsymbol{\mathrm{z}}</em>{i}$ 以外的分量积分, 西瓜书应该也是表达这个意思, 但是符号不太清晰.**</p>
+<p>同时由于 $q_j$ 与 $\boldsymbol{\mathrm{z}}<em>{i\not=j}$ 没有关系, 所以提出积分<br>$$<br>\begin{aligned}<br>\mathcal{L}(q) &amp;= \int\left{\int q_j\prod_{i \not= j}q_i\ln p(\boldsymbol{\mathrm{x}}, \boldsymbol{\mathrm{z}})\mathrm{d}\boldsymbol{\mathrm{z}}_{i\not=j}\right}\mathrm{d}\boldsymbol{\mathrm{z}}<em>j - \int \prod</em>{i}q_i\sum_i \ln q_i\mathrm{d}\boldsymbol{\mathrm{z}}\\<br>&amp;= \int q_j\left{\int \prod</em>{i \not= j}q_i\ln p(\boldsymbol{\mathrm{x}}, \boldsymbol{\mathrm{z}})\mathrm{d}\boldsymbol{\mathrm{z}}_{i\not=j}\right}\mathrm{d}\boldsymbol{\mathrm{z}}<em>j - \int \prod</em>{i}q_i\sum_i \ln q_i\mathrm{d}\boldsymbol{\mathrm{z}}<br>\end{aligned}<br>$$</p>
+<p>我们单独取后一项进行进一步分析<br>$$<br>\int \prod_{i}q_i\sum_i \ln q_i\mathrm{d}\boldsymbol{\mathrm{z}} = \int \left(\sum_i\left{\prod_{i}q_i\right}\ln q_i\right)\mathrm{d}\boldsymbol{\mathrm{z}}<br>$$<br>对于每一个 $\int \left(\left{\prod_{i}q_i\right}\ln q_k\right)\mathrm{d}\boldsymbol{\mathrm{z}}$ 来说, 有<br>$$<br>\begin{aligned}<br>\int \left(\left{\prod_{i}q_i\right}\ln q_k\right)\mathrm{d}\boldsymbol{\mathrm{z}} &amp;= \int\left{\int \left(q_j\left{\prod_{i\not=j}q_i\right}\ln q_k\right)\mathrm{d}\boldsymbol{\mathrm{z}}<em>{i\not = j}\right}\mathrm{d}\boldsymbol{\mathrm{z}}<em>j<br>\end{aligned}<br>$$<br>由于 $q_j$ 与 $\boldsymbol{\mathrm{z}}_i$ 没有关系, 于是可以提出积分<br>$$<br>\begin{aligned}<br>\int \left(\left{\prod</em>{i}q_i\right}\ln q_k\right)\mathrm{d}\boldsymbol{\mathrm{z}} &amp;= \int q_j\left{\int \left(\left{\prod_{i\not=j}q_i\right}\ln q_k\right)\mathrm{d}\boldsymbol{\mathrm{z}}</em>{i\not = j}\right}\mathrm{d}\boldsymbol{\mathrm{z}}<em>j<br>\end{aligned}<br>$$<br>注意到 $\left{\int \left(\left{\prod</em>{i\not=j}q_i\right}\ln q_k\right)\mathrm{d}\boldsymbol{\mathrm{z}}<em>i\right}$ 与 $\boldsymbol{\mathrm{z}}<em>j$ 也没有关系, 而且 $\int q_j \mathrm{d}\boldsymbol{\mathrm{z}}_j = 1$ , 于是<br>$$<br>\begin{aligned}<br>\int \left(\left{\prod</em>{i}q_i\right}\ln q_k\right)\mathrm{d}\boldsymbol{\mathrm{z}} &amp;= \int q_j\left{\int \left(\left{\prod_{i\not=j}q_i\right}\ln q_k\right)\mathrm{d}\boldsymbol{\mathrm{z}}</em>{i\not = j}\right}\mathrm{d}\boldsymbol{\mathrm{z}}<em>j\\<br>&amp;= \int \left(\left{\prod</em>{i\not=j}q_i\right}\ln q_k\right)\mathrm{d}\boldsymbol{\mathrm{z}}<em>{i\not = j}<br>\end{aligned}<br>$$<br>事实上, 可以一直反复这种提取, 消去的过程, 最终得到<br>$$<br>\begin{aligned}<br>\int \left(\left{\prod</em>{i}q_i\right}\ln q_k\right)\mathrm{d}\boldsymbol{\mathrm{z}} &amp;= \int \left(q_k\ln q_k\right)\mathrm{d}\boldsymbol{\mathrm{z}}<em>k<br>\end{aligned}<br>$$<br>于是<br>$$<br>\begin{aligned}<br>\int \prod</em>{i}q_i\sum_i \ln q_i\mathrm{d}\boldsymbol{\mathrm{z}} &amp;= \int \left(\sum_i\left{\prod_{i}q_i\right}\ln q_i\right)\mathrm{d}\boldsymbol{\mathrm{z}}\\<br>&amp;= \int \sum_i q_i\ln q_i\mathrm{d}\boldsymbol{\mathrm{z}}<em>i\\<br>&amp;= \int q_j\ln q_j\mathrm{d}\boldsymbol{\mathrm{z}}<em>j + \int \sum</em>{i\not=j} q_i\ln q_i\mathrm{d}\boldsymbol{\mathrm{z}}</em>{i\not = j}\\<br>&amp;= \int q_j\ln q_j\mathrm{d}\boldsymbol{\mathrm{z}}_j + \mathrm{const}<br>\end{aligned}<br>$$</p>
+<p>我们只关心与 $\boldsymbol{\mathrm{z}}_j$ 有关的变量, 因此后面的项可以当作常量 $\mathrm{const}$ .</p>
+<p>因此<br>$$<br>\begin{aligned}<br>\mathcal{L}(q) &amp;= \int q_j\left{\int \prod_{i \not= j}q_i\ln p(\boldsymbol{\mathrm{x}}, \boldsymbol{\mathrm{z}})\mathrm{d}\boldsymbol{\mathrm{z}}<em>{i\not=j}\right}\mathrm{d}\boldsymbol{\mathrm{z}}<em>j - \int \prod</em>{i}q_i\sum_i \ln q_i\mathrm{d}\boldsymbol{\mathrm{z}}\\<br>&amp;=\int q_j\left{\int \ln p(\boldsymbol{\mathrm{x}}, \boldsymbol{\mathrm{z}})\prod</em>{i \not= j}q_i\mathrm{d}\boldsymbol{\mathrm{z}}_{i\not=j}\right}\mathrm{d}\boldsymbol{\mathrm{z}}_j - \int q_j\ln q_j\mathrm{d}\boldsymbol{\mathrm{z}}_j + \mathrm{const}\\<br>&amp;= \int q_j\ln\tilde{p}(\boldsymbol{\mathrm{x}}, \boldsymbol{\mathrm{z}}_j)\mathrm{d}\boldsymbol{\mathrm{z}}_j - \int q_j\ln q_j\mathrm{d}\boldsymbol{\mathrm{z}}_j + \mathrm{const}<br>\end{aligned}<br>$$<br>(理解倒是不难, 可是这公式也太多了吧…写了我好长一段时间..公式是真的难写…)</p>
+<h4 id="式-14-40-推导"><a href="#式-14-40-推导" class="headerlink" title="式 14.40 推导"></a>式 14.40 推导</h4><p>$$<br>\begin{aligned}\ln \tilde{p}(\boldsymbol{\mathrm{x}}, \boldsymbol{\mathrm{z}}<em>j) &amp;= \mathbb{E}</em>{i\not=j}[\ln p(\boldsymbol{\mathrm{x}}, \boldsymbol{\mathrm{z}}_j)] + \mathrm{const}\\<br>\tilde{p}(\boldsymbol{\mathrm{x}}, \boldsymbol{\mathrm{z}}<em>j)&amp;= \exp(\mathbb{E}</em>{i\not=j}[\ln p(\boldsymbol{\mathrm{x}}, \boldsymbol{\mathrm{z}}_j)]) \cdot  \exp(\mathrm{const})<br>\end{aligned}<br>$$</p>
+<p>而又因为<br>$$<br>\begin{aligned}<br>\int \tilde{p}(\boldsymbol{\mathrm{x}}, \boldsymbol{\mathrm{z}}<em>j)\mathrm{d}\boldsymbol{\mathrm{z}}<em>j &amp;= 1\\<br>\int \exp(\mathbb{E}</em>{i\not=j}[\ln p(\boldsymbol{\mathrm{x}}, \boldsymbol{\mathrm{z}}_j)]) \cdot  \exp(\mathrm{const})\mathrm{d}\boldsymbol{\mathrm{z}}_j&amp;= 1\\<br> \exp(\mathrm{const})&amp;=\frac{1}{\int \exp(\mathbb{E}</em>{i\not=j}[\ln p(\boldsymbol{\mathrm{x}}, \boldsymbol{\mathrm{z}}<em>j)])\mathrm{d}\boldsymbol{\mathrm{z}}_j}<br>\end{aligned}<br>$$<br>于是<br>$$<br>\begin{aligned}<br>\tilde{p}(\boldsymbol{\mathrm{x}}, \boldsymbol{\mathrm{z}}_j)&amp;= \exp(\mathbb{E}</em>{i\not=j}[\ln p(\boldsymbol{\mathrm{x}}, \boldsymbol{\mathrm{z}}<em>j)]) \cdot  \exp(\mathrm{const})\\<br>&amp;= \frac{\exp(\mathbb{E}</em>{i\not=j}[\ln p(\boldsymbol{\mathrm{x}}, \boldsymbol{\mathrm{z}}<em>j)])}{\int \exp(\mathbb{E}</em>{i\not=j}[\ln p(\boldsymbol{\mathrm{x}}, \boldsymbol{\mathrm{z}}<em>j)])\mathrm{d}\boldsymbol{\mathrm{z}}_j}<br>\end{aligned}<br>$$<br>由于 $q_j^*(\boldsymbol{\mathrm z}_j) = \tilde{p}(\boldsymbol{\mathrm{x}}, \boldsymbol{\mathrm{z}}_j)$ , 因此<br>$$<br>q_j^*(\boldsymbol{\mathrm z}_j) = \frac{\exp(\mathbb{E}</em>{i\not=j}[\ln p(\boldsymbol{\mathrm{x}}, \boldsymbol{\mathrm{z}}<em>j)])}{\int \exp(\mathbb{E}</em>{i\not=j}[\ln p(\boldsymbol{\mathrm{x}}, \boldsymbol{\mathrm{z}}_j)])\mathrm{d}\boldsymbol{\mathrm{z}}_j}<br>$$</p>
+<h2 id="话题模型"><a href="#话题模型" class="headerlink" title="话题模型"></a>话题模型</h2><p>其实就是一个具体的模型, 理解了前面的内容这里应该也没什么问题. 当然这只是看懂, 如果要理解背后的原理, 就需要<del>亿点点</del>数学基础了.</p>
+<p>最近看了 <a target="_blank" rel="noopener" href="https://bloglxm.oss-cn-beijing.aliyuncs.com/lda-LDA%E6%95%B0%E5%AD%A6%E5%85%AB%E5%8D%A6.pdf">LDA 数学八卦</a>, 感觉写的还是很不错的, 公式一遍遍细细的看, 是能够看懂的, 想要了解 LDA 的推荐看一看.</p>
+<hr>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><h2 id="网络资料"><a href="#网络资料" class="headerlink" title="网络资料"></a>网络资料</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/av70839977">白板推导</a></li>
+<li><a target="_blank" rel="noopener" href="https://datawhalechina.github.io/pumpkin-book">南瓜书</a></li>
+<li><a target="_blank" rel="noopener" href="https://bloglxm.oss-cn-beijing.aliyuncs.com/lda-LDA%E6%95%B0%E5%AD%A6%E5%85%AB%E5%8D%A6.pdf">LDA 数学八卦</a></li>
+</ul>
+<h2 id="书籍"><a href="#书籍" class="headerlink" title="书籍"></a>书籍</h2><ul>
+<li>《统计学习方法》李航</li>
+</ul>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">云玩家</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://example.com/ML/watermelon_book/read/14/">http://example.com/ML/watermelon_book/read/14/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://example.com" target="_blank">云玩家</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a><a class="post-meta__tags" href="/tags/%E6%A6%82%E7%8E%87%E5%9B%BE%E6%A8%A1%E5%9E%8B/">概率图模型</a><a class="post-meta__tags" href="/tags/%E8%A5%BF%E7%93%9C%E4%B9%A6/">西瓜书</a></div><div class="post_share"><div class="social-share" data-image="/ML/watermelon_book/read/14/14.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><!-- - var pagination_cover = prev.cover === false ? prev.randomcover : prev.cover--><a href="/hexo/hexo_d_github_problem/"><img class="prev-cover" src="https://cdn.jsdelivr.net/gh/cnyist/blog/hexo/hexo_d_github_problem/hexo_d_github_problem.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">hexo d 命令后 github 无法更新问题</div></div></a></div><!-- - var pagination_cover = next.cover == false ? next.randomcover : next.cover--><div class="next-post pull-right"><a href="/ML/optimizer/optimizer_all/"><img class="next-cover" src="https://cdn.jsdelivr.net/gh/cnyist/blog/ML/optimizer/optimizer_all/optimizer_all.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">优化算法汇总</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span> 相关推荐</span></div><div class="relatedPosts-list"><div><a href="/ML/model/LDA/" title="LDA 详解"><img class="cover" src="https://cdn.jsdelivr.net/gh/cnyist/blog/ML/model/LDA/LDA.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-04-23</div><div class="title">LDA 详解</div></div></a></div><div><a href="/ML/watermelon_book/answer/1/" title="《机器学习》 西瓜书习题 第 1 章: 绪论"><img class="cover" src="https://cdn.jsdelivr.net/gh/cnyist/blog/ML/watermelon_book/answer/1/1.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-02-26</div><div class="title">《机器学习》 西瓜书习题 第 1 章: 绪论</div></div></a></div><div><a href="/ML/watermelon_book/answer/2/" title="《机器学习》 西瓜书习题 第 2 章: 模型评估与选择"><img class="cover" src="https://cdn.jsdelivr.net/gh/cnyist/blog/ML/watermelon_book/answer/2/2.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-02-26</div><div class="title">《机器学习》 西瓜书习题 第 2 章: 模型评估与选择</div></div></a></div><div><a href="/ML/watermelon_book/answer/3/" title="《机器学习》 西瓜书习题 第 3 章: 线性模型"><img class="cover" src="https://cdn.jsdelivr.net/gh/cnyist/blog/ML/watermelon_book/answer/3/3.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-02-26</div><div class="title">《机器学习》 西瓜书习题 第 3 章: 线性模型</div></div></a></div><div><a href="/ML/watermelon_book/answer/4/" title="《机器学习》 西瓜书习题 第 4 章: 决策树"><img class="cover" src="https://cdn.jsdelivr.net/gh/cnyist/blog/ML/watermelon_book/answer/4/4.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-02-26</div><div class="title">《机器学习》 西瓜书习题 第 4 章: 决策树</div></div></a></div><div><a href="/ML/watermelon_book/answer/5/" title="《机器学习》 西瓜书习题 第 5 章: 神经网络"><img class="cover" src="https://cdn.jsdelivr.net/gh/cnyist/blog/ML/watermelon_book/answer/5/5.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-02-26</div><div class="title">《机器学习》 西瓜书习题 第 5 章: 神经网络</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-info-avatar is-center"><img class="avatar-img" src="https://cdn.jsdelivr.net/gh/cnyist/blog/img/avatar.svg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/><div class="author-info__name">云玩家</div><div class="author-info__description">云玩家's blog</div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">65</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">37</div></a></div><div class="card-info-data-item is-center"><a href="/categories/"><div class="headline">分类</div><div class="length-num">24</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/cnyist" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="https://blog.csdn.net/chnyist" target="_blank" title="CSDN"><i class="fas iconfont icon-CN_csdnnet"></i></a><a class="social-icon" href="https://www.zhihu.com/people/cnyist" target="_blank" title="知乎"><i class="fas iconfont icon-zhihu"></i></a><a class="social-icon" href="mailto:371622558@qq.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%A9%AC%E5%B0%94%E5%8F%AF%E5%A4%AB%E6%80%A7"><span class="toc-number">1.</span> <span class="toc-text">马尔可夫性</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%9A%90%E9%A9%AC%E5%B0%94%E5%8F%AF%E5%A4%AB%E6%A8%A1%E5%9E%8B"><span class="toc-number">2.</span> <span class="toc-text">隐马尔可夫模型</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%A9%AC%E5%B0%94%E5%8F%AF%E5%A4%AB%E9%9A%8F%E6%9C%BA%E5%9C%BA"><span class="toc-number">3.</span> <span class="toc-text">马尔可夫随机场</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Hammersley-Clifford-%E5%AE%9A%E7%90%86"><span class="toc-number">3.1.</span> <span class="toc-text">Hammersley-Clifford 定理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9E%81%E5%A4%A7%E5%9B%A2"><span class="toc-number">3.1.1.</span> <span class="toc-text">极大团</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8A%BF%E5%87%BD%E6%95%B0"><span class="toc-number">3.1.2.</span> <span class="toc-text">势函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A7%84%E8%8C%83%E5%8C%96%E5%9B%A0%E5%AD%90"><span class="toc-number">3.1.3.</span> <span class="toc-text">规范化因子</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A9%AC%E5%B0%94%E5%8F%AF%E5%A4%AB%E6%80%A7-1"><span class="toc-number">3.2.</span> <span class="toc-text">**马尔可夫性</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%A8%E5%B1%80%E9%A9%AC%E5%B0%94%E5%8F%AF%E5%A4%AB%E6%80%A7"><span class="toc-number">3.2.1.</span> <span class="toc-text">全局马尔可夫性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B1%80%E9%83%A8%E9%A9%AC%E5%B0%94%E5%8F%AF%E5%A4%AB%E6%80%A7"><span class="toc-number">3.2.2.</span> <span class="toc-text">局部马尔可夫性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%88%90%E5%AF%B9%E9%A9%AC%E5%B0%94%E5%8F%AF%E5%A4%AB%E6%80%A7"><span class="toc-number">3.2.3.</span> <span class="toc-text">成对马尔可夫性</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%9D%A1%E4%BB%B6%E9%9A%8F%E6%9C%BA%E5%9C%BA"><span class="toc-number">4.</span> <span class="toc-text">条件随机场</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%89%B9%E5%BE%81%E5%87%BD%E6%95%B0"><span class="toc-number">4.1.</span> <span class="toc-text">特征函数</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AD%A6%E4%B9%A0%E4%B8%8E%E6%8E%A8%E6%96%AD"><span class="toc-number">5.</span> <span class="toc-text">学习与推断</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%98%E9%87%8F%E6%B6%88%E5%8E%BB"><span class="toc-number">5.1.</span> <span class="toc-text">变量消去</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92"><span class="toc-number">5.1.1.</span> <span class="toc-text">动态规划</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BF%A1%E5%BF%B5%E4%BC%A0%E6%92%AD"><span class="toc-number">5.2.</span> <span class="toc-text">信念传播</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%91%E4%BC%BC%E6%8E%A8%E6%96%AD"><span class="toc-number">5.3.</span> <span class="toc-text">近似推断</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#MCMC-%E9%87%87%E6%A0%B7"><span class="toc-number">5.3.1.</span> <span class="toc-text">MCMC 采样</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Metropolis-Hastings"><span class="toc-number">5.3.1.1.</span> <span class="toc-text">Metropolis-Hastings</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8D%95%E5%8F%98%E9%87%8F-Metropolis-Hastings-%E7%AE%97%E6%B3%95"><span class="toc-number">5.3.1.2.</span> <span class="toc-text">单变量 Metropolis-Hastings 算法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%90%89%E5%B8%83%E6%96%AF%E9%87%87%E6%A0%B7"><span class="toc-number">5.3.1.3.</span> <span class="toc-text">吉布斯采样</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%98%E5%88%86%E6%8E%A8%E6%96%AD"><span class="toc-number">5.3.2.</span> <span class="toc-text">变分推断</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#EM-%E7%AE%97%E6%B3%95"><span class="toc-number">5.3.2.1.</span> <span class="toc-text">EM 算法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BC%8F-14-36-%E6%8E%A8%E5%AF%BC"><span class="toc-number">5.3.2.2.</span> <span class="toc-text">式 14.36 推导</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BC%8F-14-40-%E6%8E%A8%E5%AF%BC"><span class="toc-number">5.3.2.3.</span> <span class="toc-text">式 14.40 推导</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AF%9D%E9%A2%98%E6%A8%A1%E5%9E%8B"><span class="toc-number">5.4.</span> <span class="toc-text">话题模型</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8F%82%E8%80%83"><span class="toc-number">6.</span> <span class="toc-text">参考</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BD%91%E7%BB%9C%E8%B5%84%E6%96%99"><span class="toc-number">6.1.</span> <span class="toc-text">网络资料</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B9%A6%E7%B1%8D"><span class="toc-number">6.2.</span> <span class="toc-text">书籍</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><!-- - let post_cover = article.cover--><div class="aside-list-item"><a class="thumbnail" href="/scribble/ggb_insert/" title="在网页中嵌入 GGB 最简单的方法"><img src="https://cdn.jsdelivr.net/gh/cnyist/blog/scribble/ggb_insert/ggb_insert.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="在网页中嵌入 GGB 最简单的方法"/></a><div class="content"><a class="title" href="/scribble/ggb_insert/" title="在网页中嵌入 GGB 最简单的方法">在网页中嵌入 GGB 最简单的方法</a><time datetime="2021-04-04T06:26:56.000Z" title="发表于 2021-04-04 14:26:56">2021-04-04</time></div></div><!-- - let post_cover = article.cover--><div class="aside-list-item"><a class="thumbnail" href="/math/other/conical_section_conclusion/" title="圆锥曲线二级结论"><img src="https://cdn.jsdelivr.net/gh/cnyist/blog/math/other/conical_section_conclusion/conical_section_conclusion.gif" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="圆锥曲线二级结论"/></a><div class="content"><a class="title" href="/math/other/conical_section_conclusion/" title="圆锥曲线二级结论">圆锥曲线二级结论</a><time datetime="2021-03-21T03:32:14.000Z" title="发表于 2021-03-21 11:32:14">2021-03-21</time></div></div><!-- - let post_cover = article.cover--><div class="aside-list-item"><a class="thumbnail" href="/hexo/hexo_conflict_mathjax/" title="解决 MathJax 与 Hexo 冲突问题"><img src="https://cdn.jsdelivr.net/gh/cnyist/blog/hexo/hexo_conflict_mathjax/hexo_conflict_mathjax.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="解决 MathJax 与 Hexo 冲突问题"/></a><div class="content"><a class="title" href="/hexo/hexo_conflict_mathjax/" title="解决 MathJax 与 Hexo 冲突问题">解决 MathJax 与 Hexo 冲突问题</a><time datetime="2021-02-20T07:08:10.000Z" title="发表于 2021-02-20 15:08:10">2021-02-20</time></div></div><!-- - let post_cover = article.cover--><div class="aside-list-item"><a class="thumbnail" href="/ML/RL/papers_read/Model-Free_RL/Deep_Q-Learning/1/" title="DQN 算法"><img src="https://cdn.jsdelivr.net/gh/cnyist/blog/ML/RL/papers_read/Model-Free_RL/Deep_Q-Learning/1/1.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="DQN 算法"/></a><div class="content"><a class="title" href="/ML/RL/papers_read/Model-Free_RL/Deep_Q-Learning/1/" title="DQN 算法">DQN 算法</a><time datetime="2021-02-13T14:55:54.000Z" title="发表于 2021-02-13 22:55:54">2021-02-13</time></div></div><!-- - let post_cover = article.cover--><div class="aside-list-item"><a class="thumbnail" href="/math/mathematical_analysis/mathematical_analysis_practice/1/" title="数学分析练习题 (一)"><img src="https://cdn.jsdelivr.net/gh/cnyist/blog/math/mathematical_analysis/mathematical_analysis_practice/1/1.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="数学分析练习题 (一)"/></a><div class="content"><a class="title" href="/math/mathematical_analysis/mathematical_analysis_practice/1/" title="数学分析练习题 (一)">数学分析练习题 (一)</a><time datetime="2020-12-20T06:38:07.000Z" title="发表于 2020-12-20 14:38:07">2020-12-20</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2021 By 云玩家</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer><script>document.getElementById('web_bg').style = 'background-image: url("' + get_rand_jsd_pic('cnyist', 'banner@master', '/', 60, '-min.jpg') + '")'</script></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    loader: {
+      source: {
+        '[tex]/amsCd': '[tex]/amscd'
+      }
+    },
+    tex: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"]],
+      tags: 'ams'
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, ''],
+        addClass: [200,() => {
+          document.querySelectorAll('mjx-container:not([display=\'true\']').forEach( node => {
+            const target = node.parentNode
+            if (!target.classList.contains('has-jax')) {
+              target.classList.add('mathjax-overflow')
+            }
+          })
+        }, '', false]
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typeset()
+}</script><script>(()=>{
+  const $countDom = document.getElementById('twikoo-count')
+  const init = () => {
+    let initData = {
+      el: '#twikoo-wrap',
+      envId: 'yunist-147dfe',
+      region: ''
+    }
+
+    if (false) {
+      const otherData = false
+      initData = Object.assign(initData, otherData)
+    }
+    
+    twikoo.init(initData)
+  }
+
+  const getCount = () => {
+    twikoo.getCommentsCount({
+      envId: 'yunist-147dfe',
+      region: '',
+      urls: [window.location.pathname],
+      includeReply: false
+    }).then(function (res) {
+      $countDom.innerText = res[0].count
+    }).catch(function (err) {
+      console.error(err);
+    });
+  }
+
+  const loadTwikoo = (bool = false) => {
+    if (typeof twikoo === 'object') {
+      init()
+      bool && $countDom && setTimeout(getCount,0)
+    } else {
+      getScript('https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js').then(()=> {
+        init()
+        bool && $countDom && setTimeout(getCount,0)
+      })
+    }
+  }
+
+  if ('Twikoo' === 'Twikoo' || !false) {
+    if (false) btf.loadComment(document.getElementById('twikoo-wrap'), loadTwikoo)
+    else loadTwikoo(true)
+  } else {
+    window.loadOtherComment = () => {
+      loadTwikoo()
+    }
+  }
+})()</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

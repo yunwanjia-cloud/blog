@@ -1,0 +1,339 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>《机器学习》 西瓜书习题 第 3 章: 线性模型 | 云玩家</title><meta name="keywords" content="机器学习,西瓜书,习题"><meta name="author" content="云玩家"><meta name="copyright" content="云玩家"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="习题3.1试析在什么情况下式 $(3.2)$ 中不必考虑偏置项 $b$ . 书中有提到, 可以把 $x$ 和 $b$ 吸收入向量形式 $\hat{w} &#x3D; (w;b)$ .此时就不用单独考虑 $b$ 了. 其实还有很多情况不用, 比如说使用了 $\mathrm{one-hot}$ 编码, 就可以不用考虑偏置项. 更广泛的情况是, 如果偏置项 $b$ 可以被 “包含” 在另外的一些离散特征里, 那么">
+<meta property="og:type" content="article">
+<meta property="og:title" content="《机器学习》 西瓜书习题 第 3 章: 线性模型">
+<meta property="og:url" content="http://example.com/ML/watermelon_book/answer/3/index.html">
+<meta property="og:site_name" content="云玩家">
+<meta property="og:description" content="习题3.1试析在什么情况下式 $(3.2)$ 中不必考虑偏置项 $b$ . 书中有提到, 可以把 $x$ 和 $b$ 吸收入向量形式 $\hat{w} &#x3D; (w;b)$ .此时就不用单独考虑 $b$ 了. 其实还有很多情况不用, 比如说使用了 $\mathrm{one-hot}$ 编码, 就可以不用考虑偏置项. 更广泛的情况是, 如果偏置项 $b$ 可以被 “包含” 在另外的一些离散特征里, 那么">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/ML/watermelon_book/answer/3/3.jpg">
+<meta property="article:published_time" content="2020-02-26T09:20:00.000Z">
+<meta property="article:modified_time" content="2021-02-07T11:10:45.157Z">
+<meta property="article:author" content="云玩家">
+<meta property="article:tag" content="机器学习">
+<meta property="article:tag" content="西瓜书">
+<meta property="article:tag" content="习题">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/ML/watermelon_book/answer/3/3.jpg"><link rel="shortcut icon" href="/img/favicon.ico"><link rel="canonical" href="http://example.com/ML/watermelon_book/answer/3/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//s4.cnzz.com"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script async="async" data-pjax="data-pjax" src="https://s4.cnzz.com/z_stat.php?id=1278869595&amp;web_id=1278869595"></script><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+}</script><script src="/js/yuntools.js"></script><script id="config-diff">var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2021-02-07 19:10:45'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    })(window)</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/cnyist/blog/css/font.css"><meta name="generator" content="Hexo 5.3.0"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" src="https://cdn.jsdelivr.net/gh/cnyist/blog/img/avatar.svg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">65</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">37</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">24</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/speak/"><i class="fa-fw fas fa-comment"></i><span> 说说</span></a></div><div class="menus_item"><a class="site-page" href="/chat/"><i class="fa-fw fas fa-comments"></i><span> 闲聊室</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> about</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw iconfont icon-Web"></i><span> 镜像站点</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page" target="_blank" rel="noopener" href="https://yunist.gitee.io"><i class="fa-fw iconfont icon-gitee-fill-round"></i><span> Gitee Pages</span></a></li></ul></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/ML/watermelon_book/answer/3/3.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">云玩家</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/speak/"><i class="fa-fw fas fa-comment"></i><span> 说说</span></a></div><div class="menus_item"><a class="site-page" href="/chat/"><i class="fa-fw fas fa-comments"></i><span> 闲聊室</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> about</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw iconfont icon-Web"></i><span> 镜像站点</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page" target="_blank" rel="noopener" href="https://yunist.gitee.io"><i class="fa-fw iconfont icon-gitee-fill-round"></i><span> Gitee Pages</span></a></li></ul></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">《机器学习》 西瓜书习题 第 3 章: 线性模型</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2020-02-26T09:20:00.000Z" title="发表于 2020-02-26 17:20:00">2020-02-26</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2021-02-07T11:10:45.157Z" title="更新于 2021-02-07 19:10:45">2021-02-07</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E8%A5%BF%E7%93%9C%E4%B9%A6/">西瓜书</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E8%A5%BF%E7%93%9C%E4%B9%A6/%E4%B9%A0%E9%A2%98/">习题</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span><span class="post-meta-separator">|</span><span class="post-meta-commentcount"><i class="far fa-comments fa-fw post-meta-icon"></i><span class="post-meta-label">评论数:</span><a href="/ML/watermelon_book/answer/3/#post-comment"><span id="twikoo-count"></span></a></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="习题"><a href="#习题" class="headerlink" title="习题"></a>习题</h1><h2 id="3-1"><a href="#3-1" class="headerlink" title="3.1"></a>3.1</h2><p><strong>试析在什么情况下式 $(3.2)$ 中不必考虑偏置项 $b$ .</strong></p>
+<p>书中有提到, 可以把 $x$ 和 $b$ 吸收入向量形式 $\hat{w} = (w;b)$ .此时就不用单独考虑 $b$ 了.</p>
+<p>其实还有很多情况不用, 比如说使用了 $\mathrm{one-hot}$ 编码, 就可以不用考虑偏置项.</p>
+<p>更广泛的情况是, 如果偏置项 $b$ 可以被 “包含” 在另外的一些离散特征里, 那么就不用考虑. 就是偏置项可以以一定系数加到离散特征中. (可能看了还是不太懂, 我以后有时间会重写一个的.)</p>
+<h2 id="3-2"><a href="#3-2" class="headerlink" title="3.2"></a>3.2</h2><p><strong>试证明, 对于参数 $w$, 对率回归的目标函数 $(3.18)$ 是非凸的, 但其对数似然函数 $(3.27)$ 是凸的.</strong></p>
+<p>$$<br>y = \frac{1}{1 + e^{-(\boldsymbol w^\mathrm T\boldsymbol x + b)}}\tag{3.18}<br>$$</p>
+<p>$$<br>\ell(\boldsymbol\beta) = \sum^m_{i = 1}(-y_i\boldsymbol \beta^\mathrm T\boldsymbol{\hat{x}}_i)\tag{3.18}<br>$$</p>
+<p>计算其海森矩阵, 判断是否正定. 海森矩阵可以类比成一元函数的二阶导, 正定可以类比为二阶导恒大于 $0$ .</p>
+<h2 id="3-3"><a href="#3-3" class="headerlink" title="3.3"></a>3.3</h2><p><strong>编程实现対率回归, 并给出西瓜数据集 $3.0\alpha$ 上的结果.</strong></p>
+<p><a target="_blank" rel="noopener" href="https://aistudio.baidu.com/aistudio/projectdetail/238277">《机器学习》西瓜书 第 3 章 编程实例</a></p>
+<h2 id="3-4"><a href="#3-4" class="headerlink" title="3.4"></a>3.4</h2><p><strong>选择两个 $\mathrm{UCI}$ 数据集, 比较 $10$ 折交叉验证法和留一法所估计出的错误率.</strong></p>
+<p><a target="_blank" rel="noopener" href="https://aistudio.baidu.com/aistudio/projectdetail/238277">《机器学习》西瓜书 第 3 章 编程实例</a></p>
+<h2 id="3-4-1"><a href="#3-4-1" class="headerlink" title="3.4"></a>3.4</h2><p><strong>编程实现线性判别分析, 并给出西瓜数据集 $3.0\alpha$ 上的结果.</strong></p>
+<p><a target="_blank" rel="noopener" href="https://aistudio.baidu.com/aistudio/projectdetail/238277">《机器学习》西瓜书 第 3 章 编程实例</a></p>
+<h2 id="3-6"><a href="#3-6" class="headerlink" title="3.6"></a>3.6</h2><p><strong>线性判别分析仅在线性可分数据上能获得理想结果, 试设计一个改进方法, 使其能较好地用于飞线性可分数据.</strong></p>
+<p>像 $6.3$ 节介绍的那样, 使用核函数, 就可以运用于非线性可分数据.</p>
+<h2 id="3-7"><a href="#3-7" class="headerlink" title="3.7"></a>3.7</h2><p><strong>令码长为 $9$, 类别数为 $4$ , 试给出海明距离意义下理论最优的 $\mathrm{ECOC}$ 二元码并证明之.</strong></p>
+<p>首先要给出理论最优, 我们先要确定 ‘最优’ 的指导标准.</p>
+<blockquote>
+<p> 对同等长度的编码, 理论上来说, 任意两个类别之间的编码距离越远, 则纠错能力越强.</p>
+</blockquote>
+<p>我们要将 ‘任意两个类别的编码距离’ 用数学表达, 这样才能进行求解. 那么怎么用数学表达这个 ‘距离’ 呢? 这里考虑到 ‘总体距离最大’ , 同时我们还要保证每两个类别之间的反码的距离也 ‘最大’ , 所以我们浅显的使用每两个类别之间的海明距离乘和其反码的海明距离的积来作为衡量标准(有点绕),  我们定义一个变量 $L$ 用来表达这个积, 也就是有<br>$$<br>L = \prod_{1\leqslant i&lt; j\leqslant 4}dis(r_i, r_j)dis(r_i, -r_j)<br>$$<br>&nbsp;$dis(r_i, r_j)$ 表示第 $i$ 个编码和第 $j$ 个编码之间的海明距离, $dis(r_i, r_j)$ 表示第 $i$ 个编码和第 $j$ 个编码的反码之间的海明距离. $L$ 越大代表这种编码方式越好.</p>
+<p>于是我写了段程序来搜索 $L$ 的最大值 <del>(直接爆搜)</del> .</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> MAXCOL = <span class="number">9</span>;  <span class="comment">// 码长为 9 </span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> MAXROW = <span class="number">4</span>;  <span class="comment">// 类别数为 4 </span></span><br><span class="line"></span><br><span class="line"><span class="keyword">bool</span> code[MAXROW][MAXCOL];  <span class="comment">// 记录最大值时编码排列</span></span><br><span class="line"><span class="keyword">bool</span> temp_code[MAXROW][MAXCOL];  <span class="comment">// 表示当前编码排列</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> mmax = <span class="number">0</span>;  <span class="comment">// 记录最大值</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">dif_val</span><span class="params">(<span class="keyword">bool</span> a[MAXCOL], <span class="keyword">bool</span> b[MAXCOL])</span></span>&#123;  <span class="comment">// 求两个编码之间的海明距离</span></span><br><span class="line">    <span class="keyword">int</span> cnt1 = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> cnt2 = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; MAXCOL ; ++i)&#123;</span><br><span class="line">        <span class="keyword">if</span>(a[i] != b[i])    ++cnt1;</span><br><span class="line">        <span class="keyword">if</span>(a[i] == b[i])	++cnt2;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> cnt1 * cnt2;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">cost</span><span class="params">(<span class="keyword">bool</span> code[MAXROW][MAXCOL])</span></span>&#123;  <span class="comment">// 求当前编码排列的 L</span></span><br><span class="line">    <span class="keyword">int</span> res = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; MAXROW ; ++i)&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = i + <span class="number">1</span> ; j &lt; MAXROW ; ++j)&#123;</span><br><span class="line">            res *= dif_val(code[i], code[j]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> row = <span class="number">2</span>, <span class="keyword">int</span> col = <span class="number">0</span>)</span></span>&#123;  <span class="comment">// 深度优先搜索, 枚举每个位置的编码 (0 和 1)</span></span><br><span class="line">    <span class="keyword">if</span>(row == MAXROW)    <span class="keyword">return</span>;  <span class="comment">// 边界条件</span></span><br><span class="line">    temp_code[row][col] = <span class="number">1</span>;  <span class="comment">// 先枚举 1</span></span><br><span class="line">    <span class="keyword">int</span> temp = cost(temp_code);</span><br><span class="line">    <span class="keyword">if</span>(mmax &lt; temp)&#123;  <span class="comment">// 发现更好的编码排列, 进行更新</span></span><br><span class="line">        mmax = temp;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; MAXROW ; ++i)</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span> ; j &lt; MAXCOL ; ++j)</span><br><span class="line">                code[i][j] = temp_code[i][j];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(col == MAXCOL - <span class="number">1</span>)    dfs(row + <span class="number">1</span>, <span class="number">0</span>);  <span class="comment">// 下一层</span></span><br><span class="line">    <span class="keyword">else</span>    dfs(row, col + <span class="number">1</span>);</span><br><span class="line">    temp_code[row][col] = <span class="number">0</span>;  <span class="comment">// 返回再枚举 0</span></span><br><span class="line">    temp = cost(temp_code);</span><br><span class="line">    <span class="keyword">if</span>(mmax &lt; temp)&#123;  <span class="comment">// 同上</span></span><br><span class="line">        mmax = temp;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; MAXROW ; ++i)</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span> ; j &lt; MAXCOL ; ++j)</span><br><span class="line">                code[i][j] = temp_code[i][j];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(col == MAXCOL - <span class="number">1</span>)    dfs(row + <span class="number">1</span>, <span class="number">0</span>);  <span class="comment">// 同上</span></span><br><span class="line">    <span class="keyword">else</span>    dfs(row, col + <span class="number">1</span>);</span><br><span class="line">    <span class="keyword">return</span> ;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; MAXCOL ; ++i)&#123;</span><br><span class="line">        temp_code[<span class="number">0</span>][i] = <span class="number">1</span>;  <span class="comment">// 不失一般性, 令第一个类别的编码全部为 1 </span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span> ; i &lt;= MAXCOL ; ++i)&#123;  <span class="comment">// 不失一般性, 枚举第二个类别 1 的数量 (1 ~ 9)</span></span><br><span class="line">        temp_code[<span class="number">1</span>][i - <span class="number">1</span>] = <span class="number">1</span>;</span><br><span class="line">        dfs();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; MAXROW ; ++i)&#123;  <span class="comment">// 打印最终结果</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span> ; j &lt; MAXCOL ; ++j)&#123;</span><br><span class="line">            <span class="built_in">cout</span> &lt;&lt; code[i][j] &lt;&lt; <span class="string">&#x27; &#x27;</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; mmax;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;  <span class="comment">// 我的码风是不是很好看</span></span><br></pre></td></tr></table></figure>
+<p>结果:</p>
+<table>
+<thead>
+<tr>
+<th align="center">1</th>
+<th align="center">2</th>
+<th align="center">3</th>
+<th align="center">4</th>
+<th align="center">5</th>
+<th align="center">6</th>
+<th align="center">7</th>
+<th align="center">8</th>
+<th align="center">9</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center">1</td>
+</tr>
+<tr>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+</tr>
+<tr>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center">0</td>
+</tr>
+<tr>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center">1</td>
+</tr>
+</tbody></table>
+<p>64000000</p>
+<p>当然我们要把 $0$ 换成 $-1$.</p>
+<p>所以, 我们求出了海明距离下理论最优的, 码长为 $9$, 类别数为 $4$ 的 $\mathrm{EOOC}$ 二元码. 至于证明, 在我们定义的衡量标准下, 其正确性是显然的.</p>
+<h2 id="3-8"><a href="#3-8" class="headerlink" title="3.8*"></a>3.8*</h2><p><strong>$\mathrm{EOOC}$ 编码能起到理想纠错作用的重要条件是: 在每一位编码上出错的概率相当且独立. 试析多分类任务经 $\mathrm{EOOC}$ 编码后产生的二类分类器满足该条件的可能性及由此产生的影响.</strong></p>
+<p>&nbsp;$\mathrm{EOOC}$ 编码不仅要和其他编码距离尽量大, 还要和其他编码的反码距离也要大. 这是因为每个二类分类器的错误可能相似. 考虑一个极端情况, 要是错误完全相同, 那么分类器出错的后果就是输出码为原来的反码.</p>
+<h2 id="3-9"><a href="#3-9" class="headerlink" title="3.9"></a>3.9</h2><p><strong>使用 $\mathrm{OvR}$ 和 $\mathrm{MvM}$ 将多分类任务分解为二分类任务求解时, 试述为何无需专门针对类别不平衡性进行处理.</strong></p>
+<p>原文就已经提到</p>
+<blockquote>
+<p>对 $\mathrm{OvR}$ 、$\mathrm{MvM}$ 来说, 由于对每个类进行了相同的处理, 其拆解出的二分类任务中类别不平衡的影响会相互抵消, 因此通常不需要专门处理.</p>
+</blockquote>
+<h2 id="3-10"><a href="#3-10" class="headerlink" title="3.10*"></a>3.10*</h2><p><strong>试推导出多分类代价敏感学习 (仅考虑基于类别的误分类代价) 使用 “再缩放” 能获得理论最优解的条件.</strong></p>
+<p>原文中提到</p>
+<blockquote>
+<p>再缩放的思想虽简单, 但实际操作却并不平凡, 主要因为 “训练集是真实样本总体的无偏采样” 这个假设往往并不成立.</p>
+</blockquote>
+<p>因此假设成立应该也算是获得理论最优解的一个条件(<del>好水啊</del>).</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">云玩家</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://example.com/ML/watermelon_book/answer/3/">http://example.com/ML/watermelon_book/answer/3/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://example.com" target="_blank">云玩家</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a><a class="post-meta__tags" href="/tags/%E8%A5%BF%E7%93%9C%E4%B9%A6/">西瓜书</a><a class="post-meta__tags" href="/tags/%E4%B9%A0%E9%A2%98/">习题</a></div><div class="post_share"><div class="social-share" data-image="/ML/watermelon_book/answer/3/3.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><!-- - var pagination_cover = prev.cover === false ? prev.randomcover : prev.cover--><a href="/ML/watermelon_book/code/3/"><img class="prev-cover" src="https://cdn.jsdelivr.net/gh/cnyist/blog/ML/watermelon_book/code/3/3.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">《机器学习》 西瓜书实例 第 3 章: 线性模型</div></div></a></div><!-- - var pagination_cover = next.cover == false ? next.randomcover : next.cover--><div class="next-post pull-right"><a href="/ML/watermelon_book/code/2/"><img class="next-cover" src="https://cdn.jsdelivr.net/gh/cnyist/blog/ML/watermelon_book/code/2/2.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">《机器学习》 西瓜书实例 第 2 章: 模型评估与选择</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span> 相关推荐</span></div><div class="relatedPosts-list"><div><a href="/ML/watermelon_book/answer/1/" title="《机器学习》 西瓜书习题 第 1 章: 绪论"><img class="cover" src="https://cdn.jsdelivr.net/gh/cnyist/blog/ML/watermelon_book/answer/1/1.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-02-26</div><div class="title">《机器学习》 西瓜书习题 第 1 章: 绪论</div></div></a></div><div><a href="/ML/watermelon_book/answer/2/" title="《机器学习》 西瓜书习题 第 2 章: 模型评估与选择"><img class="cover" src="https://cdn.jsdelivr.net/gh/cnyist/blog/ML/watermelon_book/answer/2/2.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-02-26</div><div class="title">《机器学习》 西瓜书习题 第 2 章: 模型评估与选择</div></div></a></div><div><a href="/ML/watermelon_book/answer/4/" title="《机器学习》 西瓜书习题 第 4 章: 决策树"><img class="cover" src="https://cdn.jsdelivr.net/gh/cnyist/blog/ML/watermelon_book/answer/4/4.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-02-26</div><div class="title">《机器学习》 西瓜书习题 第 4 章: 决策树</div></div></a></div><div><a href="/ML/watermelon_book/answer/5/" title="《机器学习》 西瓜书习题 第 5 章: 神经网络"><img class="cover" src="https://cdn.jsdelivr.net/gh/cnyist/blog/ML/watermelon_book/answer/5/5.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-02-26</div><div class="title">《机器学习》 西瓜书习题 第 5 章: 神经网络</div></div></a></div><div><a href="/ML/watermelon_book/answer/6/" title="《机器学习》 西瓜书习题 第 6 章: 支持向量机"><img class="cover" src="https://cdn.jsdelivr.net/gh/cnyist/blog/ML/watermelon_book/answer/6/6.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-02-26</div><div class="title">《机器学习》 西瓜书习题 第 6 章: 支持向量机</div></div></a></div><div><a href="/ML/watermelon_book/answer/7/" title="《机器学习》 西瓜书习题 第 7 章: 贝叶斯分类器"><img class="cover" src="https://cdn.jsdelivr.net/gh/cnyist/blog/ML/watermelon_book/answer/7/7.svg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-02-27</div><div class="title">《机器学习》 西瓜书习题 第 7 章: 贝叶斯分类器</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-info-avatar is-center"><img class="avatar-img" src="https://cdn.jsdelivr.net/gh/cnyist/blog/img/avatar.svg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/><div class="author-info__name">云玩家</div><div class="author-info__description">云玩家's blog</div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">65</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">37</div></a></div><div class="card-info-data-item is-center"><a href="/categories/"><div class="headline">分类</div><div class="length-num">24</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/cnyist" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="https://blog.csdn.net/chnyist" target="_blank" title="CSDN"><i class="fas iconfont icon-CN_csdnnet"></i></a><a class="social-icon" href="https://www.zhihu.com/people/cnyist" target="_blank" title="知乎"><i class="fas iconfont icon-zhihu"></i></a><a class="social-icon" href="mailto:371622558@qq.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B9%A0%E9%A2%98"><span class="toc-number">1.</span> <span class="toc-text">习题</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#3-1"><span class="toc-number">1.1.</span> <span class="toc-text">3.1</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-2"><span class="toc-number">1.2.</span> <span class="toc-text">3.2</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-3"><span class="toc-number">1.3.</span> <span class="toc-text">3.3</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-4"><span class="toc-number">1.4.</span> <span class="toc-text">3.4</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-4-1"><span class="toc-number">1.5.</span> <span class="toc-text">3.4</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-6"><span class="toc-number">1.6.</span> <span class="toc-text">3.6</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-7"><span class="toc-number">1.7.</span> <span class="toc-text">3.7</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-8"><span class="toc-number">1.8.</span> <span class="toc-text">3.8*</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-9"><span class="toc-number">1.9.</span> <span class="toc-text">3.9</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-10"><span class="toc-number">1.10.</span> <span class="toc-text">3.10*</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><!-- - let post_cover = article.cover--><div class="aside-list-item"><a class="thumbnail" href="/scribble/ggb_insert/" title="在网页中嵌入 GGB 最简单的方法"><img src="https://cdn.jsdelivr.net/gh/cnyist/blog/scribble/ggb_insert/ggb_insert.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="在网页中嵌入 GGB 最简单的方法"/></a><div class="content"><a class="title" href="/scribble/ggb_insert/" title="在网页中嵌入 GGB 最简单的方法">在网页中嵌入 GGB 最简单的方法</a><time datetime="2021-04-04T06:26:56.000Z" title="发表于 2021-04-04 14:26:56">2021-04-04</time></div></div><!-- - let post_cover = article.cover--><div class="aside-list-item"><a class="thumbnail" href="/math/other/conical_section_conclusion/" title="圆锥曲线二级结论"><img src="https://cdn.jsdelivr.net/gh/cnyist/blog/math/other/conical_section_conclusion/conical_section_conclusion.gif" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="圆锥曲线二级结论"/></a><div class="content"><a class="title" href="/math/other/conical_section_conclusion/" title="圆锥曲线二级结论">圆锥曲线二级结论</a><time datetime="2021-03-21T03:32:14.000Z" title="发表于 2021-03-21 11:32:14">2021-03-21</time></div></div><!-- - let post_cover = article.cover--><div class="aside-list-item"><a class="thumbnail" href="/hexo/hexo_conflict_mathjax/" title="解决 MathJax 与 Hexo 冲突问题"><img src="https://cdn.jsdelivr.net/gh/cnyist/blog/hexo/hexo_conflict_mathjax/hexo_conflict_mathjax.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="解决 MathJax 与 Hexo 冲突问题"/></a><div class="content"><a class="title" href="/hexo/hexo_conflict_mathjax/" title="解决 MathJax 与 Hexo 冲突问题">解决 MathJax 与 Hexo 冲突问题</a><time datetime="2021-02-20T07:08:10.000Z" title="发表于 2021-02-20 15:08:10">2021-02-20</time></div></div><!-- - let post_cover = article.cover--><div class="aside-list-item"><a class="thumbnail" href="/ML/RL/papers_read/Model-Free_RL/Deep_Q-Learning/1/" title="DQN 算法"><img src="https://cdn.jsdelivr.net/gh/cnyist/blog/ML/RL/papers_read/Model-Free_RL/Deep_Q-Learning/1/1.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="DQN 算法"/></a><div class="content"><a class="title" href="/ML/RL/papers_read/Model-Free_RL/Deep_Q-Learning/1/" title="DQN 算法">DQN 算法</a><time datetime="2021-02-13T14:55:54.000Z" title="发表于 2021-02-13 22:55:54">2021-02-13</time></div></div><!-- - let post_cover = article.cover--><div class="aside-list-item"><a class="thumbnail" href="/math/mathematical_analysis/mathematical_analysis_practice/1/" title="数学分析练习题 (一)"><img src="https://cdn.jsdelivr.net/gh/cnyist/blog/math/mathematical_analysis/mathematical_analysis_practice/1/1.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="数学分析练习题 (一)"/></a><div class="content"><a class="title" href="/math/mathematical_analysis/mathematical_analysis_practice/1/" title="数学分析练习题 (一)">数学分析练习题 (一)</a><time datetime="2020-12-20T06:38:07.000Z" title="发表于 2020-12-20 14:38:07">2020-12-20</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2021 By 云玩家</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer><script>document.getElementById('web_bg').style = 'background-image: url("' + get_rand_jsd_pic('cnyist', 'banner@master', '/', 60, '-min.jpg') + '")'</script></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    loader: {
+      source: {
+        '[tex]/amsCd': '[tex]/amscd'
+      }
+    },
+    tex: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"]],
+      tags: 'ams'
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, ''],
+        addClass: [200,() => {
+          document.querySelectorAll('mjx-container:not([display=\'true\']').forEach( node => {
+            const target = node.parentNode
+            if (!target.classList.contains('has-jax')) {
+              target.classList.add('mathjax-overflow')
+            }
+          })
+        }, '', false]
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typeset()
+}</script><script>(()=>{
+  const $countDom = document.getElementById('twikoo-count')
+  const init = () => {
+    let initData = {
+      el: '#twikoo-wrap',
+      envId: 'yunist-147dfe',
+      region: ''
+    }
+
+    if (false) {
+      const otherData = false
+      initData = Object.assign(initData, otherData)
+    }
+    
+    twikoo.init(initData)
+  }
+
+  const getCount = () => {
+    twikoo.getCommentsCount({
+      envId: 'yunist-147dfe',
+      region: '',
+      urls: [window.location.pathname],
+      includeReply: false
+    }).then(function (res) {
+      $countDom.innerText = res[0].count
+    }).catch(function (err) {
+      console.error(err);
+    });
+  }
+
+  const loadTwikoo = (bool = false) => {
+    if (typeof twikoo === 'object') {
+      init()
+      bool && $countDom && setTimeout(getCount,0)
+    } else {
+      getScript('https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js').then(()=> {
+        init()
+        bool && $countDom && setTimeout(getCount,0)
+      })
+    }
+  }
+
+  if ('Twikoo' === 'Twikoo' || !false) {
+    if (false) btf.loadComment(document.getElementById('twikoo-wrap'), loadTwikoo)
+    else loadTwikoo(true)
+  } else {
+    window.loadOtherComment = () => {
+      loadTwikoo()
+    }
+  }
+})()</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

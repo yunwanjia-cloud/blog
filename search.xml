@@ -33,7 +33,7 @@
       <link href="math/other/conical_section_conclusion/"/>
       <url>math/other/conical_section_conclusion/</url>
       
-        <content type="html"><![CDATA[<p>最近推了一个圆锥曲线的结论, 因此记录一下.</p><p>先上结论:</p><p>若有圆锥曲线 $\frac{x^2}{A}+\frac{y^2}{B}=1$ ,$A$ 与 $B$ 不同时取负数 (这样就同时代表了双曲线和椭圆) , 那么对于一个在该圆锥曲线上的点 $P_1(x_1,y_1)$ 来说, 存在一个点 $P_2(\frac{(A-B)}{(A+B)}x_1,\frac{B-A}{A+B}y_1)$ . 若作直线 $l_1, l_2$ 过点 $P_0$ 且相互垂直, 那么这两条直线与该圆锥曲线异于 $P_0$ 的两个交点 $M,N$ 的连线恒过点 $P_1$ .</p><iframe frameborder="no"title="垂点椭圆双曲线" src="https://www.geogebra.org/material/iframe/id/zkwudkkg/smb/false/stb/false/stbh/false/ai/false/asb/false/sri/true/rc/false/ld/false/sdz/true/ctl/false/" width=100% height="480px"></iframe><p>对于形如 $y^2=2px$ 的抛物线也有类似结论, 不过 $P_2$ 为 $(2p+x,-y)$.</p><iframe frameborder="no"title="垂点抛物线" src="https://www.geogebra.org/material/iframe/id/myysrpxf/smb/false/stb/false/stbh/false/ai/false/asb/false/sri/true/rc/false/ld/false/sdz/true/ctl/false/" width=100% height="480px"></iframe>]]></content>
+        <content type="html"><![CDATA[<p>最近推了一个圆锥曲线的结论, 因此记录一下.</p><p>先上结论:</p><p>若有圆锥曲线 $\Gamma\colon\frac{x^2}{A}+\frac{y^2}{B}=1$ ,$A$ 与 $B$ 不同时取负数 (这样就同时代表了双曲线和椭圆) , 那么对于一个在该圆锥曲线上的点 $P_1(x_1,y_1)$ 来说, 存在一个点 $P_2(\frac{A-B}{A+B}x_1,\frac{B-A}{A+B}y_1)$ . 若作直线 $l_1, l_2$ 过点 $P_0$ 且相互垂直, 那么这两条直线与该圆锥曲线异于 $P_0$ 的两个交点 $M,N$ 的连线恒过点 $P_1$ .</p><iframe frameborder="no"title="垂点椭圆双曲线" src="https://www.geogebra.org/material/iframe/id/zkwudkkg/smb/false/stb/false/stbh/false/ai/false/asb/false/sri/true/rc/false/ld/false/sdz/true/ctl/false/" width=100% height="480px"></iframe><p>对于形如 $y^2=2px$ 的抛物线也有类似结论, 不过 $P_2$ 为 $(2p+x_1,-y_1)$.</p><iframe frameborder="no"title="垂点抛物线" src="https://www.geogebra.org/material/iframe/id/myysrpxf/smb/false/stb/false/stbh/false/ai/false/asb/false/sri/true/rc/false/ld/false/sdz/true/ctl/false/" width=100% height="480px"></iframe><h1 id="如何得到"><a href="#如何得到" class="headerlink" title="如何得到"></a>如何得到</h1>我们以椭圆为例.设椭圆 $\Gamma\colon\frac{x^2}{a^2}+\frac{y^2}{b^2}=1$ , 点 $P_2 (x_2, y_2)$ , 直线 $l_{MN}\colon y-y_2=k(x-x_2)$  联立可得$$(a^2k^2+b^2)x^2+2a^2k(y_2-kx_2)x+a^2((kx_2-y_2)^2-b^2)=0$$设直线 $l_{MN}$ 与曲线交点为 $M(x_m,y_m),N(x_n,y_n)$ 根据韦达定理可得$$\begin{aligned}x_mx_n=\frac{a^2((kx_2-y_2)^2-b^2)}{a^2k^2+b^2},x_m+x_n=\frac{2a^2k(kx_2-y_2)}{a^2k^2+b^2}\\y_my_n=\frac{b^2((kx_2-y_2)^2-a^2k^2)}{a^2k^2+b^2},y_m+y_n=\frac{2b^2(y_2-kx_2)}{a^2k^2+b^2}\end{aligned}$$同时设 $P_1(x_1,y_1)$ ,有$$\begin{aligned}(x_m-x_1,y_m,y_1)\cdot(x_n-x_2,y_n-y_2)&=0\\x_nx_m-x_1(x_m+x_n)+{x_2}^2+y_ny_m-y_1(y_m+y_n)+{y_2}^2&=0\end{aligned}$$代入得$$\begin{aligned}a^2((kx_2-y_2)^2-b^2)-2x_1a^2k(kx_2-y_2)+b^2((kx_2-y_2)^2-a^2k^2)-2y_1b^2(y_2-kx_2)\\=-({x_1}^2+{y_1}^2)(a^2k^2+b^2)\end{aligned}$$即上式对于任意 $k$ 成立. 凭借这个复杂的等式我们已可以 (理论上) 求出 $P_1$ 与 $P_2$ 的关系, 但是这样太困难了, 我们稍稍取下巧, 只需取两个 $k$ 值就行, 很容易想到 $k=0$ 与 $k\to\infty$ (即令 $1/ \to 0$),令 $k=0$ 得$$a^2({y_2}^2-b^2)+b^2{y_2}^2-2b^2y_1y_2=-b^2({x_1}^2+{y_1}^2)$$令 $k\to\infty$ 得$$b^2({x_2}^2-a^2)+a^2{x_2}^2-2a^2x_1x_2=-a^2({x_1}^2+{y_1}^2)$$这就好多了. 但是我们发现, 已知 $x_2,y_2$ 去求 $x_1,y_1$ 有困难, 但是我们稍稍整理一下就会发现$$(a^2+b^2)\cdot {y_2}^2 -2b^2y_1\cdot y_2 + b^2({x_1}^2+{y_1}^2)-a^2b^2=0\qquad(k=0)$$而这恰好是一个以 $x_1,y_1$ 作为参数的关于 $y_2$ 的二元一次方程, 那么就让我们把 $x_1,y_1$ 看成已知, 而 $x_2,y_2$ 看成未知的吧.用求根公式可得$$y_2=\frac{2b^2y_1\pm\sqrt{4b^2{y_1}^2-4(a^2+b^2)(b^2({x_1}^2+{y_1}^2)-a^2b^2)}}{2(a^2+b^2)}$$$x_2$ 的求法也是同理 (利用 $k\to \infty$ 的情况) , 这样我们就得出了结果.等会... 这个公式和上面那个完全不一样啊! 而且还带 $\pm$ , 显然有一个解得舍去的啊! 事实上, 最上面那个公式只是这个公式的简化, 运用了到目前还没用过的最重要的等式, 即$$\begin{aligned}\frac{{x_1}^2}{a^2}+\frac{{y_1}^2}{b^2}&=1\\a^2-{x_1}^2&=\frac{a^2}{b^2}{y_1}^2\end{aligned}$$因此有$$\begin{aligned}y_2&=\frac{2b^2y_1\pm\sqrt{4b^2{y_1}^2-4(a^2+b^2)(b^2({x_1}^2+{y_1}^2)-a^2b^2)}}{2(a^2+b^2)}\\&=\frac{b^2y_1\pm\sqrt{b^2(a^2-{x_1}^2)(a^2+b^2)-a^2b^2{y_1}^2}}{a^2+b^2}\\&=\frac{b^2y_1\pm\sqrt{a^2{y_1}^2(a^2+b^2)-a^2b^2{y_1}^2}}{a^2+b^2}\\&=\frac{b^2y_1\pm a^2y_1}{a^2+b^2}\end{aligned}$$取 $+$ 的不符合实际情况 $y_1=y_2$ , 于是就有$$y_1=\frac{b^2-a^2}{a^2+b^2}y_2$$同理得$$x_1=\frac{a^2-b^2}{a^2+b^2}x_2$$双曲线和椭圆公式类似, 可以用同样方法求得, 并且归入最上面说到的一整个结论.但是抛物线和它们可不太一样, 难道要重新求一遍? 并不, 注意到抛物线是椭圆的一种极限. 设抛物线 $E\colon y^2=2px$ , 有$$E\colon\lim_{n\to\infty} \frac{(x-np)^2}{n^2p^2}+\frac{y^2}{np^2}=1$$利用上面求出的公式, 有$$\begin{aligned}x_2&=\lim_{n\to\infty}np+(x-np)\frac{n^2p^2-np^2}{n^2p^2+np^2}\\&=\lim_{n\to\infty}np+(x-np)\frac{n-1}{n+1}\\&=\lim_{n\to\infty}\frac{n-1}{n+1}x+\frac{2np}{n+1}\\&=2p+x_1\end{aligned}$$$y_2=-y_1$ 也是类似求法.由上得到了全部结果.<h1 id="感想"><a href="#感想" class="headerlink" title="感想"></a>感想</h1><p>解析几何就一句话: 干就完事了!</p>]]></content>
       
       
       <categories>
@@ -62,7 +62,7 @@
       <link href="hexo/hexo_conflict_mathjax/"/>
       <url>hexo/hexo_conflict_mathjax/</url>
       
-        <content type="html"><![CDATA[<p>将 Hexo 升级到 5.0 后, 发现 MathJax 与 Hexo 仍然有冲突. 然而网上大部分的方法对 5.0 版本的 Hexo 都没有用.</p><p>摸索许久后, 找到了一个比较不错的方法解决该问题. 即在公式前后加上 <code>` 与 `</code> , 即</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;% raw %&#125;</span><br><span class="line">$$</span><br><span class="line">xxxxxx (公式内容)</span><br><span class="line">$$</span><br><span class="line">&#123;% endraw %&#125;</span><br></pre></td></tr></table></figure><p>就可以完美解决.</p><p><del>这绝对不是水文.</del></p>]]></content>
+        <content type="html"><![CDATA[<p>将 Hexo 升级到 5.0 后, 发现 MathJax 与 Hexo 仍然有冲突. 然而网上大部分的方法对 5.0 版本的 Hexo 都没有用.</p><p>摸索许久后, 找到了一个比较不错的方法解决该问题. 即在公式前后加上 <code>{% raw %}</code> 与 <code>{% endraw %}</code>, 即</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;% raw %&#125;</span><br><span class="line">$$</span><br><span class="line">xxxxxx (公式内容)</span><br><span class="line">$$</span><br><span class="line">&#123;% endraw %&#125;</span><br></pre></td></tr></table></figure><p>就可以完美解决.</p><p><del>这绝对不是水文.</del></p>]]></content>
       
       
       <categories>
@@ -74,9 +74,9 @@
       
         <tags>
             
-            <tag> 水文 </tag>
-            
             <tag> Hexo </tag>
+            
+            <tag> 水文 </tag>
             
         </tags>
       
@@ -898,9 +898,9 @@
           
           <category> 强化学习 </category>
           
-          <category> 入门 </category>
-          
           <category> 西瓜书 </category>
+          
+          <category> 入门 </category>
           
           <category> 读懂西瓜书 </category>
           
@@ -996,9 +996,9 @@
       
         <tags>
             
-            <tag> Hexo </tag>
-            
             <tag> 问题 </tag>
+            
+            <tag> Hexo </tag>
             
             <tag> 搭建站点 </tag>
             
@@ -1029,9 +1029,9 @@
       
         <tags>
             
-            <tag> Hexo </tag>
-            
             <tag> 问题 </tag>
+            
+            <tag> Hexo </tag>
             
             <tag> 搭建站点 </tag>
             
@@ -1138,20 +1138,20 @@
       
       <categories>
           
-          <category> Git </category>
-          
           <category> Hexo </category>
+          
+          <category> Git </category>
           
       </categories>
       
       
         <tags>
             
-            <tag> Git </tag>
-            
             <tag> Hexo </tag>
             
             <tag> 搭建站点 </tag>
+            
+            <tag> Git </tag>
             
             <tag> 教程 </tag>
             
@@ -1178,9 +1178,9 @@
       
         <tags>
             
-            <tag> Hexo </tag>
-            
             <tag> 问题 </tag>
+            
+            <tag> Hexo </tag>
             
             <tag> 搭建站点 </tag>
             
@@ -1265,9 +1265,9 @@
       
         <tags>
             
-            <tag> Hexo </tag>
-            
             <tag> 问题 </tag>
+            
+            <tag> Hexo </tag>
             
             <tag> 搭建站点 </tag>
             
@@ -1418,9 +1418,9 @@
       
         <tags>
             
-            <tag> Hexo </tag>
-            
             <tag> 问题 </tag>
+            
+            <tag> Hexo </tag>
             
             <tag> 搭建站点 </tag>
             

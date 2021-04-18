@@ -4,6 +4,35 @@
   
     
     <entry>
+      <title>复数乘法与旋转</title>
+      <link href="math/other/complex_multiplication_and_rotation/"/>
+      <url>math/other/complex_multiplication_and_rotation/</url>
+      
+        <content type="html"><![CDATA[<h1 id="旋转公式"><a href="#旋转公式" class="headerlink" title="旋转公式"></a>旋转公式</h1><p>对于一个点 $P_0(x_0,y_0)$ 来说 , $P_1(x_0\cos\theta-y_0\sin\theta,x_0\sin\theta+y_0\cos\theta)$ 是 $P_0$ 旋转 $\theta$ 角度 (顺时针) 后对应的点. 这个公式的推导是很简单的, 但是它这样的形式似乎并没有什么显而易见的规律. 但是, 复数乘法可以给我们一些启示.</p><h1 id="复数乘法的几何意义"><a href="#复数乘法的几何意义" class="headerlink" title="复数乘法的几何意义"></a>复数乘法的几何意义</h1><p>设 $z_1=a_1+b_1\mathrm{i}, z_2=a_2+b_2\mathrm{i}$ , 那么就有 $z_1z_2=a_1a_2-b_1b_2+(a_1b_2+a_2b_1)\mathrm{i}$ . 如果还看不出什么, 就进行三角换元, 令 $a_1=k_1\cos\alpha, b_1=k_1\sin\alpha, a_2=k_2\cos\beta,b_2=k_2\sin\beta$ , 那么就有 $k_1=|z_1|, k_2=|z_2|$ , 于是<br>$$<br>\begin{aligned}<br>z_1z_2&amp;=a_1a_2-b_1b_2+(a_1b_2+a_2b_1)\mathrm{i}\<br>&amp;=k_1k_2(\cos\alpha\cos\beta-\sin\alpha\cos\beta)+k_1k_2(\cos\alpha\sin\beta+\cos\beta\sin\alpha)\mathrm{i}\<br>&amp;=k_1k_2\cos(\alpha+\beta)+k_1k_2\sin(\alpha+\beta)\mathrm{i}<br>\end{aligned}<br>$$<br>现在就很显然了, 复数乘法的几何意义在于, 若复数 $z_1$ 的长度为 $k_1$ , 角度为 $\alpha$ , $z_2$ 的长度为 $k_2$ , 角度为 $\beta$ , 那么它们乘积的结果的复数的长度即为 $k_1k_2$ , 角度为 $\alpha+\beta$ .</p><h1 id="旋转公式推导"><a href="#旋转公式推导" class="headerlink" title="旋转公式推导"></a>旋转公式推导</h1><p>这就启示我们使用一个特殊的复数即 $z’=\cos\theta+\sin\theta\mathrm{i}$ ,这个复数的特殊之处在于它的角度为 $\theta$ , 长度为 $1$ . 用这个复数去乘其他复数, 就可以起到旋转 $\theta$ 角的作用. 于是对于一个点 $P_0(x_0,y_0)$ , 我们将其表示在复平面即 $z_0=x_0+y_0\mathrm{i}$ , 然后就可以得到 $z_1=z_0z’=x_0\cos\theta-y_0\sin\theta+x_0\sin\theta+y_0\cos\theta\mathrm{i}$ , 再将 $z_1$ 重新用直角坐标系表达, 最终得到 $P_1(x_0\cos\theta-y_0\sin\theta,x_0\sin\theta+y_0\cos\theta)$ .</p><h1 id="Geogebra-演示"><a href="#Geogebra-演示" class="headerlink" title="Geogebra 演示"></a>Geogebra 演示</h1><p>我发现我越来越喜欢用 GGB 了…</p><iframe frameborder="no"title="复数乘法几何意义" src="https://www.geogebra.org/material/iframe/id/txdvzmv6/smb/false/stb/false/stbh/false/ai/false/asb/false/sri/true/rc/false/ld/false/sdz/true/ctl/false/" width=100% height="480px"></iframe>]]></content>
+      
+      
+      <categories>
+          
+          <category> 数学 </category>
+          
+          <category> 其他 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 数学 </tag>
+            
+            <tag> 复数 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>在网页中嵌入 GGB 最简单的方法</title>
       <link href="scribble/ggb_insert/"/>
       <url>scribble/ggb_insert/</url>
@@ -996,15 +1025,15 @@
       
         <tags>
             
-            <tag> 问题 </tag>
-            
             <tag> Hexo </tag>
             
             <tag> 搭建站点 </tag>
             
-            <tag> Valine </tag>
-            
             <tag> 教程 </tag>
+            
+            <tag> 问题 </tag>
+            
+            <tag> Valine </tag>
             
         </tags>
       
@@ -1029,11 +1058,11 @@
       
         <tags>
             
-            <tag> 问题 </tag>
-            
             <tag> Hexo </tag>
             
             <tag> 搭建站点 </tag>
+            
+            <tag> 问题 </tag>
             
         </tags>
       
@@ -1138,20 +1167,20 @@
       
       <categories>
           
-          <category> Hexo </category>
-          
           <category> Git </category>
+          
+          <category> Hexo </category>
           
       </categories>
       
       
         <tags>
             
+            <tag> Git </tag>
+            
             <tag> Hexo </tag>
             
             <tag> 搭建站点 </tag>
-            
-            <tag> Git </tag>
             
             <tag> 教程 </tag>
             
@@ -1178,11 +1207,11 @@
       
         <tags>
             
-            <tag> 问题 </tag>
-            
             <tag> Hexo </tag>
             
             <tag> 搭建站点 </tag>
+            
+            <tag> 问题 </tag>
             
             <tag> Valine </tag>
             
@@ -1265,11 +1294,11 @@
       
         <tags>
             
-            <tag> 问题 </tag>
-            
             <tag> Hexo </tag>
             
             <tag> 搭建站点 </tag>
+            
+            <tag> 问题 </tag>
             
         </tags>
       
@@ -1418,11 +1447,11 @@
       
         <tags>
             
-            <tag> 问题 </tag>
-            
             <tag> Hexo </tag>
             
             <tag> 搭建站点 </tag>
+            
+            <tag> 问题 </tag>
             
             <tag> Valine </tag>
             

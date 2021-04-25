@@ -4,6 +4,35 @@
   
     
     <entry>
+      <title>一个不等式</title>
+      <link href="math/other/an_inequality/"/>
+      <url>math/other/an_inequality/</url>
+      
+        <content type="html"><![CDATA[<p> 发现一个不等式, 因此记录一下 (应该是正确的…吧)<br>$$<br>\sum_{i=1}^nk_i\sin(\theta_i)\geqslant\frac{\sqrt{2}}{2}\sin\left(\frac{\sum_{i=1}^nk_i\theta_i}{\sum_{i=1}^nk_i}\right)\sum_{i=1}^n k_i,\qquad \theta_i\in[0,\frac{\pi}{2}]<br>$$<br>对于 $\cos$ 函数也有类似的结果.</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 数学 </category>
+          
+          <category> 其他 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 数学 </tag>
+            
+            <tag> 不等式 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>复数乘法与旋转</title>
       <link href="math/other/complex_multiplication_and_rotation/"/>
       <url>math/other/complex_multiplication_and_rotation/</url>
@@ -925,13 +954,13 @@
           
           <category> 机器学习 </category>
           
-          <category> 强化学习 </category>
-          
           <category> 西瓜书 </category>
           
-          <category> 入门 </category>
+          <category> 强化学习 </category>
           
           <category> 读懂西瓜书 </category>
+          
+          <category> 入门 </category>
           
       </categories>
       
@@ -1167,20 +1196,20 @@
       
       <categories>
           
-          <category> Git </category>
-          
           <category> Hexo </category>
+          
+          <category> Git </category>
           
       </categories>
       
       
         <tags>
             
-            <tag> Git </tag>
-            
             <tag> Hexo </tag>
             
             <tag> 搭建站点 </tag>
+            
+            <tag> Git </tag>
             
             <tag> 教程 </tag>
             
@@ -1318,9 +1347,9 @@
           
           <category> 机器学习 </category>
           
-          <category> 模型 </category>
-          
           <category> 西瓜书 </category>
+          
+          <category> 模型 </category>
           
           <category> 读懂西瓜书 </category>
           

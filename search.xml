@@ -4,19 +4,6 @@
   
     
     <entry>
-      <title>about_Taylor_series</title>
-      <link href="about_Taylor_series/"/>
-      <url>about_Taylor_series/</url>
-      
-        <content type="html"><![CDATA[]]></content>
-      
-      
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>一个问题</title>
       <link href="math/other/a_problem/"/>
       <url>math/other/a_problem/</url>
@@ -538,11 +525,11 @@
             
             <tag> 强化学习 </tag>
             
+            <tag> Spinning Up </tag>
+            
             <tag> 代码实例 </tag>
             
             <tag> Pytorch </tag>
-            
-            <tag> Spinning Up </tag>
             
         </tags>
       
@@ -1236,20 +1223,20 @@
       
       <categories>
           
-          <category> Hexo </category>
-          
           <category> Git </category>
+          
+          <category> Hexo </category>
           
       </categories>
       
       
         <tags>
             
+            <tag> Git </tag>
+            
             <tag> Hexo </tag>
             
             <tag> 搭建站点 </tag>
-            
-            <tag> Git </tag>
             
             <tag> 教程 </tag>
             

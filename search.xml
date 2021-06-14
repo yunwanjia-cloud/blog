@@ -89,6 +89,35 @@
     
     
     <entry>
+      <title>(史济怀) 数学分析教程上册第 3 版-练习题 1.1</title>
+      <link href="math/mathematical_analysis/mathematical_analysis_practice/1/"/>
+      <url>math/mathematical_analysis/mathematical_analysis_practice/1/</url>
+      
+        <content type="html"><![CDATA[<h1 id="1"><a href="#1" class="headerlink" title="1"></a>1</h1>用反证法. 假设 $a+b$ 是有理数, 那么有 $a+b = \frac{p}{q}$ , 令 $a=\frac{p'}{q'}$ , 那么有$$\begin{aligned}\frac{p'}{q'} + b &= \frac{p}{q}\\b&=\frac{pq'-p'q}{qq'}\end{aligned}$$即 $b$ 为有理数, 与题目矛盾, 因此 $a+b$ 是无理数. $a-b$ 是同理可得.若 $ab$ 是有理数, 那么有 $ab = \frac{p_0}{q_0}$ , 因此 $b=\frac{p_0}{aq_0}$ , 即 $b$ 为有理数, 矛盾, 因此 $ab$ 是无理数. $a/b$ 同理可得.<h1 id="2"><a href="#2" class="headerlink" title="2"></a>2</h1>这里只考虑大于零的情况 (小于等于零的情况类似, 因此为了方便不做讨论) .  假设有两个有理数 $a=\frac{p}{q}>b=\frac{p'}{q'}>0$ . 通分得 $\frac{pq'}{qq'}>\frac{p'q}{qq'}$ , 显然有 $\frac{pq'-1}{qq'}\geqslant\frac{p'q}{qq'}$ , 等价于 $\frac{kpq'-k}{qq'k}\geqslant\frac{p'qk}{qq'k}$ , 其中 $k\in\mathbb Z^*$因此 $a,b$ 两个有理数之间至少有 $\frac{kpq'}{qq'k}, \frac{kpq'-1}{qq'k},\dots,\frac{kpq'-k+1}{qq'k}$ , $k$ 个有理数, 有由于 $k$ 可以取任意大, 因此 $a,b$ 间有无限多个有理数. 而 $\frac{pq'}{qq'}>\frac{\sqrt{(pq')^2-1}}{qq'}>\frac{p'q}{qq'}$ , 由该节知  $\sqrt{(pq')^2-1}$ 是无理数, 由练习题 1 知 $\frac{\sqrt{(pq')^2-1}}{qq'}$ 是无理数, 因此两个有理数间至少有一个无理数. 由于两个有理数间有无限多个有理数, 因此两个有理数间也就有无限多个无理数.<h1 id="3"><a href="#3" class="headerlink" title="3"></a>3</h1>用类似书里的方法, 假设 $\sqrt[3]{2} = \frac{p}{q}$ , $p$ 与 $q$ 不存在公因子, 那么 $\sqrt[3]{2}q=p$ , 等价于 $2q^3=p^3$ , 显然 $p$ 是偶数, 令 $2p'=p$ , 那么 $q^3=8p^3$ , 因此 $q$ 也是偶数, 产生矛盾, 于是 $\sqrt[3]{2}$ 是无理数.<h1 id="4"><a href="#4" class="headerlink" title="4"></a>4</h1>平方得 $5+2\sqrt{6}$ , 显然是无理数, 假设 $\sqrt 2+\sqrt 3=\frac{p}{q}$ , 那么 $\frac{p^2}{q^2}$ 就是无理数了, 这显然不正确, 于是 $\sqrt 2+\sqrt 3$ 是无理数.<h1 id="5"><a href="#5" class="headerlink" title="5"></a>5</h1>一开始看这道题我就估计这与 $\sqrt{2}$ 是无理数有关, 果然猜对了.显然 $(0,0)$ 是该圆上的一个有理点. 若 $\frac{p}{q},\frac{p'}{q'}\not=0, (\frac{p}{q},\frac{p'}{q'})$ 是该圆的一个有理点, 那么有 ${\left(\frac{p}{q}\right)}^2-{\left(\frac{p'}{q'}\right)}^2 -2\sqrt{2}\frac{p}{q}=0$ , 即 $2\sqrt 2=\frac{{\left(\frac{p}{q}\right)}^2-{\left(\frac{p'}{q'}\right)}^2}{\frac{p}{q}}$ 显然是有理数 (懒得化简) , 与 $\sqrt{2}$ 是无理数矛盾, 因此不存在 $(0,0)$ 之外的有理点, 即该圆只有唯一有理点.<h1 id="6"><a href="#6" class="headerlink" title="6"></a>6</h1>小学的竖式除法派上用场啦! 同样只考虑正数. 由于有尽小数可以看成是特殊无尽循环小数, 因此可以合并处理. 考虑 $\frac{p}{q}$ , 我们用竖式除法来做, 第 $n$ 次除得到的数 (第一个非零数开始算起) 称为 $a_n$ , 余下的数称为 $b_n$ (已经进位). 比如说 22/7 , 那么 $a_1=3, b_1=10, a_2=1, b_2=30$ .$$\begin{aligned}22/7&=3\cdots\cdots1 \quad(进位变为10)\\10/7&=1\cdots\cdots3 \quad(进位变为30)\end{aligned}$$显然对于固定的 $q$ ,那么 $a_n, b_n$ 完全由 $b_{n-1}$ 决定, 而我们又有 $b_n<10q$ .由鸽笼原理可知, 在 ${b_1, b_2,\dots, b_{10q}}$ 中必然存在两项相同, 假设这两项是 $b_i,b_j$ , $i<j$ , 那么循环节就是 $b_ib_{i+1}\cdots b_{j-1}$ , 也就是说我们找到了有理数 $\frac{p}{q}$ 的无尽小数表示.后一个问题更简单些, 并且其实书中已经给出了求法, 这里不过多叙述.<h1 id="7"><a href="#7" class="headerlink" title="7"></a>7</h1>显然是无理数. 当然我们还是严谨的证明一下. 如果是有理数, 那么一定有循环节, 易知我们可以在这串数字中得到任意长度连续的 $0$ , 那么循环节只能由 $0$ 组成, 但是又不存在某位之后的所有数字都是 $0$ (必然会出现 $1$), 因此产生矛盾, 也就是说它是无理数.<h1 id="8"><a href="#8" class="headerlink" title="8"></a>8</h1>$$\begin{aligned}p0.2499\cdots=0.25=\frac{1}{4}\\\begin{aligned}0.\dot 3\dot7\dot5\cdot1000&=375+0.\dot3\dot7\dot5\\0.\dot 3\dot7\dot5&=\frac{375}{999}\end{aligned}\\4.\dot5\dot1\dot8=4+0.\dot5\dot1\dot8\\\begin{aligned}0.\dot5\dot1\dot8\cdot1000&=518+0.\dot5\dot1\dot8\\0.\dot5\dot1\dot8&=\frac{518}{999}\end{aligned}\\4.\dot5\dot1\dot8=4+\frac{518}{999}=\frac{4514}{999}\end{aligned}$$<h1 id="9"><a href="#9" class="headerlink" title="9"></a>9</h1>与第七题是一样的证法. 易知我们可以从这串数字中得到任意长度连续的 $0$ , 于是循环节只能由 $0$ 组成, 同样也可以得到任意长度的 pl.$1$ , 于是循环节只能由 $1$ 组成, 矛盾, 于是该数为无理数.<h1 id="10"><a href="#10" class="headerlink" title="10"></a>10</h1><h2 id="1-1"><a href="#1-1" class="headerlink" title="(1)"></a>(1)</h2>若 $r,s\not=0$ , 那么令 $r=\frac{p}{q}, s=\frac{p'}{q'}$ , 易得 $\sqrt{2}=-\frac{pq'}{qp'}$ 矛盾.<h2 id="2-1"><a href="#2-1" class="headerlink" title="(2)"></a>(2)</h2>###### 若 $r,s,t\not=0$ , 那么令  , 那么有 $r^2=2s^2+3t^2+2st\sqrt{6}$ , 等价于 $\sqrt{6} = \frac{r^2-2s^2-3t^2}{2st}$ 显然是有理数, 矛盾.<h1 id="11"><a href="#11" class="headerlink" title="11"></a>11</h1>为了方便讨论, 我们将左边的展开式的项分类, 有几个 $a$ 相乘的项就称为几次项. 当它们都大于 $0$ 时, 展开左式得$$1+a_1+a_2+\cdots+a_n+a_1a_2+\cdots>1+a_1+a_2+\cdots+a_n$$当它们都小于 $0$ 时, 分两种情况讨论.当 $\sum_{i=1}^n\leqslant-1$ 时. $(1+a_1)(1+a_2)\cdots(1+a_n)>0\geqslant1+a_1+a_2+\cdots+a_n$ .当 $\sum_{i=1}^n>-1$ 时, 展开左式得 $1+a_1+a_2+\cdots+a_n+S$ , $S$ 是余下的项的和. 现证明 $S>0$ . 显然 $2k$ 次的项的和 (正数) 要大于 $2k+1$ 次项的和 (负数) 的绝对值. 比如$$\sum_{i<j} a_ia_j=\sum_{i<j}a_ia_j\cdot1<-\sum_{i<j}a_ia_j\sum_{k\not=i,j}a_k$$就是二次项和大于三次项和的绝对值. 也就是说 $S>0$ . 因此原式成立.有点二项式展开的味道.<h1 id="12"><a href="#12" class="headerlink" title="12"></a>12</h1>本题 $(1),(2)$ 题可以合并, 即条件变成 $a_1,a_2,\dots a_n$ 符号相同, 且 $\left|\sum_{i=1}^na_i\right|<1$ . 由 11 题知后半部分成立, 因此我们只需证$$\frac{1}{1-\sum_{k=1}^na_k}>\prod_{k=1}^n(1+a_k)$$令 $a_{n+1} = 1-\sum_{k=1}^na_k$ , 那么由算数-几何平均不等式得$$\begin{aligned}a_{n+1}\prod_{k=1}^n(1+a_k)&\leqslant1\\\prod_{k=1}^n(1+a_k)&\leqslant\frac{1}{a_{n+1}}\\\prod_{k=1}^n(1+a_k)&\leqslant\frac{1}{1-\sum_{k=1}^na_k}\end{aligned}$$显然 $1+a_k>1>a_{n+1}$ , 等号无法取得. 因此$$\prod_{k=1}^n(1+a_k)<\frac{1}{1-\sum_{k=1}^na_k}$$得证.<h1 id="13"><a href="#13" class="headerlink" title="13"></a>13</h1>用书中方法即可证明.# 14{% raw %}分别假设 $a\leqslant b, a>b$ 即可得. 几何意义即是, 在数轴上找到 $a,b$ 的中点, 然后向正半轴大的那个值靠拢.{% endraw %}<h1 id="15"><a href="#15" class="headerlink" title="15"></a>15</h1>{% raw %}先证明两个的情况.假设 $\frac{a_2}{b_2}\geqslant\frac{a_1}{b_1}$ , $b_1=kb_2$ , 那么就有$\frac{a_2}{b_2}\geqslant\frac{a_1}{kb_2}$ , 即 $ka_2\geqslant a_1$ , 因此有 $\frac{a_1+a_2}{b_1+b_2}\leqslant\frac{(1+k)a_2}{(1+k)b_2}=\frac{a_2}{b_2}$ , 同理得 $\frac{a_1+a_2}{b_1+b_2}\geqslant\frac{a_1}{b_1}$ .由于对于两项成立, 那么自然对于 $n$ 项成立.{% endraw %}<h1 id="16"><a href="#16" class="headerlink" title="16"></a>16</h1>{% raw %}题目已经提示了.当 $n=2$ 时显然成立. 假设当 $n=k$ 时成立, 那么有$$(1+x)^k>1+kx$$因此$$(1+x)^{k+1}>(1+kx)(1+x)=1+(k+1)x+kx^2>1+(k+1)x$$因此对于 $n=k+1$ 也成立, 证毕.{% endraw %}<h1 id="17"><a href="#17" class="headerlink" title="17"></a>17</h1>{% raw %}即证$$\begin{aligned}x^m(y^n-x^n)+y^m(x^n-y^n)&\leqslant0\\(x^m-y^m)(y^n-x^n)&\leqslant0\end{aligned}$$显然成立 (异号) .{% endraw %}<hr><h1 id="题外话"><a href="#题外话" class="headerlink" title="题外话"></a>题外话</h1><p>终于搞定累死我了…</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 数学 </category>
+          
+          <category> 数学分析 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 数学 </tag>
+            
+            <tag> 数学分析 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>在网页中嵌入 GGB 最简单的方法</title>
       <link href="scribble/ggb_insert/"/>
       <url>scribble/ggb_insert/</url>
@@ -195,35 +224,6 @@
             <tag> 强化学习 </tag>
             
             <tag> 论文精读 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>数学分析练习题 (一)</title>
-      <link href="math/mathematical_analysis/mathematical_analysis_practice/1/"/>
-      <url>math/mathematical_analysis/mathematical_analysis_practice/1/</url>
-      
-        <content type="html"><![CDATA[<h1 id="一"><a href="#一" class="headerlink" title="一"></a>一</h1><h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>设 $n$ 为正整数, 且 $x\geqslant 0$ , $y\geqslant 0$ . 求证: 当 $n&gt;1$ 时,<br>$$<br>\frac{x^n+y^n}{2}\geqslant\left(\frac{x+y}{2}\right)^n,<br>$$<br>等号当且仅当 $x=y$ 时成立.</p><h2 id="证明"><a href="#证明" class="headerlink" title="证明"></a>证明</h2><p>当 $n=1$ 时, 显然成立.</p><p>假设 $n=k$ 时命题成立, 那么有<br>$$<br>\begin{aligned}<br>\left(\frac{x+y}{2}\right)^{k+1}&amp;=\left(\frac{x+y}{2}\right)^{k}\frac{x+y}{2}\\<br>&amp;\leqslant\left(\frac{x^k+y^k}{2}\right)\frac{x+y}{2}\\<br>&amp;=\frac{x\cdot x^k+x\cdot y^k+y\cdot x^k+y\cdot y^k}{4}<br>\end{aligned}<br>$$<br>又由于<br>$$<br>(y-x)y^k\geqslant(y-x)x^k<br>$$<br>对任意 $x,y$ 皆成立, 因此<br>$$<br>\begin{aligned}<br>(y-x)y^k&amp;\geqslant(y-x)x^k\\<br>x\cdot x^k+y\cdot y^k&amp;\geqslant x\cdot y^k+y\cdot x^k\\<br>\frac{x\cdot x^k+y\cdot y^n}{2}&amp;\geqslant\frac{x\cdot x^k+x\cdot y^k+y\cdot x^k+y\cdot y^k}{4}\\<br>\frac{x^{k+1}+y^{k+1}}{2}&amp;\geqslant\left(\frac{x+y}{2}\right)^{k+1}<br>\end{aligned}<br>$$<br>​                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               </p><p>&nbsp;$\blacksquare$</p><h1 id="二"><a href="#二" class="headerlink" title="二"></a>二</h1><h2 id="问题-1"><a href="#问题-1" class="headerlink" title="问题"></a>问题</h2><p>设数列 ${x_n}$ 满足 $\lim_{n\to\infty} (x_n-x_{n-2})=0$ , 求证:<br>$$<br>\lim_{n\to\infty} \frac{x_n - x_{n-1}}{n} =0<br>$$</p><h2 id="证明-1"><a href="#证明-1" class="headerlink" title="证明"></a>证明</h2><p>若能证明 $\lim_{n\to \infty}x_n/n = 0$ , 则有<br>$$<br>\begin{aligned}<br>\lim_{n\to\infty} \frac{x_n-x_{n-1}}{n}&amp;=\lim_{n\to\infty}\frac{x_n}{n} -\lim_{n\to\infty}\frac{x_{n-1}}{n}\\<br>&amp;=\lim_{n\to\infty}\frac{x_n}{n} -\frac{n-1}{n}\lim_{n\to\infty}\frac{x_{n-1}}{n-1}\\<br>&amp;=0<br>\end{aligned}<br>$$<br>由 $\lim_{n\to\infty} (x_n-x_{n-2})=0$ 得: $\forall\epsilon&gt;0, \exist N’, n&gt;N\Rightarrow|x_{2n}-x_{2n-2}|&lt;\epsilon.$ 运用绝对值不等式有<br>$$<br>\left|x_{2n}-A\right|&lt;(n-N’)\epsilon<br>$$<br>其中 $A=\sum_{i=1}^{N’}x_{2i}$ 是个定值.<br>$$<br>\therefore\left|\frac{x_{2n}}{2n}-\frac{A}{2n}\right|&lt;\frac{\epsilon}{2}-\frac{N’\epsilon}{2n}<br>$$<br>让 $n\to\infty$ 可得<br>$$<br>\begin{aligned}<br>\left|\frac{x_{2n}}{2n}-0\right|&amp;\leqslant\frac{\epsilon}{2}\\<br>\left|\frac{x_{2n}}{2n}-0\right|&amp;&lt;\epsilon<br>\end{aligned}<br>$$<br>因此有 $\lim_{n\to \infty}x_{2n}/(2n) = 0$ . 同理 得 $\lim_{n\to \infty}x_{2n-1}/(2n-1) = 0$ .</p><p>因此 $\lim_{n\to \infty}x_n/n = 0$ , 因此<br>$$<br>\lim_{n\to\infty} \frac{x_n - x_{n-1}}{n} =0<br>$$<br>&nbsp;$\blacksquare$</p><h1 id="三"><a href="#三" class="headerlink" title="三"></a>三</h1><h2 id="问题-2"><a href="#问题-2" class="headerlink" title="问题"></a>问题</h2><p>(Toeplitz (特普利兹, 1881~1940) 定理) 设 $n,k\in N^*$ 时, $t_{nk}\geqslant 0$ , 且 $\sum_{k=1}^n t_{nk}=1,\lim_{n\to\infty}t_{nk}=0$ . 如果 $\lim_{n\to\infty}a_n = a$ , 令<br>$$<br>x_n=\sum_{k=1}^nt_{nk}a_k,<br>$$<br>试证:<br>$$<br>\lim_{n\to\infty}x_n=a<br>$$</p><h2 id="证明-2"><a href="#证明-2" class="headerlink" title="证明"></a>证明</h2><p>&nbsp;$\because \lim_{n\to\infty}a_n=a\ \therefore\forall\epsilon_1’&gt;0,\exist N’,$ 使 $n&gt;N’$ 时 $|a_n-a|&lt;\epsilon_1’$.</p><p>取 $N=\max(N_1,N_2,\dots,N_{N’})$,</p><p>&nbsp;$\because\lim_{n\to\infty}t_{nk}=0\ \therefore\forall\epsilon_2’&gt;0,\exist N_1,N_2,\dots,N_{N’},$ 使 $n&gt;N$ 时有 $|t_{nk}|&lt;\epsilon_2’\ (k\in{1,2,3,\dots,N’})$</p><p>&nbsp;$\because x_n=\sum_{k=1}^nt_{nka_k}=\sum_{k=1}^{N’}t_{nk}a_k+\sum_{k=N’}^nt_{nk}a_k,$ 且由上有<br>$$<br>\begin{aligned}<br>\left|\sum_{k=1}^{N’}t_{nk}a_k\right|&lt;\epsilon_2’\sum_{k=1}^{N’}a_k,\\<br>\left|\sum_{k=N’}^{n}t_{nk}a_k-a\sum_{k=N’}^nt_{nk}\right|&lt;\epsilon_1’\sum_{k=N’}^nt_{nk}<br>\end{aligned}\\<br>$$</p><p>$$<br>\begin{aligned}<br>&amp;\because \sum_{k=1}^{N’} t_{nk}+\sum_{k=N’}^n t_{nk}=1\\<br>&amp;\therefore\left|\sum_{k=N’}^nt_{nk}-1\right|&lt;N’\epsilon_2’\\<br>&amp;\therefore\left|x_n-a-N’\epsilon_1’\epsilon_2’\right|&lt;\epsilon_2’\sum_{k=1}^{N’}a_k+\epsilon_1’+aN’\epsilon_2’\\<br>\end{aligned}<br>$$</p><p>&nbsp;$\therefore \forall\epsilon&gt;0,;令;\epsilon_2’\to0,;有\left|x_n,-a\right|\leqslant\epsilon_1’,$ 此时只需取 $ \epsilon_1’&lt;\epsilon$ 即有 $\left|x_n,-a\right|\leqslant\epsilon.$</p><p>&nbsp;$\therefore \lim_{x\to\infty}x_n=a$</p><p>&nbsp;$\blacksquare$</p><h1 id="四"><a href="#四" class="headerlink" title="四"></a>四</h1><h2 id="问题-3"><a href="#问题-3" class="headerlink" title="问题"></a>问题</h2><p> 设 ${a_n}$ 是一个正数数列. 如果<br>$$<br>\lim_{n\to\infty}\frac{a_{n+1}+a_{n+2}}{a_n}=+\infty,<br>$$<br>那么 ${a_n}$ 必为无界数列.</p><h2 id="证明-3"><a href="#证明-3" class="headerlink" title="证明"></a>证明</h2><p>易知<br>$$<br>\lim_{n\to\infty}\frac{a_n}{a_{n+1}+a_{n+2}}=0<br>$$</p><p>&nbsp;$\therefore$ 取 $\epsilon=\frac{1}{4},$ 存在 $N,$ 使 $n&gt;N$ 时, 有​ $ a_n&lt;\frac{1}{4}(a_{n+1}+a_{n+2}).$</p><p>易知 $a_{n+1}$ 与 $a_{n+2}$ 中至少有一个大于 $2a_n,$ 否则有 $ 4a_n&lt;a_{n+1}+a_{n+2}&lt;4a_n$ 显然矛盾.</p><p>令 $N_0$ 等于 $N+1.$ 取 $N_1$ 满足 $a_{N_1}&gt;2a_{N_0},N_1\in{N_0+1,N_0+2}.$ 对 $N_1$ 作同样讨论, 有<br>$$<br>\begin{aligned}2a_{N_0}&lt;a_{N_1},2a_{N_1}&lt;a_{N_2},2a_{N_2}&lt;a_{N_3},\dots\\N_0&lt;N_1&lt;N_2&lt;\cdots,\end{aligned}<br>$$<br>因此 ${a_n}$ 存在一子列 ${a_{N_n}}, (n-0,1,2,\dots),$ 且 $a_{N_n}&gt;2^na_{N_0}$<br>&nbsp;$\therefore{a_{N_n}}$ 是无界的.<br>&nbsp;$\therefore{a_n}$ 是无界的.</p><p>&nbsp;$\blacksquare$</p>]]></content>
-      
-      
-      <categories>
-          
-          <category> 数学 </category>
-          
-          <category> 分析 </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> 数学 </tag>
-            
-            <tag> 分析 </tag>
             
         </tags>
       
@@ -525,11 +525,11 @@
             
             <tag> 强化学习 </tag>
             
-            <tag> Spinning Up </tag>
-            
             <tag> 代码实例 </tag>
             
             <tag> Pytorch </tag>
+            
+            <tag> Spinning Up </tag>
             
         </tags>
       

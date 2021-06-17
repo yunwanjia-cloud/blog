@@ -70,6 +70,39 @@
     
     
     <entry>
+      <title>(史济怀) 数学分析教程上册第 3 版-练习题 1.3</title>
+      <link href="math/mathematical_analysis/mathematical_analysis_practice/1/1-3/"/>
+      <url>math/mathematical_analysis/mathematical_analysis_practice/1/1-3/</url>
+      
+        <content type="html"><![CDATA[<h1 id="1"><a href="#1" class="headerlink" title="1"></a>1</h1><h2 id="1-1"><a href="#1-1" class="headerlink" title="(1)"></a>(1)</h2><p>不能.</p><h2 id="2"><a href="#2" class="headerlink" title="(2)"></a>(2)</h2><p>发散.</p><h2 id="3"><a href="#3" class="headerlink" title="(3)"></a>(3)</h2><p>发散.</p><h2 id="4"><a href="#4" class="headerlink" title="(4)"></a>(4)</h2><p>既可以收敛也可以发散.</p><h2 id="5"><a href="#5" class="headerlink" title="(5)"></a>(5)</h2><p>${a_n},{b_n},{c_n}$ 都不一定收敛.</p><h1 id="2-1"><a href="#2-1" class="headerlink" title="2"></a>2</h1><p>对于 $\epsilon’&gt;0$, 存在 $N\in\mathbb{Z}^*$ , 使得当 $n&gt;N$ 时, 有 $|a_n-a|&lt;\epsilon’$ , 因此有 $|a_{n+1}-a_{n}|&lt;|a_{n+1}-a|+|a-a_{n}|&lt;2\epsilon’$, 因此只需 $\epsilon’$ 取得足够小, 就有</p>$$\frac{a_{n+1}-a_n}{a_n}<\frac{2\epsilon'}{a+\epsilon'}<\epsilon$$<p>证毕.</p><h1 id="3-1"><a href="#3-1" class="headerlink" title="3"></a>3</h1><h2 id="1-2"><a href="#1-2" class="headerlink" title="(1)"></a>(1)</h2>$$\frac{3^n+(-2)^n}{3^{n+1}+(-2)^{n+1}}=\frac{1+\left(\frac{-2}{3}\right)^n}{3+\left(\frac{-2}{3}\right)^n\cdot(-2)}$$<p>利用极限的四则运算可得出极限为 $\frac{1}{3}$.</p><h2 id="3-2"><a href="#3-2" class="headerlink" title="(3)"></a>(3)</h2><p>将 $\sqrt{n+1}-\sqrt{n}$ 转换为 $\frac{1}{\sqrt{n+1}+\sqrt n}$ 即可.</p><h2 id="4-1"><a href="#4-1" class="headerlink" title="(4)"></a>(4)</h2>$$1<(\sqrt{n^2+n}-n)^{1/n}<\sqrt{n}^{1/n}<n^{1/n}$$<p>极限为 1.</p><h2 id="5-1"><a href="#5-1" class="headerlink" title="(5)"></a>(5)</h2>$$1-\frac{1}{n}<\left(1-\frac{1}{n}\right)^{1/n}<1$$<p>于是极限为 1.</p><h2 id="7"><a href="#7" class="headerlink" title="(7)"></a>(7)</h2>$$\arctan n<(\arctan n)^{1/n}<1$$<p>极限为 1.</p><h1 id="4-2"><a href="#4-2" class="headerlink" title="4"></a>4</h1><h2 id="3-3"><a href="#3-3" class="headerlink" title="(3)"></a>(3)</h2><p>利用 $a^2-b^2=(a+b)(a-b)$ .</p><h2 id="4-3"><a href="#4-3" class="headerlink" title="(4)"></a>(4)</h2><p>注意到</p>$$\frac{2+3}{1+2+3+4}=\frac{2}{4}, \frac{2+3+4}{1+2+3+4+5}=\frac{3}{5},\dots$$因此$$\begin{aligned}\frac{2}{1+2}\frac{2+3}{1+2+3}\frac{2+3+4}{1+2+3+4}\dots&=\frac{2}{18}\frac{2}{4}\frac{3}{5}\frac{4}{7}\dots \frac{(n+2)(n-1)}{2}\\&=\frac{1}{9}\frac{6}{n(n-1)}\frac{(n+2)(n-1)}{2}\\&=\frac{1}{3}\frac{n+2}{n-1}\end{aligned}$$<p>因此极限为 $\frac{1}{3}$ .</p><h2 id="6"><a href="#6" class="headerlink" title="(6)"></a>(6)</h2><p>,$(1-x)(1+x)=(1-x^2),(1-x^2)(1+x^2)=(1-x^4)\dots$ 直接滚雪球. </p><h1 id="5-2"><a href="#5-2" class="headerlink" title="5"></a>5</h1><h2 id="1-3"><a href="#1-3" class="headerlink" title="(1)"></a>(1)</h2><p>令 $b=ka,(k\geqslant 1)$ , 那么就有</p>$$((1+k^n)a^n)^{1/n}=\sqrt[n]{1+k^n}a$$<p>由于 $k&lt;\sqrt[n]{1+k^n}&lt;\sqrt[n]{2k^n}=\sqrt[n]2k$ , 因此极限为 $ka=b$ .</p><h2 id="2-2"><a href="#2-2" class="headerlink" title="(2)"></a>(2)</h2><p>类似 (1) , 极限为 $\max(a_1,a_2,\dots,a_m)$ .</p><h1 id="6-1"><a href="#6-1" class="headerlink" title="6"></a>6</h1>$$\frac{na_n-1}{n}\leqslant\frac{[na_n]}{n}\leqslant\frac{na_n}{n}$$<p>易证.</p><h1 id="7-1"><a href="#7-1" class="headerlink" title="7"></a>7</h1><p>存在 $N$ , 使得 $n&gt;N$ 时, 有 $|a_n-a|&lt;\epsilon$ . 因此就有</p>$$(a_1a_2\dots a_n)^{1/n}<(a_1a_2\dots a_{N}(a+\epsilon)^{n-N})^{1/n}=(a_1a_2\dots a_N)^{1/n}(a+\epsilon)^{1-\frac{N}{n}}$$<p>只需 $n$ 取足够大 , $\epsilon$ 取足够小即可小于任意给定正数.</p><h1 id="8"><a href="#8" class="headerlink" title="8"></a>8</h1><p>比较容易的就不写了.</p><h2 id="2-3"><a href="#2-3" class="headerlink" title="(2)"></a>(2)</h2><p>当 $a&gt;1$ 时, 构造数列 ${a_n}={a,\frac{a+1}{a}, \frac{a+2}{a+1},\dots}$ , 显然 $\lim_{n\to\infty}a_n=1$ . 于是</p>$$1<a^{1/n}<(a_1a_2\dots a_n)^{1/n}$$<p>又夹逼定则知极限为 1.</p><p>当 $a&lt;1$ 时, 构造数列 ${a_n}={a,\frac{a-a/2}{a}, \frac{a-a/4}{a-a/2},\dots}, (a_n=\frac{a-a/2^{n-1}}{a-a/2^{n-2}}, n&gt;1)$ , 同样流程 (夹逼) .</p><h2 id="3-4"><a href="#3-4" class="headerlink" title="(3)"></a>(3)</h2><p>构造数列 ${a_n}={1,\frac{2}{1}, \frac{3}{2},\dots}$ , 显然 $\lim_{n\to\infty}a_n=1$ . 于是</p>$$n^{1/n}=(a_1a_2\dots a_n)^{1/n}$$<p>易证.</p><h1 id="9"><a href="#9" class="headerlink" title="9"></a>9</h1><p>运用例 4 可证.</p><h1 id="10"><a href="#10" class="headerlink" title="10"></a>10</h1><p>极限的四则运算.</p><h1 id="11"><a href="#11" class="headerlink" title="11"></a>11</h1><p>整理并利用例 4 可证.</p><h1 id="12"><a href="#12" class="headerlink" title="12"></a>12</h1><p>这题想了很久利用例 4 来证, 结果是用夹逼… (说实话我觉得好多夹逼都有点奇技淫巧)</p>$$\frac{\frac{k}{n^2}}{2\sqrt{1+\frac{k}{n^2}}}<\sqrt{1+\frac{k}{n^2}}-1=\frac{\frac{k}{n^2}}{\sqrt{1+\frac{k}{n^2}}+1}<\frac{k}{2n^2}$$易得 $\lim_{n\to\infty}\sum_{k=1}^n\frac{k}{2n^2}=\frac{1}{4}$ .而$$\frac{\frac{k}{n^2}}{2\sqrt{1+\frac{k}{n^2}}}>\frac{\frac{k}{n^2}}{2\sqrt{1+\frac{1}{n}}}$$因此$$\lim_{n\to\infty}\sum_{k=1}^n\frac{\frac{k}{n^2}}{2\sqrt{1+\frac{k}{n^2}}}<\lim_{n\to\infty}\sum_{k=1}^n\frac{\frac{k}{n^2}}{2\sqrt{1+\frac{1}{n}}}=\lim_{n\to\infty}\frac{\sqrt{1+\frac{1}{n}}}{4}=\frac{1}{4}$$<p>因此极限为 $1/4$ .</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 数学 </category>
+          
+          <category> 数学分析 </category>
+          
+          <category> 数学分析教程 (第一章) </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 数学 </tag>
+            
+            <tag> 习题 </tag>
+            
+            <tag> 数学分析 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>一个问题</title>
       <link href="math/other/a_problem/"/>
       <url>math/other/a_problem/</url>
@@ -560,13 +593,13 @@
             
             <tag> Python </tag>
             
-            <tag> Pytorch </tag>
-            
             <tag> 强化学习 </tag>
+            
+            <tag> Spinning Up </tag>
             
             <tag> 代码实例 </tag>
             
-            <tag> Spinning Up </tag>
+            <tag> Pytorch </tag>
             
         </tags>
       
@@ -632,11 +665,11 @@
             
             <tag> Python </tag>
             
-            <tag> Pytorch </tag>
-            
             <tag> 强化学习 </tag>
             
             <tag> 代码实例 </tag>
+            
+            <tag> Pytorch </tag>
             
         </tags>
       
@@ -696,9 +729,9 @@
             
             <tag> 机器学习 </tag>
             
-            <tag> 框架 </tag>
-            
             <tag> Pytorch </tag>
+            
+            <tag> 框架 </tag>
             
         </tags>
       

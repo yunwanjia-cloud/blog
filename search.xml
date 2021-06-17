@@ -4,6 +4,39 @@
   
     
     <entry>
+      <title>《强化学习》(第 2 版) 习题</title>
+      <link href="ML/RL/reinforcement_learning/1/"/>
+      <url>ML/RL/reinforcement_learning/1/</url>
+      
+        <content type="html"><![CDATA[<h1 id="1-1-左右互搏"><a href="#1-1-左右互搏" class="headerlink" title="1.1 左右互搏"></a>1.1 左右互搏</h1><h2 id="1"><a href="#1" class="headerlink" title="(1)"></a>(1)</h2><p>一开始应该收敛得很慢.</p><h2 id="2"><a href="#2" class="headerlink" title="(2)"></a>(2)</h2><p>应该不会, 我觉得它应该会收敛到必定不输的那个策略.</p><h1 id="1-2-对称性"><a href="#1-2-对称性" class="headerlink" title="1.2 对称性"></a>1.2 对称性</h1><h2 id="1-1"><a href="#1-1" class="headerlink" title="(1)"></a>(1)</h2><p>可以在更新价值表格时同时更新其对称位置.</p><h2 id="2-1"><a href="#2-1" class="headerlink" title="(2)"></a>(2)</h2><p>应该会更快收敛.</p><h2 id="3"><a href="#3" class="headerlink" title="(3)"></a>(3)</h2><p>不应该. 因为如果对手有偏好, 那么我们对对称的位置应该有不同的考虑.</p><h2 id="4"><a href="#4" class="headerlink" title="(4)"></a>(4)</h2><p>不一定, 这与对手的策略有关.</p><h1 id="1-3-贪心策略"><a href="#1-3-贪心策略" class="headerlink" title="1.3 贪心策略"></a>1.3 贪心策略</h1><h2 id="1-2"><a href="#1-2" class="headerlink" title="(1)"></a>(1)</h2><p>如果是一开始就贪心, 当然是更差 (根本没有训练) . 如果已经收敛, 就会玩得更好.</p><h2 id="2-2"><a href="#2-2" class="headerlink" title="(2)"></a>(2)</h2><p>贪心难以收敛到最优策略.</p><h1 id="1-4-从试探中学习"><a href="#1-4-从试探中学习" class="headerlink" title="1.4 从试探中学习"></a>1.4 从试探中学习</h1><p>我认为从试探中学习的方式应该… 不太正确. 应该来说无论是学习还是胜率考虑都是不从试探中学习的更优.</p><h1 id="1-5-其他提升方法"><a href="#1-5-其他提升方法" class="headerlink" title="1.5 其他提升方法"></a>1.5 其他提升方法</h1><h2 id="1-3"><a href="#1-3" class="headerlink" title="(1)"></a>(1)</h2><p>不能.</p><h2 id="2-3"><a href="#2-3" class="headerlink" title="(2)"></a>(2)</h2><p>直接几个 <code>if</code> 判断就好了.</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 机器学习 </category>
+          
+          <category> 强化学习 </category>
+          
+          <category> 《强化学习》 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 机器学习 </tag>
+            
+            <tag> 强化学习 </tag>
+            
+            <tag> 习题 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>(史济怀) 数学分析教程上册第 3 版-练习题 1.2</title>
       <link href="math/mathematical_analysis/mathematical_analysis_practice/1/1-2/"/>
       <url>math/mathematical_analysis/mathematical_analysis_practice/1/1-2/</url>
@@ -374,9 +407,9 @@
             
             <tag> 机器学习 </tag>
             
-            <tag> 英语 </tag>
-            
             <tag> 强化学习 </tag>
+            
+            <tag> 英语 </tag>
             
             <tag> 论文 </tag>
             
@@ -595,11 +628,11 @@
             
             <tag> 强化学习 </tag>
             
-            <tag> Spinning Up </tag>
-            
             <tag> 代码实例 </tag>
             
             <tag> Pytorch </tag>
+            
+            <tag> Spinning Up </tag>
             
         </tags>
       
@@ -1610,9 +1643,9 @@
             
             <tag> 机器学习 </tag>
             
-            <tag> 西瓜书 </tag>
-            
             <tag> 习题 </tag>
+            
+            <tag> 西瓜书 </tag>
             
         </tags>
       
@@ -1759,9 +1792,9 @@
             
             <tag> 机器学习 </tag>
             
-            <tag> 西瓜书 </tag>
-            
             <tag> 习题 </tag>
+            
+            <tag> 西瓜书 </tag>
             
         </tags>
       
@@ -1794,9 +1827,9 @@
             
             <tag> 机器学习 </tag>
             
-            <tag> 西瓜书 </tag>
-            
             <tag> 习题 </tag>
+            
+            <tag> 西瓜书 </tag>
             
         </tags>
       
@@ -1829,9 +1862,9 @@
             
             <tag> 机器学习 </tag>
             
-            <tag> 西瓜书 </tag>
-            
             <tag> 习题 </tag>
+            
+            <tag> 西瓜书 </tag>
             
         </tags>
       
@@ -1864,9 +1897,9 @@
             
             <tag> 机器学习 </tag>
             
-            <tag> 西瓜书 </tag>
-            
             <tag> 习题 </tag>
+            
+            <tag> 西瓜书 </tag>
             
         </tags>
       
@@ -1899,9 +1932,9 @@
             
             <tag> 机器学习 </tag>
             
-            <tag> 西瓜书 </tag>
-            
             <tag> 习题 </tag>
+            
+            <tag> 西瓜书 </tag>
             
         </tags>
       
@@ -1932,9 +1965,9 @@
             
             <tag> 机器学习 </tag>
             
-            <tag> 西瓜书 </tag>
-            
             <tag> 习题 </tag>
+            
+            <tag> 西瓜书 </tag>
             
         </tags>
       

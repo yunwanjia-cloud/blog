@@ -8,7 +8,7 @@
       <link href="math/mathematical_analysis/mathematical_analysis_practice/1/1-5/"/>
       <url>math/mathematical_analysis/mathematical_analysis_practice/1/1-5/</url>
       
-        <content type="html"><![CDATA[<h1 id="1"><a href="#1" class="headerlink" title="1"></a>1</h1><h2 id="1-1"><a href="#1-1" class="headerlink" title="(1)"></a>(1)</h2><p>当 $n&gt;10$ 时, 数列单调递减, 而 $x_n&gt;0$ , 因此极限存在.</p><h2 id="2"><a href="#2" class="headerlink" title="(2)"></a>(2)</h2><p>数列单调递减, $x_n&gt;0$ , 极限存在.</p><h1 id="2-1"><a href="#2-1" class="headerlink" title="2"></a>2</h1><p>显然该数列单调递增, 但有 $x_n&lt;2$ (由数学归纳法得) , 因此极限存在.</p><h1 id="3"><a href="#3" class="headerlink" title="3"></a>3</h1><p>设数列 ${a_n}$ 是单调递增的, 若子列 ${a_{k_n}}$ 收敛, 说明 $a_{k_n}&lt;A$ 即有界, 那么任取 $1\leqslant t&lt;k_n$ , 都有 $a_1\leqslant a_t&lt;a_{k_n}&lt;A$ , 由于 $k_n$ 可以任取, 也就是说对于任意的 $t\in\mathbb{Z}^*$ 都有该结论, 即数列收敛.</p><p>对递减数列同理.</p><h1 id="4"><a href="#4" class="headerlink" title="4"></a>4</h1><p>已经有提示了.</p><p>易得 $a_{n+1}&gt;a_n$ , 即 ${a_n}$ 是单调数列, 由题意知有界, 因此有<br>$$<br>(1-\lim_{n\to\infty}a_n)\lim_{n\to\infty}a_n\geqslant\frac{1}{4}, (1-\lim_{n\to\infty}a_n)\lim_{n\to\infty}a_n\leqslant\frac{1}{4}<br>$$<br>那么只有<br>$$<br>\lim_{n\to\infty}a_n=\frac{1}{2}<br>$$</p><h1 id="5"><a href="#5" class="headerlink" title="5"></a>5</h1><p>$$<br>\begin{aligned}<br>n^{n-1}&amp;&gt;(n-1)!\<br>(n!)^{n-1}&amp;&gt;(n-1)!^n\<br>(n!)^{1/n}&amp;&gt;(n-1)!^{1/(n-1)}<br>\end{aligned}<br>$$</p><h1 id="6"><a href="#6" class="headerlink" title="6"></a>6</h1><p>易得 $x_n-x_1&lt; \sum_{n=1}^\infty\frac{1}{n^2}$ , 而右边极限是存在的, 那么 ${x_n}$ 也就单调且有界, 即极限存在.</p>]]></content>
+        <content type="html"><![CDATA[<h1 id="1"><a href="#1" class="headerlink" title="1"></a>1</h1><h2 id="1-1"><a href="#1-1" class="headerlink" title="(1)"></a>(1)</h2><p>当 $n&gt;10$ 时, 数列单调递减, 而 $x_n&gt;0$ , 因此极限存在.</p><h2 id="2"><a href="#2" class="headerlink" title="(2)"></a>(2)</h2><p>数列单调递减, $x_n&gt;0$ , 极限存在.</p><h1 id="2-1"><a href="#2-1" class="headerlink" title="2"></a>2</h1><p>显然该数列单调递增, 但有 $x_n&lt;2$ (由数学归纳法得) , 因此极限存在.</p><h1 id="3"><a href="#3" class="headerlink" title="3"></a>3</h1><p>设数列 ${a_n}$ 是单调递增的, 若子列 ${a_{k_n}}$ 收敛, 说明 $a_{k_n}&lt;A$ 即有界, 那么任取 $1\leqslant t&lt;k_n$ , 都有 $a_1\leqslant a_t&lt;a_{k_n}&lt;A$ , 由于 $k_n$ 可以任取, 也就是说对于任意的 $t\in\mathbb{Z}^*$ 都有该结论, 即数列收敛.</p><p>对递减数列同理.</p><h1 id="4"><a href="#4" class="headerlink" title="4"></a>4</h1><p>已经有提示了.</p><p>易得 $a_{n+1}&gt;a_n$ , 即 ${a_n}$ 是单调数列, 由题意知有界, 因此有<br>$$<br>(1-\lim_{n\to\infty}a_n)\lim_{n\to\infty}a_n\geqslant\frac{1}{4}, (1-\lim_{n\to\infty}a_n)\lim_{n\to\infty}a_n\leqslant\frac{1}{4}<br>$$<br>那么只有<br>$$<br>\lim_{n\to\infty}a_n=\frac{1}{2}<br>$$</p><h1 id="5"><a href="#5" class="headerlink" title="5"></a>5</h1>$$\begin{aligned}n^{n-1}&>(n-1)!\\(n!)^{n-1}&>(n-1)!^n\\(n!)^{1/n}&>(n-1)!^{1/(n-1)}\end{aligned}$$<h1 id="6"><a href="#6" class="headerlink" title="6"></a>6</h1><p>易得 $x_n-x_1&lt; \sum_{n=1}^\infty\frac{1}{n^2}$ , 而右边极限是存在的, 那么 ${x_n}$ 也就单调且有界, 即极限存在.</p>]]></content>
       
       
       <categories>
@@ -725,11 +725,11 @@
             
             <tag> Python </tag>
             
-            <tag> Pytorch </tag>
-            
             <tag> 强化学习 </tag>
             
             <tag> 代码实例 </tag>
+            
+            <tag> Pytorch </tag>
             
             <tag> Spinning Up </tag>
             
@@ -797,11 +797,11 @@
             
             <tag> Python </tag>
             
-            <tag> Pytorch </tag>
-            
             <tag> 强化学习 </tag>
             
             <tag> 代码实例 </tag>
+            
+            <tag> Pytorch </tag>
             
         </tags>
       
@@ -861,9 +861,9 @@
             
             <tag> 机器学习 </tag>
             
-            <tag> 框架 </tag>
-            
             <tag> Pytorch </tag>
+            
+            <tag> 框架 </tag>
             
         </tags>
       

@@ -4,6 +4,39 @@
   
     
     <entry>
+      <title>(史济怀) 数学分析教程上册第 3 版-练习题 1.7</title>
+      <link href="math/mathematical_analysis/mathematical_analysis_practice/1/1-7/"/>
+      <url>math/mathematical_analysis/mathematical_analysis_practice/1/1-7/</url>
+      
+        <content type="html"><![CDATA[<h1 id="1"><a href="#1" class="headerlink" title="1"></a>1</h1><p>是. 因为</p>$$|a_m-a_n|\leqslant|a_m-a_N|+|a_N-a_n|<2\epsilon$$<h1 id="2"><a href="#2" class="headerlink" title="2"></a>2</h1><h2 id="1-1"><a href="#1-1" class="headerlink" title="(1)"></a>(1)</h2><p>不是, 简单举个反例, 调和级数.</p><h2 id="2-1"><a href="#2-1" class="headerlink" title="(2)"></a>(2)</h2><p>那就是了, 对应于之前 1.5 的例二.</p>很显然有 $|a_{n+1}-a_n|<\frac{1}{(n+1)^2}$ , 那么 $|a_m-a_n|<\sum_{i=n+1}^m 1/i^2,(m>n)$ , 记$$\lim_{n\to\infty}\sum_{i=1}^n\frac{1}{i^2}=L$$那么对于任意 $\epsilon>0$ , 存在 $N\in\mathbb{Z}^*$ , 使得当 $n>N$ 时, 有$$L-\sum_{i=1}^n\frac{1}{i^2}<\epsilon,\left(L>\sum_{i=1}^n\frac{1}{i^2}\right)$$那么对于这样的 $\epsilon$ , 当 $m>n>N$ 时, 就有$$|a_m-a_n|<\sum_{i=n+1}^m \frac{1}{i^2}<L-\sum_{i=1}^n\frac{1}{i^2}<\epsilon$$<p>那么该数列显然是基本列.</p><h1 id="3"><a href="#3" class="headerlink" title="3"></a>3</h1><h2 id="1-2"><a href="#1-2" class="headerlink" title="(1)"></a>(1)</h2><p>根据第 2 题 (2) 显然成立 (它是基本列) .</p><h2 id="2-2"><a href="#2-2" class="headerlink" title="(2)"></a>(2)</h2><p>记 $|a_n|&lt;M$ .<br>$$<br>|b_m-b_n|=\left|\sum_{i=n+1}^ma_iq^i\right|&lt;M\sum_{i=n+1}^m|q^i|&lt;M\frac{q^{n+1}-q^{m+1}}{1-q}=\frac{Mq^{n+1}(1-q^{m-n})}{1-q}&lt;\frac{Mq^{n+1}}{1-q}<br>$$<br>由于</p>$$\lim_{n\to\infty}\frac{Mq^{n+1}}{1-q}=0$$那么对于任意 $\epsilon>0$ , 存在 $N\in\mathbb{Z}^*$ , 使得当 $n>N$ 时, 有$$|b_m-b_n|<\frac{Mq^{n+1}}{1-q}<\epsilon$$<p>因此 ${a_n}$ 是基本列, 自然收敛.</p><h2 id="3-1"><a href="#3-1" class="headerlink" title="(3)"></a>(3)</h2><p>由 (2) 得成立.</p><h2 id="4"><a href="#4" class="headerlink" title="(4)"></a>(4)</h2><p>由 (3) 得成立.</p><h1 id="4-1"><a href="#4-1" class="headerlink" title="4"></a>4</h1><p>用反证法. 假设不收敛, 那么就有: 存在 $\epsilon&gt;0$ , 使得任取 $N\in\mathbb{Z}^*$ , 都存在 $m&gt;n&gt;N$ 使得 $|a_m-a_n|&gt;\epsilon$ . 取</p><p>$N_1&lt;n_1&lt;m_1&lt;N_2&lt;n_2&lt;m_2\cdots$ , 设</p>$$b_n=|a_2-a_1|+|a_3-a_2|+\dots+|a_n-a_{n-1}|$$那么就有$$b_k>\sum_{i=1}^k\sum_{j=n_i}^{m_i-1}|a_{j+1}-a_j|>\sum_{i=1}^k|a_{m_i}-a_{n_i}|>k\epsilon$$左右同时取极限得$$\lim_{k\to\infty}b_k=+\infty$$<p>与题设矛盾.</p><h1 id="5"><a href="#5" class="headerlink" title="5"></a>5</h1><p>存在 $\epsilon&gt;0$ , 使得对任意的 $N\in\mathbb{Z}^*$ , 都存在 $m&gt;n&gt;N$ 使得 $|a_m-a_n|&gt;\epsilon$ .</p><h1 id="6"><a href="#6" class="headerlink" title="6"></a>6</h1>即 $\{a_n\}$ 不是基本列, 那么就存在 $\epsilon>0$ , 使得对任意的 $N\in\mathbb{Z}^*$ , 都存在 $m>n>N$ 使得 $|a_m-a_n|>\epsilon$ . 像第 4 题一样, 取 $N_1<n_1<m_1<N_2<n_2<m_2\cdots$ , 然后取两个 $\{a_n\}$ 子列 $\{a_{n_k}\}$ 与 $\{a_{m_k}\}$ . 由本节定理 1.7.1 得我们可从子列 $\{a_{n_k}\}$ 与 $\{a_{m_k}\}$ 中分别取出两个收敛的子列 , 记为 $\{b_n\},\{c_n\}$ . (嗯...就是子列的子列...~~无限套娃~~) 这两个子列必然收敛于不同的值, 这是因为$$\lim_{n\to\infty}b_n-\lim_{n\to\infty}c_n=\lim_{n\to\infty}(b_n-c_n)>\epsilon$$]]></content>
+      
+      
+      <categories>
+          
+          <category> 数学 </category>
+          
+          <category> 数学分析 </category>
+          
+          <category> 数学分析教程 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 数学 </tag>
+            
+            <tag> 习题 </tag>
+            
+            <tag> 数学分析 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>《强化学习》(第 2 版) 习题 3</title>
       <link href="ML/RL/reinforcement_learning/3/"/>
       <url>ML/RL/reinforcement_learning/3/</url>
@@ -572,9 +605,9 @@
             
             <tag> 机器学习 </tag>
             
-            <tag> 强化学习 </tag>
-            
             <tag> 英语 </tag>
+            
+            <tag> 强化学习 </tag>
             
             <tag> 论文 </tag>
             
@@ -1349,15 +1382,15 @@
       
         <tags>
             
+            <tag> 问题 </tag>
+            
             <tag> Hexo </tag>
             
             <tag> 搭建站点 </tag>
             
-            <tag> 教程 </tag>
-            
-            <tag> 问题 </tag>
-            
             <tag> Valine </tag>
+            
+            <tag> 教程 </tag>
             
         </tags>
       
@@ -1382,11 +1415,11 @@
       
         <tags>
             
+            <tag> 问题 </tag>
+            
             <tag> Hexo </tag>
             
             <tag> 搭建站点 </tag>
-            
-            <tag> 问题 </tag>
             
         </tags>
       
@@ -1531,11 +1564,11 @@
       
         <tags>
             
+            <tag> 问题 </tag>
+            
             <tag> Hexo </tag>
             
             <tag> 搭建站点 </tag>
-            
-            <tag> 问题 </tag>
             
             <tag> Valine </tag>
             
@@ -1618,11 +1651,11 @@
       
         <tags>
             
+            <tag> 问题 </tag>
+            
             <tag> Hexo </tag>
             
             <tag> 搭建站点 </tag>
-            
-            <tag> 问题 </tag>
             
         </tags>
       
@@ -1771,11 +1804,11 @@
       
         <tags>
             
+            <tag> 问题 </tag>
+            
             <tag> Hexo </tag>
             
             <tag> 搭建站点 </tag>
-            
-            <tag> 问题 </tag>
             
             <tag> Valine </tag>
             

@@ -1,0 +1,264 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>《强化学习》(第 2 版) 习题 4 | 云玩家</title><meta name="keywords" content="强化学习,机器学习,习题"><meta name="author" content="云玩家"><meta name="copyright" content="云玩家"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="4.1$$q_\pi(11,\text{down})&#x3D;-1$$ 4.2都是 $-20$ . 事实上只需要算出第一个 $-20$ 就可以了, 状态 13 与状态 15 具有相同的状态价值, 状态 13 的动态特性变化并不影响它的价值 ($\text{down}$ 都是 $-20$) . 4.3$$\begin{aligned}q_\pi(s,a)&amp;{\dot{&#x3D;}}\mathbb{E}\pi">
+<meta property="og:type" content="article">
+<meta property="og:title" content="《强化学习》(第 2 版) 习题 4">
+<meta property="og:url" content="http://example.com/ML/RL/reinforcement_learning/4/index.html">
+<meta property="og:site_name" content="云玩家">
+<meta property="og:description" content="4.1$$q_\pi(11,\text{down})&#x3D;-1$$ 4.2都是 $-20$ . 事实上只需要算出第一个 $-20$ 就可以了, 状态 13 与状态 15 具有相同的状态价值, 状态 13 的动态特性变化并不影响它的价值 ($\text{down}$ 都是 $-20$) . 4.3$$\begin{aligned}q_\pi(s,a)&amp;{\dot{&#x3D;}}\mathbb{E}\pi">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/ML/RL/reinforcement_learning/4/RL.png">
+<meta property="article:published_time" content="2021-07-02T07:13:25.000Z">
+<meta property="article:modified_time" content="2021-07-07T16:11:53.552Z">
+<meta property="article:author" content="云玩家">
+<meta property="article:tag" content="强化学习">
+<meta property="article:tag" content="机器学习">
+<meta property="article:tag" content="习题">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/ML/RL/reinforcement_learning/4/RL.png"><link rel="shortcut icon" href="/img/favicon.ico"><link rel="canonical" href="http://example.com/ML/RL/reinforcement_learning/4/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//s4.cnzz.com"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script async="async" data-pjax="data-pjax" src="https://s4.cnzz.com/z_stat.php?id=1278869595&amp;web_id=1278869595"></script><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+}</script><script src="/js/yuntools.js"></script><script id="config-diff">var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2021-07-08 00:11:53'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    })(window)</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/cnyist/blog/css/font.css"><meta name="generator" content="Hexo 5.3.0"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" src="https://cdn.jsdelivr.net/gh/cnyist/blog/img/avatar.svg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">78</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">39</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">26</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/chat/"><i class="fa-fw fas fa-comments"></i><span> 闲聊室</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> about</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw iconfont icon-Web"></i><span> 镜像站点</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page" target="_blank" rel="noopener" href="https://yunist.gitee.io"><i class="fa-fw iconfont icon-gitee-fill-round"></i><span> Gitee Pages</span></a></li></ul></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/ML/RL/reinforcement_learning/4/RL.png')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">云玩家</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/chat/"><i class="fa-fw fas fa-comments"></i><span> 闲聊室</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> about</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw iconfont icon-Web"></i><span> 镜像站点</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page" target="_blank" rel="noopener" href="https://yunist.gitee.io"><i class="fa-fw iconfont icon-gitee-fill-round"></i><span> Gitee Pages</span></a></li></ul></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">《强化学习》(第 2 版) 习题 4</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2021-07-02T07:13:25.000Z" title="发表于 2021-07-02 15:13:25">2021-07-02</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2021-07-07T16:11:53.552Z" title="更新于 2021-07-08 00:11:53">2021-07-08</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/">强化学习</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/%E3%80%8A%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E3%80%8B/">《强化学习》</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span><span class="post-meta-separator">|</span><span class="post-meta-commentcount"><i class="far fa-comments fa-fw post-meta-icon"></i><span class="post-meta-label">评论数:</span><a href="/ML/RL/reinforcement_learning/4/#post-comment"><span id="twikoo-count"></span></a></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="4-1"><a href="#4-1" class="headerlink" title="4.1"></a>4.1</h1><p>$$<br>q_\pi(11,\text{down})=-1<br>$$</p>
+<h1 id="4-2"><a href="#4-2" class="headerlink" title="4.2"></a>4.2</h1><p>都是 $-20$ .</p>
+<p>事实上只需要算出第一个 $-20$ 就可以了, 状态 13 与状态 15 具有相同的状态价值, 状态 13 的动态特性变化并不影响它的价值 ($\text{down}$ 都是 $-20$) .</p>
+<h1 id="4-3"><a href="#4-3" class="headerlink" title="4.3"></a>4.3</h1><p>$$<br>\begin{aligned}<br>q_\pi(s,a)&amp;{\dot{=}}\mathbb{E}<em>\pi[G_t\mid S_t=s,A_t=a]\<br>&amp;{=}\mathbb{E_{\pi}}[R</em>{t+1}+\gamma G_{t+1}\mid S_t=s,A_t=a]\<br>&amp;{=}\mathbb{E}<em>\pi[R</em>{t+1}+\gamma q_{\pi}(S_{t+1},A_{t+1})\mid S_t=s,A_t=a]\<br>&amp;{=}\sum_{s’,r}p(s’,r\mid s,a)\left[r+\gamma \sum _{a’}\pi(a’\mid s’) q_\pi(s’,a’)\right]<br>\end{aligned}<br>$$</p>
+<p>$$<br>\begin{aligned}<br>q_{k+1}(s,a)&amp;{\dot{=}}\mathbb{E}<em>\pi[R</em>{t+1}+\gamma q_{k}(S_{t+1},A_{t+1})\mid S_t=s,A_t=a]\<br>&amp;{=}\sum_{s’,r}p(s’,r\mid s,a)\left[r+\gamma \sum <em>{a’}\pi(a’\mid s’) q</em>{k}(s’,a’)\right]<br>\end{aligned}<br>$$</p>
+<h1 id="4-4"><a href="#4-4" class="headerlink" title="4.4"></a>4.4</h1><p>“如果 $old\text-action\not= \pi(s)$ “ 改为 “如果 $\sum_{s’,r}p(s’,r\mid s,\pi(s))[r+\gamma V(s’)]\not=\sum_{s’,r}p(s’,r\mid s,old\text-action)[r+\gamma V(s’)]$” .</p>
+<h1 id="4-5"><a href="#4-5" class="headerlink" title="4.5"></a>4.5</h1><ol>
+<li><p>“任意设定 $V(s)\in R$ “ 改为 “任意设定 $Q(s, a)\in R$” .</p>
+</li>
+<li><p>“对每一个 $s\in \mathcal S$ 循环” 改为 “对每一个 $s\in\mathcal S,a\in\mathcal A$ 循环” ,</p>
+</li>
+<li><p>‘策略评估’ 中循环的内容改为<br>$$<br>\begin{aligned}<br>&amp;q\leftarrow Q(s,a)\<br>&amp;Q(s,a)\leftarrow\sum_{s’,r}p(s’,r\mid s,a)\left[r+\gamma \sum _{a’}\pi(a’\mid s’) Q(s’,a’)\right]\<br>&amp;\Delta\leftarrow\max(\Delta,|q-Q(s,a)|)<br>\end{aligned}<br>$$</p>
+</li>
+<li><p>‘3. 策略改进’ 中 “$\pi(s)\leftarrow \mathop{\arg\max}<em>{a}\sum</em>{s’,r}p(s’,r\mid s,a)[r+\gamma V(s’)]$” 改为 “$\pi(s)\leftarrow \mathop{\arg\max}_{a}Q(s,a)$” </p>
+</li>
+</ol>
+<h1 id="4-6"><a href="#4-6" class="headerlink" title="4.6"></a>4.6</h1><p>3: $\pi(s)$ 不能只取定值 $a$ , 要根据题目要求设定.</p>
+<p>2: 好像没啥要改的…</p>
+<p>1: 初始化需要多弄一个参数 $\varepsilon$ .</p>
+<h1 id="4-7"><a href="#4-7" class="headerlink" title="4.7"></a>4.7</h1><p>这训练方法效率也忒慢了… 于是我就<del>偷懒</del>无奈放弃了, 只写了策略评估的部分 (<del>真的不是我懒啊喂</del>).</p>
+<p><a href="/jupyter/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0-%E7%AC%AC2%E7%89%88/4/%E6%9D%B0%E5%85%8B%E7%A7%9F%E8%BD%A6%E9%97%AE%E9%A2%98.html">杰克租车问题</a></p>
+<h1 id="4-8"><a href="#4-8" class="headerlink" title="4.8"></a>4.8</h1><p>首先确定一点, 在赌资为 $50$ 美元时, $q_*(50,50)=v_*(50)&gt;v_*(s), s&lt;50$ . 如果赌资少于 $50$ , 当达到 $50$ 时就相当于成功了一小半. 如果赌资大于 $50$ (大一点), 在输的时候最好也是输到 $50$ 美元, 好有一个退路. 因此就有了如此奇怪 (不连续) 的策略. 当然 $25$ 美元, $75$ 美元也是特殊的两个情况, 一个 ($25$ 美元) 堵上全部赌资 (赢了的话) 刚刚好达到 “成功了一小半的境地”, 一个 ($75$ 美元) 堵上 $25$ 美元赢了的话刚刚好胜利, 输了还有 $50$ 美元, 赢得概率还是很大, $25$ 美元算是次优情况, 而 $75$ 美元是更优情况 (这里的优指的是比之前的情况的优势大了<strong>很多</strong>). 因此其他情况都在考虑输和赢对这 3 种情况的靠拢.</p>
+<h1 id="4-9"><a href="#4-9" class="headerlink" title="4.9"></a>4.9</h1><p><a href="/jupyter/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0-%E7%AC%AC2%E7%89%88/4/%E8%B5%8C%E5%BE%92%E9%97%AE%E9%A2%98.html">赌徒问题</a></p>
+<p>是稳定的.</p>
+<h1 id="4-10"><a href="#4-10" class="headerlink" title="4.10"></a>4.10</h1><p>$$<br>\begin{aligned}<br>q_{k+1}(s,a)&amp;{\dot{=}}\max_{a’}\mathbb{E}<em>\pi[R</em>{t+1}+\gamma q_{k}(S_{t+1},A_{t+1})\mid S_t=s,A_t=a, A_{t+1}=a’]\<br>&amp;{=}\max_{a’}\sum_{s’,r}p(s’,r\mid s,a)\left[r+\gamma q_{k}(s’,a’)\right]<br>\end{aligned}<br>$$</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">云玩家</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://example.com/ML/RL/reinforcement_learning/4/">http://example.com/ML/RL/reinforcement_learning/4/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://example.com" target="_blank">云玩家</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/">强化学习</a><a class="post-meta__tags" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a><a class="post-meta__tags" href="/tags/%E4%B9%A0%E9%A2%98/">习题</a></div><div class="post_share"><div class="social-share" data-image="/ML/RL/reinforcement_learning/4/RL.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><!-- - var pagination_cover = next.cover == false ? next.randomcover : next.cover--><div class="next-post pull-full"><a href="/math/mathematical_analysis/mathematical_analysis_practice/1/1-7/"><img class="next-cover" src="https://cdn.jsdelivr.net/gh/cnyist/blog/math/mathematical_analysis/mathematical_analysis_practice/1/1-7/1-7.jpeg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">(史济怀) 数学分析教程上册第 3 版-练习题 1.7</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span> 相关推荐</span></div><div class="relatedPosts-list"><div><a href="/ML/RL/reinforcement_learning/1/" title="《强化学习》(第 2 版) 习题 1"><img class="cover" src="https://cdn.jsdelivr.net/gh/cnyist/blog/ML/RL/reinforcement_learning/1/RL.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-06-17</div><div class="title">《强化学习》(第 2 版) 习题 1</div></div></a></div><div><a href="/ML/RL/reinforcement_learning/2/" title="《强化学习》(第 2 版) 习题 2"><img class="cover" src="https://cdn.jsdelivr.net/gh/cnyist/blog/ML/RL/reinforcement_learning/2/RL.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-06-18</div><div class="title">《强化学习》(第 2 版) 习题 2</div></div></a></div><div><a href="/ML/RL/reinforcement_learning/3/" title="《强化学习》(第 2 版) 习题 3"><img class="cover" src="https://cdn.jsdelivr.net/gh/cnyist/blog/ML/RL/reinforcement_learning/3/RL.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-06-27</div><div class="title">《强化学习》(第 2 版) 习题 3</div></div></a></div><div><a href="/ML/RL/papers_read/RL_papers_word/" title="强化学习类论文常用表达"><img class="cover" src="https://cdn.jsdelivr.net/gh/cnyist/blog/ML/RL/papers_read/RL_papers_word/RL_papers_word.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-09-13</div><div class="title">强化学习类论文常用表达</div></div></a></div><div><a href="/ML/RL/primer/Intro_to_Policy_Optimization_code/" title="Intro to Policy Optimization 代码详解"><img class="cover" src="https://cdn.jsdelivr.net/gh/cnyist/blog/ML/RL/primer/Intro_to_Policy_Optimization_code/Intro_to_Policy_Optimization_code.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-06-25</div><div class="title">Intro to Policy Optimization 代码详解</div></div></a></div><div><a href="/ML/RL/primer/RL_demo/" title="强化学习入门 Demo"><img class="cover" src="https://cdn.jsdelivr.net/gh/cnyist/blog/ML/RL/primer/RL_demo/RL_demo.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-04-27</div><div class="title">强化学习入门 Demo</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-info-avatar is-center"><img class="avatar-img" src="https://cdn.jsdelivr.net/gh/cnyist/blog/img/avatar.svg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/><div class="author-info__name">云玩家</div><div class="author-info__description">云玩家's blog</div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">78</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">39</div></a></div><div class="card-info-data-item is-center"><a href="/categories/"><div class="headline">分类</div><div class="length-num">26</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/cnyist" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="https://blog.csdn.net/chnyist" target="_blank" title="CSDN"><i class="fas iconfont icon-CN_csdnnet"></i></a><a class="social-icon" href="https://www.zhihu.com/people/cnyist" target="_blank" title="知乎"><i class="fas iconfont icon-zhihu"></i></a><a class="social-icon" href="mailto:371622558@qq.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#4-1"><span class="toc-number">1.</span> <span class="toc-text">4.1</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-2"><span class="toc-number">2.</span> <span class="toc-text">4.2</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-3"><span class="toc-number">3.</span> <span class="toc-text">4.3</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-4"><span class="toc-number">4.</span> <span class="toc-text">4.4</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-5"><span class="toc-number">5.</span> <span class="toc-text">4.5</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-6"><span class="toc-number">6.</span> <span class="toc-text">4.6</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-7"><span class="toc-number">7.</span> <span class="toc-text">4.7</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-8"><span class="toc-number">8.</span> <span class="toc-text">4.8</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-9"><span class="toc-number">9.</span> <span class="toc-text">4.9</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-10"><span class="toc-number">10.</span> <span class="toc-text">4.10</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><!-- - let post_cover = article.cover--><div class="aside-list-item"><a class="thumbnail" href="/ML/RL/reinforcement_learning/4/" title="《强化学习》(第 2 版) 习题 4"><img src="https://cdn.jsdelivr.net/gh/cnyist/blog/ML/RL/reinforcement_learning/4/RL.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="《强化学习》(第 2 版) 习题 4"/></a><div class="content"><a class="title" href="/ML/RL/reinforcement_learning/4/" title="《强化学习》(第 2 版) 习题 4">《强化学习》(第 2 版) 习题 4</a><time datetime="2021-07-02T07:13:25.000Z" title="发表于 2021-07-02 15:13:25">2021-07-02</time></div></div><!-- - let post_cover = article.cover--><div class="aside-list-item"><a class="thumbnail" href="/math/mathematical_analysis/mathematical_analysis_practice/1/1-7/" title="(史济怀) 数学分析教程上册第 3 版-练习题 1.7"><img src="https://cdn.jsdelivr.net/gh/cnyist/blog/math/mathematical_analysis/mathematical_analysis_practice/1/1-7/1-7.jpeg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="(史济怀) 数学分析教程上册第 3 版-练习题 1.7"/></a><div class="content"><a class="title" href="/math/mathematical_analysis/mathematical_analysis_practice/1/1-7/" title="(史济怀) 数学分析教程上册第 3 版-练习题 1.7">(史济怀) 数学分析教程上册第 3 版-练习题 1.7</a><time datetime="2021-06-29T15:31:11.000Z" title="发表于 2021-06-29 23:31:11">2021-06-29</time></div></div><!-- - let post_cover = article.cover--><div class="aside-list-item"><a class="thumbnail" href="/ML/RL/reinforcement_learning/3/" title="《强化学习》(第 2 版) 习题 3"><img src="https://cdn.jsdelivr.net/gh/cnyist/blog/ML/RL/reinforcement_learning/3/RL.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="《强化学习》(第 2 版) 习题 3"/></a><div class="content"><a class="title" href="/ML/RL/reinforcement_learning/3/" title="《强化学习》(第 2 版) 习题 3">《强化学习》(第 2 版) 习题 3</a><time datetime="2021-06-27T05:35:51.000Z" title="发表于 2021-06-27 13:35:51">2021-06-27</time></div></div><!-- - let post_cover = article.cover--><div class="aside-list-item"><a class="thumbnail" href="/math/mathematical_analysis/mathematical_analysis_practice/1/1-6/" title="(史济怀) 数学分析教程上册第 3 版-练习题 1.6"><img src="https://cdn.jsdelivr.net/gh/cnyist/blog/math/mathematical_analysis/mathematical_analysis_practice/1/1-6/1-6.jpeg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="(史济怀) 数学分析教程上册第 3 版-练习题 1.6"/></a><div class="content"><a class="title" href="/math/mathematical_analysis/mathematical_analysis_practice/1/1-6/" title="(史济怀) 数学分析教程上册第 3 版-练习题 1.6">(史济怀) 数学分析教程上册第 3 版-练习题 1.6</a><time datetime="2021-06-24T15:07:59.000Z" title="发表于 2021-06-24 23:07:59">2021-06-24</time></div></div><!-- - let post_cover = article.cover--><div class="aside-list-item"><a class="thumbnail" href="/math/mathematical_analysis/mathematical_analysis_practice/1/1-5/" title="(史济怀) 数学分析教程上册第 3 版-练习题 1.5"><img src="https://cdn.jsdelivr.net/gh/cnyist/blog/math/mathematical_analysis/mathematical_analysis_practice/1/1-5/1-5.jpeg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="(史济怀) 数学分析教程上册第 3 版-练习题 1.5"/></a><div class="content"><a class="title" href="/math/mathematical_analysis/mathematical_analysis_practice/1/1-5/" title="(史济怀) 数学分析教程上册第 3 版-练习题 1.5">(史济怀) 数学分析教程上册第 3 版-练习题 1.5</a><time datetime="2021-06-22T15:13:38.000Z" title="发表于 2021-06-22 23:13:38">2021-06-22</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2021 By 云玩家</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer><script>document.getElementById('web_bg').style = 'background-image: url("' + get_rand_jsd_pic('cnyist', 'banner@master', '/', 60, '-min.jpg') + '")'</script></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    loader: {
+      source: {
+        '[tex]/amsCd': '[tex]/amscd'
+      }
+    },
+    tex: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"]],
+      tags: 'ams'
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, ''],
+        addClass: [200,() => {
+          document.querySelectorAll('mjx-container:not([display=\'true\']').forEach( node => {
+            const target = node.parentNode
+            if (!target.classList.contains('has-jax')) {
+              target.classList.add('mathjax-overflow')
+            }
+          })
+        }, '', false]
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typeset()
+}</script><script>(()=>{
+  const $countDom = document.getElementById('twikoo-count')
+  const init = () => {
+    let initData = {
+      el: '#twikoo-wrap',
+      envId: 'yunist-147dfe',
+      region: ''
+    }
+
+    if (false) {
+      const otherData = false
+      initData = Object.assign(initData, otherData)
+    }
+    
+    twikoo.init(initData)
+  }
+
+  const getCount = () => {
+    twikoo.getCommentsCount({
+      envId: 'yunist-147dfe',
+      region: '',
+      urls: [window.location.pathname],
+      includeReply: false
+    }).then(function (res) {
+      $countDom.innerText = res[0].count
+    }).catch(function (err) {
+      console.error(err);
+    });
+  }
+
+  const loadTwikoo = (bool = false) => {
+    if (typeof twikoo === 'object') {
+      init()
+      bool && $countDom && setTimeout(getCount,0)
+    } else {
+      getScript('https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js').then(()=> {
+        init()
+        bool && $countDom && setTimeout(getCount,0)
+      })
+    }
+  }
+
+  if ('Twikoo' === 'Twikoo' || !false) {
+    if (false) btf.loadComment(document.getElementById('twikoo-wrap'), loadTwikoo)
+    else loadTwikoo(true)
+  } else {
+    window.loadOtherComment = () => {
+      loadTwikoo()
+    }
+  }
+})()</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

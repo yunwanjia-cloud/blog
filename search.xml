@@ -4,6 +4,39 @@
   
     
     <entry>
+      <title>《强化学习》(第 2 版) 习题 4</title>
+      <link href="ML/RL/reinforcement_learning/4/"/>
+      <url>ML/RL/reinforcement_learning/4/</url>
+      
+        <content type="html"><![CDATA[<h1 id="4-1"><a href="#4-1" class="headerlink" title="4.1"></a>4.1</h1><p>$$<br>q_\pi(11,\text{down})=-1<br>$$</p><h1 id="4-2"><a href="#4-2" class="headerlink" title="4.2"></a>4.2</h1><p>都是 $-20$ .</p><p>事实上只需要算出第一个 $-20$ 就可以了, 状态 13 与状态 15 具有相同的状态价值, 状态 13 的动态特性变化并不影响它的价值 ($\text{down}$ 都是 $-20$) .</p><h1 id="4-3"><a href="#4-3" class="headerlink" title="4.3"></a>4.3</h1><p>$$<br>\begin{aligned}<br>q_\pi(s,a)&amp;{\dot{=}}\mathbb{E}<em>\pi[G_t\mid S_t=s,A_t=a]\<br>&amp;{=}\mathbb{E_{\pi}}[R</em>{t+1}+\gamma G_{t+1}\mid S_t=s,A_t=a]\<br>&amp;{=}\mathbb{E}<em>\pi[R</em>{t+1}+\gamma q_{\pi}(S_{t+1},A_{t+1})\mid S_t=s,A_t=a]\<br>&amp;{=}\sum_{s’,r}p(s’,r\mid s,a)\left[r+\gamma \sum _{a’}\pi(a’\mid s’) q_\pi(s’,a’)\right]<br>\end{aligned}<br>$$</p><p>$$<br>\begin{aligned}<br>q_{k+1}(s,a)&amp;{\dot{=}}\mathbb{E}<em>\pi[R</em>{t+1}+\gamma q_{k}(S_{t+1},A_{t+1})\mid S_t=s,A_t=a]\<br>&amp;{=}\sum_{s’,r}p(s’,r\mid s,a)\left[r+\gamma \sum <em>{a’}\pi(a’\mid s’) q</em>{k}(s’,a’)\right]<br>\end{aligned}<br>$$</p><h1 id="4-4"><a href="#4-4" class="headerlink" title="4.4"></a>4.4</h1><p>“如果 $old\text-action\not= \pi(s)$ “ 改为 “如果 $\sum_{s’,r}p(s’,r\mid s,\pi(s))[r+\gamma V(s’)]\not=\sum_{s’,r}p(s’,r\mid s,old\text-action)[r+\gamma V(s’)]$” .</p><h1 id="4-5"><a href="#4-5" class="headerlink" title="4.5"></a>4.5</h1><ol><li><p>“任意设定 $V(s)\in R$ “ 改为 “任意设定 $Q(s, a)\in R$” .</p></li><li><p>“对每一个 $s\in \mathcal S$ 循环” 改为 “对每一个 $s\in\mathcal S,a\in\mathcal A$ 循环” ,</p></li><li><p>‘策略评估’ 中循环的内容改为<br>$$<br>\begin{aligned}<br>&amp;q\leftarrow Q(s,a)\<br>&amp;Q(s,a)\leftarrow\sum_{s’,r}p(s’,r\mid s,a)\left[r+\gamma \sum _{a’}\pi(a’\mid s’) Q(s’,a’)\right]\<br>&amp;\Delta\leftarrow\max(\Delta,|q-Q(s,a)|)<br>\end{aligned}<br>$$</p></li><li><p>‘3. 策略改进’ 中 “$\pi(s)\leftarrow \mathop{\arg\max}<em>{a}\sum</em>{s’,r}p(s’,r\mid s,a)[r+\gamma V(s’)]$” 改为 “$\pi(s)\leftarrow \mathop{\arg\max}_{a}Q(s,a)$” </p></li></ol><h1 id="4-6"><a href="#4-6" class="headerlink" title="4.6"></a>4.6</h1><p>3: $\pi(s)$ 不能只取定值 $a$ , 要根据题目要求设定.</p><p>2: 好像没啥要改的…</p><p>1: 初始化需要多弄一个参数 $\varepsilon$ .</p><h1 id="4-7"><a href="#4-7" class="headerlink" title="4.7"></a>4.7</h1><p>这训练方法效率也忒慢了… 于是我就<del>偷懒</del>无奈放弃了, 只写了策略评估的部分 (<del>真的不是我懒啊喂</del>).</p><p><a href="/jupyter/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0-%E7%AC%AC2%E7%89%88/4/%E6%9D%B0%E5%85%8B%E7%A7%9F%E8%BD%A6%E9%97%AE%E9%A2%98.html">杰克租车问题</a></p><h1 id="4-8"><a href="#4-8" class="headerlink" title="4.8"></a>4.8</h1><p>首先确定一点, 在赌资为 $50$ 美元时, $q_*(50,50)=v_*(50)&gt;v_*(s), s&lt;50$ . 如果赌资少于 $50$ , 当达到 $50$ 时就相当于成功了一小半. 如果赌资大于 $50$ (大一点), 在输的时候最好也是输到 $50$ 美元, 好有一个退路. 因此就有了如此奇怪 (不连续) 的策略. 当然 $25$ 美元, $75$ 美元也是特殊的两个情况, 一个 ($25$ 美元) 堵上全部赌资 (赢了的话) 刚刚好达到 “成功了一小半的境地”, 一个 ($75$ 美元) 堵上 $25$ 美元赢了的话刚刚好胜利, 输了还有 $50$ 美元, 赢得概率还是很大, $25$ 美元算是次优情况, 而 $75$ 美元是更优情况 (这里的优指的是比之前的情况的优势大了<strong>很多</strong>). 因此其他情况都在考虑输和赢对这 3 种情况的靠拢.</p><h1 id="4-9"><a href="#4-9" class="headerlink" title="4.9"></a>4.9</h1><p><a href="/jupyter/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0-%E7%AC%AC2%E7%89%88/4/%E8%B5%8C%E5%BE%92%E9%97%AE%E9%A2%98.html">赌徒问题</a></p><p>是稳定的.</p><h1 id="4-10"><a href="#4-10" class="headerlink" title="4.10"></a>4.10</h1><p>$$<br>\begin{aligned}<br>q_{k+1}(s,a)&amp;{\dot{=}}\max_{a’}\mathbb{E}<em>\pi[R</em>{t+1}+\gamma q_{k}(S_{t+1},A_{t+1})\mid S_t=s,A_t=a, A_{t+1}=a’]\<br>&amp;{=}\max_{a’}\sum_{s’,r}p(s’,r\mid s,a)\left[r+\gamma q_{k}(s’,a’)\right]<br>\end{aligned}<br>$$</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 机器学习 </category>
+          
+          <category> 强化学习 </category>
+          
+          <category> 《强化学习》 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 强化学习 </tag>
+            
+            <tag> 机器学习 </tag>
+            
+            <tag> 习题 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>(史济怀) 数学分析教程上册第 3 版-练习题 1.7</title>
       <link href="math/mathematical_analysis/mathematical_analysis_practice/1/1-7/"/>
       <url>math/mathematical_analysis/mathematical_analysis_practice/1/1-7/</url>
@@ -41,7 +74,7 @@
       <link href="ML/RL/reinforcement_learning/3/"/>
       <url>ML/RL/reinforcement_learning/3/</url>
       
-        <content type="html"><![CDATA[<h1 id="3-1"><a href="#3-1" class="headerlink" title="3.1"></a>3.1</h1><h2 id="1-确定游戏"><a href="#1-确定游戏" class="headerlink" title="1.确定游戏"></a>1.确定游戏</h2><p>闯关小游戏 (类似森林冰火人那种) , 游戏是确定的, 即你每次都可以用同样的方式获得同种分数</p><p>动作为上下左右, 可以考虑用相同时间间隔来进行离散处理, 通关给出正收益, 被攻击, 死亡给出负收益.</p><h2 id="2-对弈"><a href="#2-对弈" class="headerlink" title="2.对弈"></a>2.对弈</h2><p>棋类游戏, 给定对手, 那么对手的行为的概率就是可预测的, 那么环境 (棋盘) 就可预测.</p><h2 id="3-随机游戏"><a href="#3-随机游戏" class="headerlink" title="3.随机游戏"></a>3.随机游戏</h2><p> 比如 2048.</p><h1 id="2"><a href="#2" class="headerlink" title="2"></a>2</h1><p>不能. 环境信息决定于智能体的感知能力, 如果感知能力不够强 (不是上帝视角) , 那么同样的环境信息就可能是不同的情况, 那么这样的任务就不是 $\text{MDP}$ 框架.</p><h1 id="3"><a href="#3" class="headerlink" title="3"></a>3</h1><p>个人觉得是第一个层次 (即方向盘) . 首先要考虑 “动作” 操控 (实际操作) 的难度. 比如说轮胎、肌肉、思想这种层面, 即使训练好了, 如何方便之前的做出这种动作仍是一种困难. 而且要控制动作的数量. 肌肉要控制的地方太多了, 会导致训练的参数很多, 收敛慢. 而且还要便于人类理解. 人类就是操控方向盘来与环境交互的, 以方向盘层次作为训练的动作更容易理解.</p><h1 id="4"><a href="#4" class="headerlink" title="4"></a>4</h1><p><img src="1.png"></p><p>这是我在<a href="https://github.com/LyWangPX/Reinforcement-Learning-2nd-Edition-by-Sutton-Exercise-Solutions/blob/master/Chapter%203/Solutions_to_Reinforcement_Learning_by_Sutton_Chapter_3_rx1.pdf">别的地方</a>找到的答案. 但我认为这样的答案是错误的 (或者是题目没有出得足够严谨) .</p><p>要知道 $r_{\text{search}},r_{\text{wait}}$ 在文中的定义是 “期望数量 (期望收益)” , 重点关注 “期望” , “期望” 并不能作为 $p(s’,r\mid s,a)$ 中的 $r$ , 因为取得期望的概率在绝大多数的情况下不是 $1$ , 甚至是 $0$ . 这里的 $r$ 应该取 $0,1,2,3\cdots$ , 并且给出 $r$ 取 $0,1,2,3\cdots$ 的条件概率才能够做这道题. 但题目也不可能这么出, 因此我猜测出题人要的答案应该就是如此, 但是他出的这道题目并不对应这个答案 (出题不严谨) .</p><h1 id="5"><a href="#5" class="headerlink" title="5"></a>5</h1>$$\sum_{s'\in \mathcal S}\sum_{r\in\mathcal R}p(s',r\mid s,a)=1, 对于所有s\in(\mathcal S\backslash 终结状态),a\in\mathcal A(s).$$<hr><h1 id="6"><a href="#6" class="headerlink" title="6"></a>6</h1><p>每次的回报都是 $-\gamma^K$ , $K$ 是每一幕失败前的步数. 区别在于持续性任务将所有失败的事件都考虑了 (失败会大于等于一次) .</p><h1 id="7"><a href="#7" class="headerlink" title="7"></a>7</h1><p>可能没有采用折扣, 导致机器人认为只要走出迷宫即可, 不需要考虑时间的长短.</p><h1 id="8"><a href="#8" class="headerlink" title="8"></a>8</h1>$$G_5=0, G_4=2, G_3=4,G_2=8, G_1=6,G_0=4$$<hr><h1 id="9"><a href="#9" class="headerlink" title="9"></a>9</h1>$$G_1=7\sum_{i=1}^\infty 0.9^{i-1}=70, G_0=2+0.9\cdot70=65$$<hr><h1 id="10"><a href="#10" class="headerlink" title="10"></a>10</h1><p>中学等比数列+一丢丢极限(不严谨甚至可以直接忽略极限).</p><h1 id="11"><a href="#11" class="headerlink" title="11"></a>11</h1>$$\sum_{a}\pi(a|s=S_t)\sum_{s',r}p(s',r\mid s=S_t,a)r$$<hr><h1 id="12"><a href="#12" class="headerlink" title="12"></a>12</h1>$$v_{\pi}(s)=\sum_{a}\pi(a\mid s)q_{\pi}(s,a)$$<hr><h1 id="13"><a href="#13" class="headerlink" title="13"></a>13</h1>$$q_\pi(s,a)=\sum_{s',r}p(s',r\mid s,a)(r+\gamma v_{\pi}(s'))$$<hr><h1 id="14"><a href="#14" class="headerlink" title="14"></a>14</h1>$$(2.3+0.4-0.4+0.7)/4\approx0.7$$<hr><h1 id="15"><a href="#15" class="headerlink" title="15"></a>15</h1><p>应该是相对大小.</p>$$v_c=\frac{c}{1-\gamma}$$<hr><h1 id="16"><a href="#16" class="headerlink" title="16"></a>16</h1><p>会, 因为 $v_c$ 对每个状态来说都不一样了 (距离终结状态的距离不同) . 举例懒得举.</p><h1 id="17"><a href="#17" class="headerlink" title="17"></a>17</h1>$$q_{\pi}(s,a)=\sum_{s',r}p(s',r\mid s,a)[r+\gamma \sum_{a'}q_\pi(s',a')\pi(a'\mid s')]$$<hr><h1 id="18"><a href="#18" class="headerlink" title="18"></a>18</h1>$$v_\pi(s)=\mathbb{E}_{a\sim\pi(a\mid s)}[q_\pi(s,a)]=\sum_{a}\pi(a\mid s)q_{\pi}(s,a)$$<hr><h1 id="19"><a href="#19" class="headerlink" title="19"></a>19</h1>$$q_\pi(s,a)=\mathbb{E}_{s',r\sim p(s',r\mid s,a)}[r+v_\pi(s')]=\sum _{s', r}p(s',r\mid s,a)(r+\gamma v_{\pi}(s'))$$<hr><h1 id="20"><a href="#20" class="headerlink" title="20"></a>20</h1><p>绿色部分是 $-1$ , 洞口是 $0$ , 然后按照木杆的距离递减.</p><h1 id="21"><a href="#21" class="headerlink" title="21"></a>21</h1><p>绿色部分是 $-1$ , 然后按照推杆的距离画一个 $-2$ 等值线, 然后以木杆的距离递减.</p><h1 id="22"><a href="#22" class="headerlink" title="22"></a>22</h1>$$\gamma=0:\pi_{\text{left}},\gamma=0.9:\pi_{\text{right}},\gamma=0.5:\pi_{\text{both}}$$<hr><h1 id="23"><a href="#23" class="headerlink" title="23"></a>23</h1><p>懒得写, 式 (3.20) 套进去就好.</p><h1 id="24"><a href="#24" class="headerlink" title="24"></a>24</h1>$$G=\sum_{i=0}^\infty 10\gamma^{5i},24.419$$<hr><h1 id="25"><a href="#25" class="headerlink" title="25"></a>25</h1>$$v_*(s)=\max_aq_*(s,a)$$<hr><h1 id="26"><a href="#26" class="headerlink" title="26"></a>26</h1>$$q_*(s,a)=\sum_{s',r} p(s',r\mid s,a)[r+\gamma v_*(s')]$$<hr><h1 id="27"><a href="#27" class="headerlink" title="27"></a>27</h1>$$\pi_*(a\mid s)=\max_aq_*(s, a)$$<hr><h1 id="28"><a href="#28" class="headerlink" title="28"></a>28</h1>$$\pi_*(a\mid s)=\max_a\sum_{s',r} p(s',r\mid s,a)[r+\gamma v_*(s')]$$<hr><h1 id="29"><a href="#29" class="headerlink" title="29"></a>29</h1>$$\begin{aligned}v_\pi(s)&=\sum_{s',a}p(s'\mid s,a)[r(s,a)+\gamma v_\pi(s')]\\q_\pi(s,a)&=r(s,a)+\gamma\sum_{s'} p(s'\mid s,a)\sum_{a'}\pi(a'\mid s')q_\pi(s',a')\end{aligned}$$<p>最优价值函数同理.</p>]]></content>
+        <content type="html"><![CDATA[<h1 id="3-1"><a href="#3-1" class="headerlink" title="3.1"></a>3.1</h1><h2 id="1-确定游戏"><a href="#1-确定游戏" class="headerlink" title="1.确定游戏"></a>1.确定游戏</h2><p>闯关小游戏 (类似森林冰火人那种) , 游戏是确定的, 即你每次都可以用同样的方式获得同种分数</p><p>动作为上下左右, 可以考虑用相同时间间隔来进行离散处理, 通关给出正收益, 被攻击, 死亡给出负收益.</p><h2 id="2-对弈"><a href="#2-对弈" class="headerlink" title="2.对弈"></a>2.对弈</h2><p>棋类游戏, 给定对手, 那么对手的行为的概率就是可预测的, 那么环境 (棋盘) 就可预测.</p><h2 id="3-随机游戏"><a href="#3-随机游戏" class="headerlink" title="3.随机游戏"></a>3.随机游戏</h2><p> 比如 2048.</p><h1 id="2"><a href="#2" class="headerlink" title="2"></a>2</h1><p>不能. 环境信息决定于智能体的感知能力, 如果感知能力不够强 (不是上帝视角) , 那么同样的环境信息就可能是不同的情况, 那么这样的任务就不是 $\text{MDP}$ 框架.</p><h1 id="3"><a href="#3" class="headerlink" title="3"></a>3</h1><p>个人觉得是第一个层次 (即方向盘) . 首先要考虑 “动作” 操控 (实际操作) 的难度. 比如说轮胎、肌肉、思想这种层面, 即使训练好了, 如何方便之前的做出这种动作仍是一种困难. 而且要控制动作的数量. 肌肉要控制的地方太多了, 会导致训练的参数很多, 收敛慢. 而且还要便于人类理解. 人类就是操控方向盘来与环境交互的, 以方向盘层次作为训练的动作更容易理解.</p><h1 id="4"><a href="#4" class="headerlink" title="4"></a>4</h1><p><img src="1.png"></p><p>这是我在<a href="https://github.com/LyWangPX/Reinforcement-Learning-2nd-Edition-by-Sutton-Exercise-Solutions/blob/master/Chapter%203/Solutions_to_Reinforcement_Learning_by_Sutton_Chapter_3_rx1.pdf">别的地方</a>找到的答案. 但我认为这样的答案是错误的 (或者是题目没有出得足够严谨) .</p><p>要知道 $r_{\text{search}},r_{\text{wait}}$ 在文中的定义是 “期望数量 (期望收益)” , 重点关注 “期望” , “期望” 并不能作为 $p(s’,r\mid s,a)$ 中的 $r$ , 因为取得期望的概率在绝大多数的情况下不是 $1$ , 甚至是 $0$ . 这里的 $r$ 应该取 $0,1,2,3\cdots$ , 并且给出 $r$ 取 $0,1,2,3\cdots$ 的条件概率才能够做这道题. 但题目也不可能这么出, 因此我猜测出题人要的答案应该就是如此, 但是他出的这道题目并不对应这个答案 (出题不严谨) .</p><h1 id="5"><a href="#5" class="headerlink" title="5"></a>5</h1>$$\sum_{s'\in \mathcal S}\sum_{r\in\mathcal R}p(s',r\mid s,a)=1, 对于所有s\in(\mathcal S\backslash 终结状态),a\in\mathcal A(s).$$<hr><h1 id="6"><a href="#6" class="headerlink" title="6"></a>6</h1><p>每次的回报都是 $-\gamma^K$ , $K$ 是每一幕失败前的步数. 区别在于持续性任务将所有失败的事件都考虑了 (失败会大于等于一次) .</p><h1 id="7"><a href="#7" class="headerlink" title="7"></a>7</h1><p>可能没有采用折扣, 导致机器人认为只要走出迷宫即可, 不需要考虑时间的长短.</p><h1 id="8"><a href="#8" class="headerlink" title="8"></a>8</h1>$$G_5=0, G_4=2, G_3=4,G_2=8, G_1=6,G_0=4$$<hr><h1 id="9"><a href="#9" class="headerlink" title="9"></a>9</h1>$$G_1=7\sum_{i=1}^\infty 0.9^{i-1}=70, G_0=2+0.9\cdot70=65$$<hr><h1 id="10"><a href="#10" class="headerlink" title="10"></a>10</h1><p>中学等比数列+一丢丢极限(不严谨甚至可以直接忽略极限).</p><h1 id="11"><a href="#11" class="headerlink" title="11"></a>11</h1>$$\sum_{a}\pi(a|s=S_t)\sum_{s',r}p(s',r\mid s=S_t,a)r$$<hr><h1 id="12"><a href="#12" class="headerlink" title="12"></a>12</h1>$$v_{\pi}(s)=\sum_{a}\pi(a\mid s)q_{\pi}(s,a)$$<hr><h1 id="13"><a href="#13" class="headerlink" title="13"></a>13</h1>$$q_\pi(s,a)=\sum_{s',r}p(s',r\mid s,a)(r+\gamma v_{\pi}(s'))$$<hr><h1 id="14"><a href="#14" class="headerlink" title="14"></a>14</h1>$$(2.3+0.4-0.4+0.7)/4\approx0.7$$<hr><h1 id="15"><a href="#15" class="headerlink" title="15"></a>15</h1><p>应该是相对大小.</p>$$v_c=\frac{c}{1-\gamma}$$<hr><h1 id="16"><a href="#16" class="headerlink" title="16"></a>16</h1><p>会, 因为 $v_c$ 对每个状态来说都不一样了 (距离终结状态的距离不同) . 举例懒得举.</p><h1 id="17"><a href="#17" class="headerlink" title="17"></a>17</h1>$$q_{\pi}(s,a)=\sum_{s',r}p(s',r\mid s,a)\left[r+\gamma \sum_{a'}q_\pi(s',a')\pi(a'\mid s')\right]$$<hr><h1 id="18"><a href="#18" class="headerlink" title="18"></a>18</h1>$$v_\pi(s)=\mathbb{E}_{a\sim\pi(a\mid s)}[q_\pi(s,a)]=\sum_{a}\pi(a\mid s)q_{\pi}(s,a)$$<hr><h1 id="19"><a href="#19" class="headerlink" title="19"></a>19</h1>$$q_\pi(s,a)=\mathbb{E}_{s',r\sim p(s',r\mid s,a)}[r+v_\pi(s')]=\sum _{s', r}p(s',r\mid s,a)(r+\gamma v_{\pi}(s'))$$<hr><h1 id="20"><a href="#20" class="headerlink" title="20"></a>20</h1><p>绿色部分是 $-1$ , 洞口是 $0$ , 然后按照木杆的距离递减.</p><h1 id="21"><a href="#21" class="headerlink" title="21"></a>21</h1><p>绿色部分是 $-1$ , 然后按照推杆的距离画一个 $-2$ 等值线, 然后以木杆的距离递减.</p><h1 id="22"><a href="#22" class="headerlink" title="22"></a>22</h1>$$\gamma=0:\pi_{\text{left}},\gamma=0.9:\pi_{\text{right}},\gamma=0.5:\pi_{\text{both}}$$<hr><h1 id="23"><a href="#23" class="headerlink" title="23"></a>23</h1><p>懒得写, 式 (3.20) 套进去就好.</p><h1 id="24"><a href="#24" class="headerlink" title="24"></a>24</h1>$$G=\sum_{i=0}^\infty 10\gamma^{5i},24.419$$<hr><h1 id="25"><a href="#25" class="headerlink" title="25"></a>25</h1>$$v_*(s)=\max_aq_*(s,a)$$<hr><h1 id="26"><a href="#26" class="headerlink" title="26"></a>26</h1>$$q_*(s,a)=\sum_{s',r} p(s',r\mid s,a)[r+\gamma v_*(s')]$$<hr><h1 id="27"><a href="#27" class="headerlink" title="27"></a>27</h1>$$\pi_*(a\mid s)=\max_aq_*(s, a)$$<hr><h1 id="28"><a href="#28" class="headerlink" title="28"></a>28</h1>$$\pi_*(a\mid s)=\max_a\sum_{s',r} p(s',r\mid s,a)[r+\gamma v_*(s')]$$<hr><h1 id="29"><a href="#29" class="headerlink" title="29"></a>29</h1>$$\begin{aligned}v_\pi(s)&=\sum_{s',a}p(s'\mid s,a)[r(s,a)+\gamma v_\pi(s')]\\q_\pi(s,a)&=r(s,a)+\gamma\sum_{s'} p(s'\mid s,a)\sum_{a'}\pi(a'\mid s')q_\pi(s',a')\end{aligned}$$<p>最优价值函数同理.</p>]]></content>
       
       
       <categories>
@@ -57,9 +90,9 @@
       
         <tags>
             
-            <tag> 机器学习 </tag>
-            
             <tag> 强化学习 </tag>
+            
+            <tag> 机器学习 </tag>
             
             <tag> 习题 </tag>
             
@@ -173,7 +206,7 @@
       <link href="ML/RL/reinforcement_learning/2/"/>
       <url>ML/RL/reinforcement_learning/2/</url>
       
-        <content type="html"><![CDATA[<h1 id="2-1"><a href="#2-1" class="headerlink" title="2.1"></a>2.1</h1><p>$1/4$.</p><h1 id="2-2"><a href="#2-2" class="headerlink" title="2.2"></a>2.2</h1><p>4, 5必定发生了, 其余都可能发生.</p><h1 id="2-3"><a href="#2-3" class="headerlink" title="2.3"></a>2.3</h1><p>首先应该要确定, 只要 $\epsilon$ 不取 $0$ , 经过足够长的时间应该都能够收敛到最优情况, 于是最优动作的概率为 $(1-\epsilon)\frac{\epsilon}{10}]$ , 而贪心取最优动作的概率取决于最开始的动作, 从期望值来看, 这个概率是 $1/10$ . 那么平均收益即可计算.</p><p>$\epsilon-贪心$ :<br>$$<br>(1-\epsilon)\mathbb{E}[q_*(a_t)]+\epsilon\sum_{i=1}^{10}\mathbb{E}[q_*(a_i)]<br>$$<br>其中 $a_t$ 是最优动作</p><p>贪心:<br>$$<br>\frac{1}{10}\sum_{i=1}^{10}\mathbb{E}]q_*(a_i)]<br>$$</p><h1 id="2-4"><a href="#2-4" class="headerlink" title="2.4"></a>2.4</h1><p>$$<br>\alpha_i\prod_{j=i+1}^{n}(1-\alpha_j)<br>$$</p><h1 id="2-5"><a href="#2-5" class="headerlink" title="2.5"></a>2.5</h1><p><a href="/jupyter/%E5%A4%9A%E8%87%82%E8%B5%8C%E5%8D%9A%E6%9C%BA.html">多臂赌博机</a></p><p>可以明显看出常数步长对于非平稳问题的优势.</p><h1 id="2-6"><a href="#2-6" class="headerlink" title="2.6"></a>2.6</h1><p>因为其会探索得更多, 因此会更糟, 但同时由于其还拥有贪心的本质, 因此在不同臂收益差距明显时, 会出现峰值.</p><h1 id="2-7"><a href="#2-7" class="headerlink" title="2.7"></a>2.7</h1><p>只需证明最后表达式与 $Q_1$ 无关即可.  展开可得<br>$$<br>Q_{n+1}=Q_1\prod_{i=1}^{n}(1-\beta_i)+\sum_{i=1}^nR_i\beta_i\prod_{j=i+1}^{n}(1-\beta_j)<br>$$<br>显然有 $\beta_1=1$ . 因此<br>$$<br>Q_{n+1} =\sum_{i=1}^nR_i\beta_i\prod_{j=i+1}^{n}(1-\beta_j)<br>$$<br>与 $Q_1$ 无关.</p><h1 id="2-8"><a href="#2-8" class="headerlink" title="2.8"></a>2.8</h1><p>第 11 步恰好是 “10” 臂赌博机加一, 为什么这么恰好呢? 原因是 $\text{UBC}$ 的特点让其对于从未选择过的动作的优先度高于其他动作, 于是前 10 步恰好做过 10 钟动作, 因此对于每个动作来说 $\text{UBC}$ 特有的那一项标准差度量相等, 因此这一步完全是贪心的状态 (完全没有试探) , 因此产生一个小小的峰值. 而过了这一步, 试探的能力才会逐渐提升. 如果 $c=1$ , 也就是减少, 相当于提升了 $\text{UBC}$ 贪心的能力, 也就会更平滑, 尖峰就不会那么突出了. </p><h1 id="2-9"><a href="#2-9" class="headerlink" title="2.9"></a>2.9</h1><p>$\text{softmax}$ 就是广义的 $\text{sigmoid}$ .</p><h1 id="2-10"><a href="#2-10" class="headerlink" title="2.10"></a>2.10</h1><h2 id="1"><a href="#1" class="headerlink" title="(1)"></a>(1)</h2><p>只选动作 1 或动作 2 , 期望是 0.5 .</p><h2 id="2"><a href="#2" class="headerlink" title="(2)"></a>(2)</h2><p>最优期望是 0.55 . 当 A 时选择动作 2 , B 时选择动作 1 .</p><h1 id="2-11"><a href="#2-11" class="headerlink" title="2.11"></a>2.11</h1><p>这是要我把其他算法都实现一遍的意思??</p><p><a href="/jupyter/%E5%A4%9A%E8%87%82%E8%B5%8C%E5%8D%9A%E6%9C%BA2.html">多臂赌博机2</a></p><p><img src="1.png"></p><p>好像有点丑.</p>]]></content>
+        <content type="html"><![CDATA[<h1 id="2-1"><a href="#2-1" class="headerlink" title="2.1"></a>2.1</h1><p>$1/4$.</p><h1 id="2-2"><a href="#2-2" class="headerlink" title="2.2"></a>2.2</h1><p>4, 5必定发生了, 其余都可能发生.</p><h1 id="2-3"><a href="#2-3" class="headerlink" title="2.3"></a>2.3</h1><p>首先应该要确定, 只要 $\epsilon$ 不取 $0$ , 经过足够长的时间应该都能够收敛到最优情况, 于是最优动作的概率为 $(1-\epsilon)\frac{\epsilon}{10}]$ , 而贪心取最优动作的概率取决于最开始的动作, 从期望值来看, 这个概率是 $1/10$ . 那么平均收益即可计算.</p><p>$\epsilon-贪心$ :<br>$$<br>(1-\epsilon)\mathbb{E}[q_*(a_t)]+\epsilon\sum_{i=1}^{10}\mathbb{E}[q_*(a_i)]<br>$$<br>其中 $a_t$ 是最优动作</p><p>贪心:<br>$$<br>\frac{1}{10}\sum_{i=1}^{10}\mathbb{E}]q_*(a_i)]<br>$$</p><h1 id="2-4"><a href="#2-4" class="headerlink" title="2.4"></a>2.4</h1><p>$$<br>\alpha_i\prod_{j=i+1}^{n}(1-\alpha_j)<br>$$</p><h1 id="2-5"><a href="#2-5" class="headerlink" title="2.5"></a>2.5</h1><p><a href="/jupyter/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0-%E7%AC%AC2%E7%89%88/2/%E5%A4%9A%E8%87%82%E8%B5%8C%E5%8D%9A%E6%9C%BA.html">多臂赌博机</a></p><p>可以明显看出常数步长对于非平稳问题的优势.</p><h1 id="2-6"><a href="#2-6" class="headerlink" title="2.6"></a>2.6</h1><p>因为其会探索得更多, 因此会更糟, 但同时由于其还拥有贪心的本质, 因此在不同臂收益差距明显时, 会出现峰值.</p><h1 id="2-7"><a href="#2-7" class="headerlink" title="2.7"></a>2.7</h1><p>只需证明最后表达式与 $Q_1$ 无关即可.  展开可得<br>$$<br>Q_{n+1}=Q_1\prod_{i=1}^{n}(1-\beta_i)+\sum_{i=1}^nR_i\beta_i\prod_{j=i+1}^{n}(1-\beta_j)<br>$$<br>显然有 $\beta_1=1$ . 因此<br>$$<br>Q_{n+1} =\sum_{i=1}^nR_i\beta_i\prod_{j=i+1}^{n}(1-\beta_j)<br>$$<br>与 $Q_1$ 无关.</p><h1 id="2-8"><a href="#2-8" class="headerlink" title="2.8"></a>2.8</h1><p>第 11 步恰好是 “10” 臂赌博机加一, 为什么这么恰好呢? 原因是 $\text{UBC}$ 的特点让其对于从未选择过的动作的优先度高于其他动作, 于是前 10 步恰好做过 10 钟动作, 因此对于每个动作来说 $\text{UBC}$ 特有的那一项标准差度量相等, 因此这一步完全是贪心的状态 (完全没有试探) , 因此产生一个小小的峰值. 而过了这一步, 试探的能力才会逐渐提升. 如果 $c=1$ , 也就是减少, 相当于提升了 $\text{UBC}$ 贪心的能力, 也就会更平滑, 尖峰就不会那么突出了. </p><h1 id="2-9"><a href="#2-9" class="headerlink" title="2.9"></a>2.9</h1><p>$\text{softmax}$ 就是广义的 $\text{sigmoid}$ .</p><h1 id="2-10"><a href="#2-10" class="headerlink" title="2.10"></a>2.10</h1><h2 id="1"><a href="#1" class="headerlink" title="(1)"></a>(1)</h2><p>只选动作 1 或动作 2 , 期望是 0.5 .</p><h2 id="2"><a href="#2" class="headerlink" title="(2)"></a>(2)</h2><p>最优期望是 0.55 . 当 A 时选择动作 2 , B 时选择动作 1 .</p><h1 id="2-11"><a href="#2-11" class="headerlink" title="2.11"></a>2.11</h1><p>这是要我把其他算法都实现一遍的意思??</p><p><a href="/jupyter/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0-%E7%AC%AC2%E7%89%88/2/%E5%A4%9A%E8%87%82%E8%B5%8C%E5%8D%9A%E6%9C%BA2.html">多臂赌博机2</a></p><p><img src="1.png"></p><p>好像有点丑.</p>]]></content>
       
       
       <categories>
@@ -189,9 +222,9 @@
       
         <tags>
             
-            <tag> 机器学习 </tag>
-            
             <tag> 强化学习 </tag>
+            
+            <tag> 机器学习 </tag>
             
             <tag> 习题 </tag>
             
@@ -222,9 +255,9 @@
       
         <tags>
             
-            <tag> 机器学习 </tag>
-            
             <tag> 强化学习 </tag>
+            
+            <tag> 机器学习 </tag>
             
             <tag> 习题 </tag>
             
@@ -520,9 +553,9 @@
       
         <tags>
             
-            <tag> 机器学习 </tag>
-            
             <tag> 强化学习 </tag>
+            
+            <tag> 机器学习 </tag>
             
             <tag> 论文精读 </tag>
             
@@ -603,11 +636,11 @@
       
         <tags>
             
-            <tag> 机器学习 </tag>
-            
             <tag> 英语 </tag>
             
             <tag> 强化学习 </tag>
+            
+            <tag> 机器学习 </tag>
             
             <tag> 论文 </tag>
             
@@ -667,11 +700,11 @@
       
         <tags>
             
-            <tag> 机器学习 </tag>
-            
             <tag> Python </tag>
             
             <tag> 强化学习 </tag>
+            
+            <tag> 机器学习 </tag>
             
             <tag> Gym </tag>
             
@@ -731,13 +764,13 @@
       
         <tags>
             
-            <tag> 机器学习 </tag>
-            
-            <tag> 优化算法 </tag>
-            
             <tag> 强化学习 </tag>
             
+            <tag> 机器学习 </tag>
+            
             <tag> 论文精读 </tag>
+            
+            <tag> 优化算法 </tag>
             
         </tags>
       
@@ -820,11 +853,11 @@
       
         <tags>
             
-            <tag> 机器学习 </tag>
-            
             <tag> Python </tag>
             
             <tag> 强化学习 </tag>
+            
+            <tag> 机器学习 </tag>
             
             <tag> 代码实例 </tag>
             
@@ -859,9 +892,9 @@
       
         <tags>
             
-            <tag> 机器学习 </tag>
-            
             <tag> 强化学习 </tag>
+            
+            <tag> 机器学习 </tag>
             
             <tag> Spinning Up </tag>
             
@@ -892,11 +925,11 @@
       
         <tags>
             
-            <tag> 机器学习 </tag>
-            
             <tag> Python </tag>
             
             <tag> 强化学习 </tag>
+            
+            <tag> 机器学习 </tag>
             
             <tag> 代码实例 </tag>
             
@@ -991,9 +1024,9 @@
       
         <tags>
             
-            <tag> 机器学习 </tag>
-            
             <tag> 强化学习 </tag>
+            
+            <tag> 机器学习 </tag>
             
         </tags>
       
@@ -1140,9 +1173,9 @@
       
         <tags>
             
-            <tag> 机器学习 </tag>
-            
             <tag> 强化学习 </tag>
+            
+            <tag> 机器学习 </tag>
             
         </tags>
       
@@ -1198,9 +1231,9 @@
       
         <tags>
             
-            <tag> 机器学习 </tag>
-            
             <tag> 强化学习 </tag>
+            
+            <tag> 机器学习 </tag>
             
         </tags>
       
@@ -1256,11 +1289,11 @@
       
         <tags>
             
-            <tag> 机器学习 </tag>
-            
             <tag> Python </tag>
             
             <tag> 强化学习 </tag>
+            
+            <tag> 机器学习 </tag>
             
             <tag> 代码实例 </tag>
             
@@ -1295,9 +1328,9 @@
       
         <tags>
             
-            <tag> 机器学习 </tag>
-            
             <tag> 强化学习 </tag>
+            
+            <tag> 机器学习 </tag>
             
             <tag> 西瓜书 </tag>
             
@@ -1675,9 +1708,9 @@
           
           <category> 机器学习 </category>
           
-          <category> 模型 </category>
-          
           <category> 西瓜书 </category>
+          
+          <category> 模型 </category>
           
           <category> 读懂西瓜书 </category>
           
@@ -1688,9 +1721,9 @@
             
             <tag> 机器学习 </tag>
             
-            <tag> 概率图模型 </tag>
-            
             <tag> 西瓜书 </tag>
+            
+            <tag> 概率图模型 </tag>
             
         </tags>
       

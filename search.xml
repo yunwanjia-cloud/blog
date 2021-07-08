@@ -4,11 +4,24 @@
   
     
     <entry>
+      <title>1-8</title>
+      <link href="math/mathematical_analysis/mathematical_analysis_practice/1/1-8/"/>
+      <url>math/mathematical_analysis/mathematical_analysis_practice/1/1-8/</url>
+      
+        <content type="html"><![CDATA[]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>《强化学习》(第 2 版) 习题 4</title>
       <link href="ML/RL/reinforcement_learning/4/"/>
       <url>ML/RL/reinforcement_learning/4/</url>
       
-        <content type="html"><![CDATA[<h1 id="4-1"><a href="#4-1" class="headerlink" title="4.1"></a>4.1</h1><p>$$<br>q_\pi(11,\text{down})=-1<br>$$</p><h1 id="4-2"><a href="#4-2" class="headerlink" title="4.2"></a>4.2</h1><p>都是 $-20$ .</p><p>事实上只需要算出第一个 $-20$ 就可以了, 状态 13 与状态 15 具有相同的状态价值, 状态 13 的动态特性变化并不影响它的价值 ($\text{down}$ 都是 $-20$) .</p><h1 id="4-3"><a href="#4-3" class="headerlink" title="4.3"></a>4.3</h1><p>$$<br>\begin{aligned}<br>q_\pi(s,a)&amp;{\dot{=}}\mathbb{E}<em>\pi[G_t\mid S_t=s,A_t=a]\<br>&amp;{=}\mathbb{E_{\pi}}[R</em>{t+1}+\gamma G_{t+1}\mid S_t=s,A_t=a]\<br>&amp;{=}\mathbb{E}<em>\pi[R</em>{t+1}+\gamma q_{\pi}(S_{t+1},A_{t+1})\mid S_t=s,A_t=a]\<br>&amp;{=}\sum_{s’,r}p(s’,r\mid s,a)\left[r+\gamma \sum _{a’}\pi(a’\mid s’) q_\pi(s’,a’)\right]<br>\end{aligned}<br>$$</p><p>$$<br>\begin{aligned}<br>q_{k+1}(s,a)&amp;{\dot{=}}\mathbb{E}<em>\pi[R</em>{t+1}+\gamma q_{k}(S_{t+1},A_{t+1})\mid S_t=s,A_t=a]\<br>&amp;{=}\sum_{s’,r}p(s’,r\mid s,a)\left[r+\gamma \sum <em>{a’}\pi(a’\mid s’) q</em>{k}(s’,a’)\right]<br>\end{aligned}<br>$$</p><h1 id="4-4"><a href="#4-4" class="headerlink" title="4.4"></a>4.4</h1><p>“如果 $old\text-action\not= \pi(s)$ “ 改为 “如果 $\sum_{s’,r}p(s’,r\mid s,\pi(s))[r+\gamma V(s’)]\not=\sum_{s’,r}p(s’,r\mid s,old\text-action)[r+\gamma V(s’)]$” .</p><h1 id="4-5"><a href="#4-5" class="headerlink" title="4.5"></a>4.5</h1><ol><li><p>“任意设定 $V(s)\in R$ “ 改为 “任意设定 $Q(s, a)\in R$” .</p></li><li><p>“对每一个 $s\in \mathcal S$ 循环” 改为 “对每一个 $s\in\mathcal S,a\in\mathcal A$ 循环” ,</p></li><li><p>‘策略评估’ 中循环的内容改为<br>$$<br>\begin{aligned}<br>&amp;q\leftarrow Q(s,a)\<br>&amp;Q(s,a)\leftarrow\sum_{s’,r}p(s’,r\mid s,a)\left[r+\gamma \sum _{a’}\pi(a’\mid s’) Q(s’,a’)\right]\<br>&amp;\Delta\leftarrow\max(\Delta,|q-Q(s,a)|)<br>\end{aligned}<br>$$</p></li><li><p>‘3. 策略改进’ 中 “$\pi(s)\leftarrow \mathop{\arg\max}<em>{a}\sum</em>{s’,r}p(s’,r\mid s,a)[r+\gamma V(s’)]$” 改为 “$\pi(s)\leftarrow \mathop{\arg\max}_{a}Q(s,a)$” </p></li></ol><h1 id="4-6"><a href="#4-6" class="headerlink" title="4.6"></a>4.6</h1><p>3: $\pi(s)$ 不能只取定值 $a$ , 要根据题目要求设定.</p><p>2: 好像没啥要改的…</p><p>1: 初始化需要多弄一个参数 $\varepsilon$ .</p><h1 id="4-7"><a href="#4-7" class="headerlink" title="4.7"></a>4.7</h1><p>这训练方法效率也忒慢了… 于是我就<del>偷懒</del>无奈放弃了, 只写了策略评估的部分 (<del>真的不是我懒啊喂</del>).</p><p><a href="/jupyter/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0-%E7%AC%AC2%E7%89%88/4/%E6%9D%B0%E5%85%8B%E7%A7%9F%E8%BD%A6%E9%97%AE%E9%A2%98.html">杰克租车问题</a></p><h1 id="4-8"><a href="#4-8" class="headerlink" title="4.8"></a>4.8</h1><p>首先确定一点, 在赌资为 $50$ 美元时, $q_*(50,50)=v_*(50)&gt;v_*(s), s&lt;50$ . 如果赌资少于 $50$ , 当达到 $50$ 时就相当于成功了一小半. 如果赌资大于 $50$ (大一点), 在输的时候最好也是输到 $50$ 美元, 好有一个退路. 因此就有了如此奇怪 (不连续) 的策略. 当然 $25$ 美元, $75$ 美元也是特殊的两个情况, 一个 ($25$ 美元) 堵上全部赌资 (赢了的话) 刚刚好达到 “成功了一小半的境地”, 一个 ($75$ 美元) 堵上 $25$ 美元赢了的话刚刚好胜利, 输了还有 $50$ 美元, 赢得概率还是很大, $25$ 美元算是次优情况, 而 $75$ 美元是更优情况 (这里的优指的是比之前的情况的优势大了<strong>很多</strong>). 因此其他情况都在考虑输和赢对这 3 种情况的靠拢.</p><h1 id="4-9"><a href="#4-9" class="headerlink" title="4.9"></a>4.9</h1><p><a href="/jupyter/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0-%E7%AC%AC2%E7%89%88/4/%E8%B5%8C%E5%BE%92%E9%97%AE%E9%A2%98.html">赌徒问题</a></p><p>是稳定的.</p><h1 id="4-10"><a href="#4-10" class="headerlink" title="4.10"></a>4.10</h1><p>$$<br>\begin{aligned}<br>q_{k+1}(s,a)&amp;{\dot{=}}\max_{a’}\mathbb{E}<em>\pi[R</em>{t+1}+\gamma q_{k}(S_{t+1},A_{t+1})\mid S_t=s,A_t=a, A_{t+1}=a’]\<br>&amp;{=}\max_{a’}\sum_{s’,r}p(s’,r\mid s,a)\left[r+\gamma q_{k}(s’,a’)\right]<br>\end{aligned}<br>$$</p>]]></content>
+        <content type="html"><![CDATA[<h1 id="4-1"><a href="#4-1" class="headerlink" title="4.1"></a>4.1</h1><p>$$<br>q_\pi(11,\text{down})=-1<br>$$</p><h1 id="4-2"><a href="#4-2" class="headerlink" title="4.2"></a>4.2</h1><p>都是 $-20$ .</p><p>事实上只需要算出第一个 $-20$ 就可以了, 状态 13 与状态 15 具有相同的状态价值, 状态 13 的动态特性变化并不影响它的价值 ($\text{down}$ 都是 $-20$) .</p><h1 id="4-3"><a href="#4-3" class="headerlink" title="4.3"></a>4.3</h1>$$\begin{aligned}q_\pi(s,a)&{\dot{=}}\mathbb{E}_\pi[G_t\mid S_t=s,A_t=a]\\&{=}\mathbb{E_{\pi}}[R_{t+1}+\gamma G_{t+1}\mid S_t=s,A_t=a]\\&{=}\mathbb{E}_\pi[R_{t+1}+\gamma q_{\pi}(S_{t+1},A_{t+1})\mid S_t=s,A_t=a]\\&{=}\sum_{s',r}p(s',r\mid s,a)\left[r+\gamma \sum _{a'}\pi(a'\mid s') q_\pi(s',a')\right]\end{aligned}$$$$\begin{aligned}q_{k+1}(s,a)&{\dot{=}}\mathbb{E}_\pi[R_{t+1}+\gamma q_{k}(S_{t+1},A_{t+1})\mid S_t=s,A_t=a]\\&{=}\sum_{s',r}p(s',r\mid s,a)\left[r+\gamma \sum _{a'}\pi(a'\mid s') q_{k}(s',a')\right]\end{aligned}$$<h1 id="4-4"><a href="#4-4" class="headerlink" title="4.4"></a>4.4</h1><p>“如果 $old\text-action\not= \pi(s)$ “ 改为 “如果 $\sum_{s’,r}p(s’,r\mid s,\pi(s))[r+\gamma V(s’)]\not=\sum_{s’,r}p(s’,r\mid s,old\text-action)[r+\gamma V(s’)]$” .</p><h1 id="4-5"><a href="#4-5" class="headerlink" title="4.5"></a>4.5</h1><ol><li>“任意设定 $V(s)\in R$ “ 改为 “任意设定 $Q(s, a)\in R$” .</li><li>“对每一个 $s\in \mathcal S$ 循环” 改为 “对每一个 $s\in\mathcal S,a\in\mathcal A$ 循环” ,</li><li>‘策略评估’ 中循环的内容改为</li></ol>$$\begin{aligned}&q\leftarrow Q(s,a)\\&Q(s,a)\leftarrow\sum_{s',r}p(s',r\mid s,a)\left[r+\gamma \sum _{a'}\pi(a'\mid s') Q(s',a')\right]\\&\Delta\leftarrow\max(\Delta,|q-Q(s,a)|)\end{aligned}$$<ol start="4"><li>‘3. 策略改进’ 中 “$\pi(s)\leftarrow \mathop{\arg\max}<em>{a}\sum</em>{s’,r}p(s’,r\mid s,a)[r+\gamma V(s’)]$” 改为 “$\pi(s)\leftarrow \mathop{\arg\max}_{a}Q(s,a)$” </li></ol><h1 id="4-6"><a href="#4-6" class="headerlink" title="4.6"></a>4.6</h1><p>3: $\pi(s)$ 不能只取定值 $a$ , 要根据题目要求设定.</p><p>2: 好像没啥要改的…</p><p>1: 初始化需要多弄一个参数 $\varepsilon$ .</p><h1 id="4-7"><a href="#4-7" class="headerlink" title="4.7"></a>4.7</h1><p>这训练方法效率也忒慢了… 于是我就<del>偷懒</del>无奈放弃了, 只写了策略评估的部分 (<del>真的不是我懒啊喂</del>).</p><p><a href="/jupyter/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0-%E7%AC%AC2%E7%89%88/4/%E6%9D%B0%E5%85%8B%E7%A7%9F%E8%BD%A6%E9%97%AE%E9%A2%98.html">杰克租车问题</a></p><h1 id="4-8"><a href="#4-8" class="headerlink" title="4.8"></a>4.8</h1><p>首先确定一点, 在赌资为 $50$ 美元时, $q_*(50,50)=v_*(50)&gt;v_*(s), s&lt;50$ . 如果赌资少于 $50$ , 当达到 $50$ 时就相当于成功了一小半. 如果赌资大于 $50$ (大一点), 在输的时候最好也是输到 $50$ 美元, 好有一个退路. 因此就有了如此奇怪 (不连续) 的策略. 当然 $25$ 美元, $75$ 美元也是特殊的两个情况, 一个 ($25$ 美元) 堵上全部赌资 (赢了的话) 刚刚好达到 “成功了一小半的境地”, 一个 ($75$ 美元) 堵上 $25$ 美元赢了的话刚刚好胜利, 输了还有 $50$ 美元, 赢得概率还是很大, $25$ 美元算是次优情况, 而 $75$ 美元是更优情况 (这里的优指的是比之前的情况的优势大了<strong>很多</strong>). 因此其他情况都在考虑输和赢对这 3 种情况的靠拢.</p><h1 id="4-9"><a href="#4-9" class="headerlink" title="4.9"></a>4.9</h1><p><a href="/jupyter/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0-%E7%AC%AC2%E7%89%88/4/%E8%B5%8C%E5%BE%92%E9%97%AE%E9%A2%98.html">赌徒问题</a></p><p>是稳定的.</p><h1 id="4-10"><a href="#4-10" class="headerlink" title="4.10"></a>4.10</h1>$$\begin{aligned}q_{k+1}(s,a)&{\dot{=}}\max_{a'}\mathbb{E}_\pi[R_{t+1}+\gamma q_{k}(S_{t+1},A_{t+1})\mid S_t=s,A_t=a, A_{t+1}=a']\\&{=}\max_{a'}\sum_{s',r}p(s',r\mid s,a)\left[r+\gamma q_{k}(s',a')\right]\end{aligned}$$]]></content>
       
       
       <categories>
@@ -24,9 +37,9 @@
       
         <tags>
             
-            <tag> 强化学习 </tag>
-            
             <tag> 机器学习 </tag>
+            
+            <tag> 强化学习 </tag>
             
             <tag> 习题 </tag>
             
@@ -90,9 +103,9 @@
       
         <tags>
             
-            <tag> 强化学习 </tag>
-            
             <tag> 机器学习 </tag>
+            
+            <tag> 强化学习 </tag>
             
             <tag> 习题 </tag>
             
@@ -222,9 +235,9 @@
       
         <tags>
             
-            <tag> 强化学习 </tag>
-            
             <tag> 机器学习 </tag>
+            
+            <tag> 强化学习 </tag>
             
             <tag> 习题 </tag>
             
@@ -255,9 +268,9 @@
       
         <tags>
             
-            <tag> 强化学习 </tag>
-            
             <tag> 机器学习 </tag>
+            
+            <tag> 强化学习 </tag>
             
             <tag> 习题 </tag>
             
@@ -553,9 +566,9 @@
       
         <tags>
             
-            <tag> 强化学习 </tag>
-            
             <tag> 机器学习 </tag>
+            
+            <tag> 强化学习 </tag>
             
             <tag> 论文精读 </tag>
             
@@ -636,11 +649,11 @@
       
         <tags>
             
+            <tag> 机器学习 </tag>
+            
             <tag> 英语 </tag>
             
             <tag> 强化学习 </tag>
-            
-            <tag> 机器学习 </tag>
             
             <tag> 论文 </tag>
             
@@ -700,11 +713,11 @@
       
         <tags>
             
+            <tag> 机器学习 </tag>
+            
             <tag> Python </tag>
             
             <tag> 强化学习 </tag>
-            
-            <tag> 机器学习 </tag>
             
             <tag> Gym </tag>
             
@@ -764,13 +777,13 @@
       
         <tags>
             
-            <tag> 强化学习 </tag>
-            
             <tag> 机器学习 </tag>
             
-            <tag> 论文精读 </tag>
-            
             <tag> 优化算法 </tag>
+            
+            <tag> 强化学习 </tag>
+            
+            <tag> 论文精读 </tag>
             
         </tags>
       
@@ -853,11 +866,11 @@
       
         <tags>
             
+            <tag> 机器学习 </tag>
+            
             <tag> Python </tag>
             
             <tag> 强化学习 </tag>
-            
-            <tag> 机器学习 </tag>
             
             <tag> 代码实例 </tag>
             
@@ -892,9 +905,9 @@
       
         <tags>
             
-            <tag> 强化学习 </tag>
-            
             <tag> 机器学习 </tag>
+            
+            <tag> 强化学习 </tag>
             
             <tag> Spinning Up </tag>
             
@@ -925,11 +938,11 @@
       
         <tags>
             
+            <tag> 机器学习 </tag>
+            
             <tag> Python </tag>
             
             <tag> 强化学习 </tag>
-            
-            <tag> 机器学习 </tag>
             
             <tag> 代码实例 </tag>
             
@@ -1024,9 +1037,9 @@
       
         <tags>
             
-            <tag> 强化学习 </tag>
-            
             <tag> 机器学习 </tag>
+            
+            <tag> 强化学习 </tag>
             
         </tags>
       
@@ -1173,9 +1186,9 @@
       
         <tags>
             
-            <tag> 强化学习 </tag>
-            
             <tag> 机器学习 </tag>
+            
+            <tag> 强化学习 </tag>
             
         </tags>
       
@@ -1231,9 +1244,9 @@
       
         <tags>
             
-            <tag> 强化学习 </tag>
-            
             <tag> 机器学习 </tag>
+            
+            <tag> 强化学习 </tag>
             
         </tags>
       
@@ -1289,11 +1302,11 @@
       
         <tags>
             
+            <tag> 机器学习 </tag>
+            
             <tag> Python </tag>
             
             <tag> 强化学习 </tag>
-            
-            <tag> 机器学习 </tag>
             
             <tag> 代码实例 </tag>
             
@@ -1328,9 +1341,9 @@
       
         <tags>
             
-            <tag> 强化学习 </tag>
-            
             <tag> 机器学习 </tag>
+            
+            <tag> 强化学习 </tag>
             
             <tag> 西瓜书 </tag>
             
@@ -1708,9 +1721,9 @@
           
           <category> 机器学习 </category>
           
-          <category> 西瓜书 </category>
-          
           <category> 模型 </category>
+          
+          <category> 西瓜书 </category>
           
           <category> 读懂西瓜书 </category>
           
@@ -1721,9 +1734,9 @@
             
             <tag> 机器学习 </tag>
             
-            <tag> 西瓜书 </tag>
-            
             <tag> 概率图模型 </tag>
+            
+            <tag> 西瓜书 </tag>
             
         </tags>
       

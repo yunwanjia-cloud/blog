@@ -4,6 +4,39 @@
   
     
     <entry>
+      <title>(史济怀) 数学分析教程上册第 3 版-练习题 1.10</title>
+      <link href="math/mathematical_analysis/mathematical_analysis_practice/1/1-10/"/>
+      <url>math/mathematical_analysis/mathematical_analysis_practice/1/1-10/</url>
+      
+        <content type="html"><![CDATA[<h1 id="2"><a href="#2" class="headerlink" title="2"></a>2</h1><h2 id="1"><a href="#1" class="headerlink" title="(1)"></a>(1)</h2><p>只需找到对应的子列 ${a_{k_n}}$ , 然后运用极限的四则运算即可.</p><h2 id="2-1"><a href="#2-1" class="headerlink" title="(2)"></a>(2)</h2><p>由 1.8 节得 $\inf_{k\geqslant n}-a_k=-\sup_{k\geqslant n}a_k$ . 因此等式显然成立.</p><h2 id="3"><a href="#3" class="headerlink" title="(3)"></a>(3)</h2><p> $a_n&gt;a^*-\sqrt\epsilon, b_n&gt;b^*-\sqrt\epsilon$ , 于是就有 $a_nb_n&gt;a_<em>b_</em>$ , 第一个左边不等式显然成立. 而又有 $\mathop{\lim\inf}<em>{n\to\infty}a_nb_n\leqslant\mathop{\lim\inf</em>{n\to\infty} a_nb^*}=b^*\mathop{\lim\inf a_n}_{n\to\infty}$ 显然第一个右边不等式也成立. 利用同样方法可以证明接下来的不等式.</p><h2 id="4"><a href="#4" class="headerlink" title="(4)"></a>(4)</h2><p>同 (1).</p><h1 id="3-1"><a href="#3-1" class="headerlink" title="3"></a>3</h1><p>依题意得存在 $N, n&gt;N$ 时有 $a_n&lt;(1+\epsilon)^n$ , 由此可得 $\lim_{n\to\infty}a_n/l^n=0$ . 这个关系是等价的.</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 数学 </category>
+          
+          <category> 数学分析 </category>
+          
+          <category> 数学分析教程 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 数学 </tag>
+            
+            <tag> 习题 </tag>
+            
+            <tag> 数学分析 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>(史济怀) 数学分析教程上册第 3 版-练习题 1.8</title>
       <link href="math/mathematical_analysis/mathematical_analysis_practice/1/1-8/"/>
       <url>math/mathematical_analysis/mathematical_analysis_practice/1/1-8/</url>
